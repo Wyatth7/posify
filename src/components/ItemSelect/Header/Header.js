@@ -3,9 +3,7 @@ import styled from "styled-components";
 import CompanyInfo from "./CompanyInfo/CompanyInfo";
 import Nav from "./Nav/Nav";
 
-const HEADER = styled.div`
-  padding: 1rem;
-`;
+const HEADER = styled.div``;
 
 const Header = (props) => {
   return (

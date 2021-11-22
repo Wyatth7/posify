@@ -15,6 +15,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-size: 62.5%;
     font-family: 'Heebo', sans-serif;
+    padding: 1rem;
   }
 `;
 
