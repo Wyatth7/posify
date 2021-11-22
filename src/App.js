@@ -1,6 +1,6 @@
 import React from "react";
+import { Route, Routes } from "react-router";
 import { createGlobalStyle } from "styled-components";
-import "./App.css";
 import Content from "./components/ContentHead/Content";
 
 const GlobalStyle = createGlobalStyle`
@@ -22,8 +22,15 @@ function App() {
   return (
     <React.Fragment>
       <GlobalStyle />
-      <div className="App">
-        <Content />
+      <div>
+        <Routes>
+          <Route path="/all" element={<Content />} />
+          <Route path="/food" element={<Content />} />
+          <Route path="/alcohol" element={<Content />} />
+          <Route path="/cold-drinks" element={<Content />} />
+          <Route path="/hot-drinks" element={<Content />} />
+          <Route path="/" element={<Content />} />
+        </Routes>
       </div>
     </React.Fragment>
   );

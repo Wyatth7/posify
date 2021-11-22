@@ -4,6 +4,7 @@ import NavItem from "./NavItem/NavItem";
 
 const NAV = styled.nav`
   display: flex;
+  flex: 1;
   overflow-x: auto;
   padding: 1.5rem 0;
 `;
@@ -17,22 +18,16 @@ const Nav = (props) => {
     { name: "Alcohol", active: false },
   ];
 
-  const onNavItemClicked = () => {
-    return;
-  };
-
   return (
     <NAV>
-      {navItems.forEach((el) => (
-        <NavItem onClick={onNavItemClicked} active={el.active}>
-          {el.name}
-        </NavItem>
-      ))}
-      {/* <NavItem active>All Items</NavItem>
-      <NavItem>Food</NavItem>
-      <NavItem>Alcohol</NavItem>
-      <NavItem>Cold Drinks</NavItem>
-      <NavItem>Hot Drinks</NavItem> */}
+      {/* {navItems.forEach((el) => (
+        <NavItem active={el.active}>{el.name}</NavItem>
+      ))} */}
+      <NavItem path={"all"}>All Items</NavItem>
+      <NavItem path={"food"}>Food</NavItem>
+      <NavItem path={"alcohol"}>Alcohol</NavItem>
+      <NavItem path={"cold-drinks"}>Cold Drinks</NavItem>
+      <NavItem path={"hot-drinks"}>Hot Drinks</NavItem>
     </NAV>
   );
 };
