@@ -8,8 +8,8 @@ const HEADER = styled.div``;
 const Header = (props) => {
   return (
     <HEADER>
-      <CompanyInfo></CompanyInfo>
-      <Nav></Nav>
+      <CompanyInfo />
+      <Nav />
     </HEADER>
   );
 };

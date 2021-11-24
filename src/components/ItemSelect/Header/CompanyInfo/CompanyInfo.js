@@ -36,7 +36,7 @@ const CompanyInfo = (props) => {
       </Left>
       <Right>
         <Left></Left>
-        <Button icon={<FiHelpCircle />}>Help</Button>
+        <Button icon={<FiHelpCircle />}>Info</Button>
       </Right>
     </COMPANYINFO>
   );

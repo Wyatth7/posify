@@ -12,6 +12,16 @@ const NAVITEM = styled(NavLink)`
   margin: auto 1rem auto 0;
   text-decoration: none;
   height: inherit;
+  transition: all 0.1s;
+
+  &:hover {
+    background-color: #ef7614;
+    border-color: #ef7614;
+
+    p {
+      color: #ffffff;
+    }
+  }
 
   &.active {
     background-color: #ef7614;

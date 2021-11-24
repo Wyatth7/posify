@@ -5,6 +5,12 @@ import Item from "./Item/Item";
 const ITEMS = styled.div`
   display: grid;
   grid-template-columns: 100%;
+
+  @media (min-width: 715px) {
+    grid-template-columns: 45% 45%;
+    grid-gap: 2%;
+    justify-content: center;
+  }
 `;
 
 const Items = (props) => {
@@ -13,6 +19,24 @@ const Items = (props) => {
       title: "Grilled Corn",
       subHead: "150",
       price: 1.75,
+      img: "grilled-corn.png",
+    },
+    {
+      title: "Ranch Burger",
+      subHead: "150",
+      price: 8.75,
+      img: "grilled-corn.png",
+    },
+    {
+      title: "Fettuccine Pasta",
+      subHead: "150",
+      price: 10.75,
+      img: "grilled-corn.png",
+    },
+    {
+      title: "Stuffed File Steak",
+      subHead: "150",
+      price: 15.75,
       img: "grilled-corn.png",
     },
   ];

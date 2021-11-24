@@ -10,15 +10,21 @@ const BUTTON = styled.button`
 `;
 
 const Icon = styled.div`
-  margin-right: 0.2rem;
+  margin-right: ${(props) => (props.isChildren === null ? `.2rem` : `0rem`)};
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
-const Paragraph = styled.p``;
+const Paragraph = styled.p`
+  font-size: 1rem;
+`;
 
 const Button = (props) => {
   return (
     <BUTTON>
-      <Icon>{props.icon}</Icon>
+      <Icon isChildren={props.children}>{props.icon}</Icon>
       <Paragraph>{props.children}</Paragraph>
     </BUTTON>
   );
