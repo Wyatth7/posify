@@ -27,7 +27,7 @@ const Header = styled.p`
   font-weight: 500;
 `;
 
-const MobileCart = (props) => {
+const MobileCartButton = (props) => {
   return (
     <MOBILECART onClick={props.clicked}>
       <Header>Current Order $37.50</Header>
@@ -35,4 +35,4 @@ const MobileCart = (props) => {
   );
 };
 
-export default MobileCart;
+export default MobileCartButton;

@@ -13,6 +13,7 @@ const CARTHEADER = styled.div`
 
 const Header = styled.h1`
   font-weight: 500;
+  font-size: 2.5rem;
 `;
 
 const ButtonContainer = styled.div`
@@ -29,10 +30,10 @@ const CartHeader = (props) => {
   return (
     <CARTHEADER>
       <Header>Current Order</Header>
-      <ButtonContainer>
+      {/* <ButtonContainer>
         <Button>Clear All</Button>
         <Button icon={<FiSettings />}></Button>
-      </ButtonContainer>
+      </ButtonContainer> */}
     </CARTHEADER>
   );
 };

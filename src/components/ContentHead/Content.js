@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Cart from "../Cart/Cart";
-import MobileCart from "../Cart/MobileCart/MobileCart";
+import MobileCartButton from "../Cart/MobileCart/MobileCart";
 import ItemSelect from "../ItemSelect/ItemSelect";
+import Modal from "../reusable/Button/Modal/Modal";
 
 const CONTENT = styled.div`
   position: relative;
   width: 100%;
-  max-height: 100vh;
+  height: 100%;
+  padding: 1rem;
 `;
 
 const Wrapper = styled.div`
@@ -30,9 +32,13 @@ const Content = (props) => {
     <CONTENT>
       <ItemSelect />
       <Wrapper>
-        <MobileCart clicked={onMobileClickHandler} />
+        <MobileCartButton clicked={onMobileClickHandler} />
       </Wrapper>
-      {mobileCart ? <Cart closed={onMobileClickHandler} /> : null}
+      {mobileCart ? (
+        <Modal>
+          <Cart closed={onMobileClickHandler} />
+        </Modal>
+      ) : null}
     </CONTENT>
   );
 };
