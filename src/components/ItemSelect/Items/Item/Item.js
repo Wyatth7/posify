@@ -36,7 +36,8 @@ const DataWrap = styled.div`
 `;
 
 const Image = styled.img`
-  width: 45%;
+  object-fit: cover;
+  width: 50%;
   max-height: auto !important;
   border-radius: 12px;
 `;
