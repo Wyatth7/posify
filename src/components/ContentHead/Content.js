@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import Cart from "../Cart/Cart";
 import MobileCartButton from "../Cart/MobileCart/MobileCart";
 import ItemSelect from "../ItemSelect/ItemSelect";
-import Modal from "../reusable/Modal/Modal";
 
 const CONTENT = styled.div`
   position: relative;
@@ -22,23 +20,12 @@ const Wrapper = styled.div`
 `;
 
 const Content = (props) => {
-  const [mobileCart, setMobileCart] = useState(false);
-
-  const onMobileClickHandler = () => {
-    setMobileCart(!mobileCart);
-  };
-
   return (
     <CONTENT>
       <ItemSelect />
       <Wrapper>
-        <MobileCartButton clicked={onMobileClickHandler} />
+        <MobileCartButton />
       </Wrapper>
-      {mobileCart ? (
-        <Modal>
-          <Cart closed={onMobileClickHandler} />
-        </Modal>
-      ) : null}
     </CONTENT>
   );
 };

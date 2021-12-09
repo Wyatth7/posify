@@ -1,7 +1,8 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
-const MOBILECART = styled.div`
+const MOBILECART = styled(NavLink)`
   cursor: pointer;
   width: 100%;
   z-index: 1000;
@@ -13,6 +14,7 @@ const MOBILECART = styled.div`
   border-radius: 10px;
   box-shadow: 1px 1px 15px 0px #ef7614;
   overflow: auto;
+  text-decoration: none;
   transition: all 0.2s;
 
   &:hover {
@@ -29,7 +31,7 @@ const Header = styled.p`
 
 const MobileCartButton = (props) => {
   return (
-    <MOBILECART onClick={props.clicked}>
+    <MOBILECART to="cart">
       <Header>Current Order $37.50</Header>
     </MOBILECART>
   );
