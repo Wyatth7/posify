@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Cart from "../Cart/Cart";
 import MobileCartButton from "../Cart/MobileCart/MobileCart";
 import ItemSelect from "../ItemSelect/ItemSelect";
-import Modal from "../reusable/Button/Modal/Modal";
+import Modal from "../reusable/Modal/Modal";
 
 const CONTENT = styled.div`
   position: relative;
