@@ -10,13 +10,13 @@ const NAV = styled.nav`
 `;
 
 const Nav = (props) => {
-  let navItems = [
-    { name: "All Items", active: true },
-    { name: "Food", active: false },
-    { name: "Cold Drinks", active: false },
-    { name: "Hot Drinks", active: false },
-    { name: "Alcohol", active: false },
-  ];
+  // let navItems = [
+  //   { name: "All Items", active: true },
+  //   { name: "Food", active: false },
+  //   { name: "Cold Drinks", active: false },
+  //   { name: "Hot Drinks", active: false },
+  //   { name: "Alcohol", active: false },
+  // ];
 
   return (
     <NAV>

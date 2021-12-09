@@ -1,40 +1,56 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
+import SolidButton from "../reusable/SolidButton/SolidButton";
 import CartHeader from "./CartHeader/CartHeader";
 import CartItems from "./CartItems/CartItems";
-import MobileCartButton from "./MobileCart/MobileCart";
 
 const CART = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  max-height: 100vh;
   background-color: #fdfdfb;
   overflow: auto;
   padding: 1rem;
 `;
 
-const Wrapper = styled.div`
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
+const PaddingTopWrapper = styled.div`
+  padding-top: 1rem;
+`;
+
+const PaddingBottomWrapper = styled.div``;
+
+const ButtonWrapper = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+`;
+
+const MarginWrapper = styled.div`
+  margin: 0 0.2rem;
 `;
 
 const Cart = (props) => {
-  // useEffect(() => {
-  //   document.querySelector("body").style.overflow = "hidden";
+  useEffect(() => {
+    document.querySelector("body").style.overflow = "hidden";
 
-  //   return () => (document.querySelector("body").style.overflow = "visible");
-  // });
+    return () => (document.querySelector("body").style.overflow = "visible");
+  });
 
   return (
     <CART>
-      <CartHeader />
+      <PaddingBottomWrapper>
+        <CartHeader />
+      </PaddingBottomWrapper>
       <CartItems />
-      <Wrapper>
-        <MobileCartButton />
-      </Wrapper>
+      <PaddingTopWrapper>
+        <ButtonWrapper>
+          <SolidButton clicked={props.closed} color="#ed5675">
+            Close
+          </SolidButton>
+          <MarginWrapper />
+          <SolidButton color="#ef7614">Checkout</SolidButton>
+        </ButtonWrapper>
+      </PaddingTopWrapper>
     </CART>
   );
 };
