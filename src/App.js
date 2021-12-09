@@ -25,13 +25,13 @@ function App() {
       <GlobalStyle />
       <div>
         <Routes>
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Content />} />
           <Route path="/all" element={<Content />} />
           <Route path="/food" element={<Content />} />
           <Route path="/alcohol" element={<Content />} />
           <Route path="/cold-drinks" element={<Content />} />
           <Route path="/hot-drinks" element={<Content />} />
-          <Route path="/checkout" element={<Content />} />
-          <Route path="/cart" element={<Cart />} />
           <Route path="/" element={<Content />} />
         </Routes>
       </div>

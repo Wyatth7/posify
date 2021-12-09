@@ -31,7 +31,7 @@ const Header = styled.p`
 
 const MobileCartButton = (props) => {
   return (
-    <MOBILECART to="cart">
+    <MOBILECART to="/cart">
       <Header>Current Order $37.50</Header>
     </MOBILECART>
   );
