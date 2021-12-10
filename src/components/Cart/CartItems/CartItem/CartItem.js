@@ -5,7 +5,6 @@ import styled from "styled-components";
 const CARTITEM = styled.div`
   padding: 1rem 0;
   border-bottom: 1px solid #000000;
-  overflow-y: auto;
 `;
 
 const CartHeader = styled.div`
@@ -17,7 +16,7 @@ const CartHeader = styled.div`
 
 const Image = styled.img`
   object-fit: cover;
-  width: 50%;
+  width: 40%;
   height: auto;
   border-radius: 15px;
 `;
@@ -54,6 +53,10 @@ const ControlButton = styled.button`
   border-radius: 10px;
   font-size: 2rem;
   padding: 0.5rem;
+`;
+
+const DescriptionWrapper = styled.div`
+  text-align: right;
 `;
 
 const ControlText = styled.p`
@@ -97,10 +100,12 @@ const CartItem = (props) => {
 
   return (
     <CARTITEM>
-      <Title>{props.title}</Title>
       <CartHeader>
         <Image src={`/images/${props.img}`} alt={props.title} />
-        <Price>${price}</Price>
+        <DescriptionWrapper>
+          <Title>{props.title}</Title>
+          <Price>${price}</Price>
+        </DescriptionWrapper>
       </CartHeader>
       <AmountControl>
         <ControlButton amount={count} del onClick={decreaseHandler}>

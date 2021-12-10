@@ -8,7 +8,7 @@ const CART = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  max-height: 100vh;
+  height: 100vh;
   background-color: #fdfdfb;
   overflow: auto;
   padding: 1rem;
@@ -44,12 +44,12 @@ const Cart = (props) => {
       <CartItems />
       <PaddingTopWrapper>
         <ButtonWrapper>
-          <SolidButton path="" clicked={props.closed} color="#ed5675">
-            Close
-          </SolidButton>
-          <MarginWrapper />
           <SolidButton path="" color="#ef7614">
             Checkout
+          </SolidButton>
+          <MarginWrapper />
+          <SolidButton path="" clicked={props.closed} color="#ed5675">
+            Close
           </SolidButton>
         </ButtonWrapper>
       </PaddingTopWrapper>

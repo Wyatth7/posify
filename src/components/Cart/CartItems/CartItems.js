@@ -13,10 +13,6 @@ const CartItems = (props) => {
     <CARTITEMS>
       <CartItem img="grilled-corn.png" title="Grilled Corn" price={8} />
       <CartItem img="grilled-corn.png" title="Grilled Corn" price={8} />
-      <CartItem img="grilled-corn.png" title="Grilled Corn" price={8} />
-      <CartItem img="grilled-corn.png" title="Grilled Corn" price={8} />
-      <CartItem img="grilled-corn.png" title="Grilled Corn" price={8} />
-      <CartItem img="grilled-corn.png" title="Grilled Corn" price={8} />
     </CARTITEMS>
   );
 };
