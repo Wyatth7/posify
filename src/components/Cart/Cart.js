@@ -9,6 +9,7 @@ const CART = styled.div`
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
+  max-height: -webkit-fill-available;
   background-color: #fdfdfb;
   overflow: auto;
   padding: 1rem;
@@ -30,20 +31,14 @@ const MarginWrapper = styled.div`
 `;
 
 const Cart = (props) => {
-  useEffect(() => {
-    document.querySelector("body").style.overflow = "hidden";
-
-    return () => (document.querySelector("body").style.overflow = "visible");
-  });
-
   return (
-    <CART>
+    <CART height={window.innerHeight}>
       <PaddingBottomWrapper>
         <CartHeader />
       </PaddingBottomWrapper>
       <CartItems />
       <PaddingTopWrapper>
-        <ButtonWrapper>
+        <ButtonWrapper id="buttonWrapper">
           <SolidButton path="" color="#ef7614">
             Checkout
           </SolidButton>
