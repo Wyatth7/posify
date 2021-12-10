@@ -12,7 +12,7 @@ const CART = styled.div`
   max-height: -webkit-fill-available;
   background-color: #fdfdfb;
   overflow: auto;
-  padding: 1rem;
+  padding: 0 1rem;
 `;
 
 const PaddingTopWrapper = styled.div`
@@ -24,6 +24,7 @@ const PaddingBottomWrapper = styled.div``;
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-around;
+  padding-bottom: 1rem;
 `;
 
 const MarginWrapper = styled.div`

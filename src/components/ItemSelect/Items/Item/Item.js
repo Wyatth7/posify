@@ -32,13 +32,14 @@ const SubHead = styled.p`
 
 const DataWrap = styled.div`
   display: flex;
+  align-items: center;
   justify-content: space-between;
 `;
 
 const Image = styled.img`
   object-fit: cover;
-  width: 50%;
-  max-height: auto !important;
+  width: 55%;
+  height: auto;
   border-radius: 12px;
 `;
 

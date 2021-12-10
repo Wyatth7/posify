@@ -11,7 +11,7 @@ const CARTITEMS = styled.div`
 const CartItems = (props) => {
   return (
     <CARTITEMS>
-      <CartItem img="grilled-corn.png" title="Grilled Corn" price={8} />
+      <CartItem img="grilled-corn.png" title="Grilled Corn" price={8.0} />
       <CartItem img="grilled-corn.png" title="Grilled Corn" price={8} />
       <CartItem img="grilled-corn.png" title="Grilled Corn" price={8} />
       <CartItem img="grilled-corn.png" title="Grilled Corn" price={8} />
