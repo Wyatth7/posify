@@ -15,7 +15,7 @@ const Left = styled.div`
 `;
 
 const Header = styled.h1`
-  font-size: 1.1rem;
+  font-size: 1.7rem;
 `;
 
 const SubHead = styled.p`

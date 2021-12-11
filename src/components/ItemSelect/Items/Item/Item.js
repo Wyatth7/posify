@@ -38,8 +38,8 @@ const DataWrap = styled.div`
 
 const Image = styled.img`
   object-fit: cover;
-  width: 55%;
-  height: auto;
+  width: 50%;
+  height: 50%;
   border-radius: 12px;
 `;
 

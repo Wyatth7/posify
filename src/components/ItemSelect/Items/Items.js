@@ -5,6 +5,7 @@ import Item from "./Item/Item";
 const ITEMS = styled.div`
   display: grid;
   grid-template-columns: 100%;
+  padding-top: 8.5rem;
 
   @media (min-width: 715px) {
     grid-template-columns: 45% 45%;

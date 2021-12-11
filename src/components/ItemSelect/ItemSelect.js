@@ -7,6 +7,7 @@ import Items from "./Items/Items";
 const ITEMSELECT = styled.div`
   display: flex;
   flex-direction: column;
+  position: relative;
 `;
 
 const ItemSelect = (props) => {

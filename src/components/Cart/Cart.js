@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import CompanyInfo from "../ItemSelect/Header/CompanyInfo/CompanyInfo";
 import SolidButton from "../reusable/SolidButton/SolidButton";
 import CartHeader from "./CartHeader/CartHeader";
 import CartItems from "./CartItems/CartItems";
@@ -31,9 +32,16 @@ const MarginWrapper = styled.div`
   margin: 0 0.2rem;
 `;
 
+const HeaderWrapper = styled.div`
+  padding-top: 1rem;
+`;
+
 const Cart = (props) => {
   return (
     <CART height={window.innerHeight}>
+      <HeaderWrapper>
+        <CompanyInfo />
+      </HeaderWrapper>
       <PaddingBottomWrapper>
         <CartHeader />
       </PaddingBottomWrapper>
