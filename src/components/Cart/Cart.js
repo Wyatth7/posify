@@ -1,62 +1,31 @@
 import React from "react";
 import styled from "styled-components";
-import CompanyInfo from "../ItemSelect/Header/CompanyInfo/CompanyInfo";
-import SolidButton from "../reusable/SolidButton/SolidButton";
 import CartHeader from "./CartHeader/CartHeader";
-import CartItems from "./CartItems/CartItems";
 
 const CART = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 35%;
   height: 100vh;
-  max-height: -webkit-fill-available;
-  background-color: #fdfdfb;
-  overflow: auto;
-  padding: 0 1rem;
+  padding-left: 2rem;
+  border-left: 0.1rem solid #f3f3f2;
 `;
 
-const PaddingTopWrapper = styled.div`
-  padding-top: 1rem;
-`;
+const Header = styled.div``;
 
-const PaddingBottomWrapper = styled.div``;
+const Body = styled.div``;
 
-const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: space-around;
-  padding-bottom: 1rem;
-`;
-
-const MarginWrapper = styled.div`
-  margin: 0 0.2rem;
-`;
-
-const HeaderWrapper = styled.div`
-  padding-top: 1rem;
-`;
+const Footer = styled.div``;
 
 const Cart = (props) => {
   return (
-    <CART height={window.innerHeight}>
-      <HeaderWrapper>
-        <CompanyInfo />
-      </HeaderWrapper>
-      <PaddingBottomWrapper>
+    <CART>
+      <Header>
         <CartHeader />
-      </PaddingBottomWrapper>
-      <CartItems />
-      <PaddingTopWrapper>
-        <ButtonWrapper id="buttonWrapper">
-          <SolidButton path="" color="#ef7614">
-            Checkout
-          </SolidButton>
-          <MarginWrapper />
-          <SolidButton path="" clicked={props.closed} color="#ed5675">
-            Close
-          </SolidButton>
-        </ButtonWrapper>
-      </PaddingTopWrapper>
+      </Header>
+      <Body></Body>
+      <Footer></Footer>
     </CART>
   );
 };

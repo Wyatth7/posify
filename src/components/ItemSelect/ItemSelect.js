@@ -8,7 +8,19 @@ const ITEMSELECT = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+  width: 100%;
+  height: 100vh;
+
+  @media (min-width: 1280px) {
+    width: 65%;
+    padding-right: 2rem;
+    /* border-right: 0.1rem solid #f3f3f2; */
+  }
 `;
+
+// const NavContainer = styled.div`
+//   width: 100%;
+// `;
 
 const ItemSelect = (props) => {
   return (

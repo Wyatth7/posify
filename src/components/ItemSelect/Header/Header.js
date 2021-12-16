@@ -10,6 +10,13 @@ const HEADER = styled.div`
   width: 100%;
   padding: 1rem 1rem 0 1rem;
   background-color: #ffffff;
+
+  @media (min-width: 1280px) {
+    position: sticky;
+    top: auto;
+    left: auto;
+    padding: 1rem 0 0 0;
+  }
 `;
 
 const Header = (props) => {

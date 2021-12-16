@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router";
 import { createGlobalStyle } from "styled-components";
-import Cart from "./components/Cart/Cart";
+import MobileCart from "./components/Cart/MobileCart";
 import Content from "./components/ContentHead/Content";
 
 const GlobalStyle = createGlobalStyle`
@@ -25,7 +25,7 @@ function App() {
       <GlobalStyle />
       <div>
         <Routes>
-          <Route path="/cart" element={<Cart />} />
+          <Route path="/cart" element={<MobileCart />} />
           <Route path="/checkout" element={<Content />} />
           <Route path="/all" element={<Content />} />
           <Route path="/food" element={<Content />} />

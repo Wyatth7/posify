@@ -12,6 +12,12 @@ const ITEMS = styled.div`
     grid-gap: 2%;
     justify-content: center;
   }
+
+  @media (min-width: 1280px) {
+    padding-top: 0;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: left;
+  }
 `;
 
 const Items = (props) => {
