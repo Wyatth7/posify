@@ -11,9 +11,10 @@ const CONTENT = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  padding: 1rem;
+  /* padding: 1rem; */
+  padding: 0 1rem;
 
-  @media (min-width: 1280px) {
+  @media only screen and (min-width: 950px) {
     display: flex;
     height: 100vh;
   }
@@ -36,12 +37,12 @@ const Content = (props) => {
   return (
     <CONTENT>
       <ItemSelect />
-      <MediaQuery maxWidth={1279}>
+      <MediaQuery maxWidth={949}>
         <Wrapper>
           <MobileCartButton />
         </Wrapper>
       </MediaQuery>
-      <MediaQuery minWidth={1280}>
+      <MediaQuery minWidth={950}>
         <Cart />
       </MediaQuery>
     </CONTENT>

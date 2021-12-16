@@ -10,10 +10,12 @@ const ITEMSELECT = styled.div`
   position: relative;
   width: 100%;
   height: 100vh;
+  padding-top: 1rem;
 
-  @media (min-width: 1280px) {
+  @media only screen and (min-width: 950px) {
     width: 65%;
-    padding-right: 2rem;
+    padding-right: 1rem;
+    padding-top: 0;
     /* border-right: 0.1rem solid #f3f3f2; */
   }
 `;

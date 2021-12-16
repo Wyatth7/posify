@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Item from "./Item/Item";
 
@@ -7,46 +7,53 @@ const ITEMS = styled.div`
   grid-template-columns: 100%;
   padding-top: 8.5rem;
 
-  @media (min-width: 715px) {
+  @media only screen and (min-width: 715px) {
     grid-template-columns: 45% 45%;
     grid-gap: 2%;
     justify-content: center;
   }
 
-  @media (min-width: 1280px) {
+  @media only screen and (min-width: 950px) {
     padding-top: 0;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     justify-content: left;
+  }
+
+  @media only screen and (min-width: 1190px) {
+    grid-template-columns: repeat(3, 1fr);
   }
 `;
 
+const items = [
+  {
+    title: "Grilled Corn",
+    subHead: "150",
+    price: 1.75,
+    img: "grilled-corn.png",
+  },
+  {
+    title: "Ranch Burger",
+    subHead: "150",
+    price: 8.75,
+    img: "grilled-corn.png",
+  },
+  {
+    title: "Fettuccine Pasta",
+    subHead: "150",
+    price: 10.75,
+    img: "grilled-corn.png",
+  },
+  {
+    title: "Stuffed File Steak",
+    subHead: "150",
+    price: 15.75,
+    img: "grilled-corn.png",
+  },
+];
+
 const Items = (props) => {
-  const items = [
-    {
-      title: "Grilled Corn",
-      subHead: "150",
-      price: 1.75,
-      img: "grilled-corn.png",
-    },
-    {
-      title: "Ranch Burger",
-      subHead: "150",
-      price: 8.75,
-      img: "grilled-corn.png",
-    },
-    {
-      title: "Fettuccine Pasta",
-      subHead: "150",
-      price: 10.75,
-      img: "grilled-corn.png",
-    },
-    {
-      title: "Stuffed File Steak",
-      subHead: "150",
-      price: 15.75,
-      img: "grilled-corn.png",
-    },
-  ];
+  useEffect(() => {});
+
   return (
     <ITEMS>
       {items.map((el) => (
