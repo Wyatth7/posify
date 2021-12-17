@@ -5,34 +5,59 @@ import QuantityController from "../../QuantityController/QuantityController";
 const CARTITEM = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 8%;
+  grid-gap: 4%;
   justify-content: space-between;
   width: 100%;
   height: fit-content;
   padding-bottom: 0.5rem;
+
+  @media only screen and (min-width: 1130px) {
+    grid-gap: 5%;
+  }
+
+  @media only screen and (min-width: 1189px) {
+    grid-gap: 8%;
+  }
 `;
 
 const DescriptionContainer = styled.div`
   display: flex;
-  width: 150px;
+  align-items: center;
+  width: 40px;
   /* width: fit-content; */
+
+  @media only screen and (min-width: 1130px) {
+    width: 150px;
+  }
 `;
 
 const ImageWrapper = styled.div``;
 
 const Image = styled.img`
   object-fit: cover;
-  width: 50px;
-  height: 50px;
-  border-radius: 12px;
+  width: 25px;
+  height: 25px;
+  border-radius: 5px;
+  margin: auto 0;
+
+  @media only screen and (min-width: 1130px) {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+  }
 `;
 
 const Title = styled.p`
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 400;
   padding-left: 0.5rem;
   margin: auto 0;
   width: fit-content;
+  overflow-wrap: break-word;
+
+  @media only screen and (min-width: 1130px) {
+    font-size: 1rem;
+  }
 `;
 
 const QuantityContainer = styled.div`
