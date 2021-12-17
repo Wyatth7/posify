@@ -29,7 +29,7 @@ const ControlButton = styled.button`
       ? `#000000`
       : `#ffffff`};
   border-radius: 10px;
-  font-size: ${(props) => (props.mobile ? "2rem" : "1rem")};
+  font-size: ${(props) => (props.mobile ? "2rem" : "1.3rem")};
   padding: 0.5rem;
 `;
 

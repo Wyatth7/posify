@@ -11,6 +11,10 @@ const CART = styled.div`
   height: 100vh;
   padding-left: 1rem;
   border-left: 0.1rem solid #f3f3f2;
+
+  @media only screen and (min-width: 1280px) {
+    width: 30%;
+  }
 `;
 
 const Header = styled.div``;

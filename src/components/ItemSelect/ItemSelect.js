@@ -18,6 +18,10 @@ const ITEMSELECT = styled.div`
     padding-top: 0;
     /* border-right: 0.1rem solid #f3f3f2; */
   }
+
+  @media only screen and (min-width: 1280px) {
+    width: 70%;
+  }
 `;
 
 // const NavContainer = styled.div`

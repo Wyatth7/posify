@@ -35,19 +35,19 @@ const items = [
     title: "Ranch Burger",
     subHead: "150",
     price: 8.75,
-    img: "grilled-corn.png",
+    img: "ranch-burger.jpeg",
   },
   {
     title: "Fettuccine Pasta",
     subHead: "150",
     price: 10.75,
-    img: "grilled-corn.png",
+    img: "fettuccine-alfredo.jpeg",
   },
   {
     title: "Stuffed File Steak",
     subHead: "150",
     price: 15.75,
-    img: "grilled-corn.png",
+    img: "stuffed-filet-steak.jpeg",
   },
 ];
 
