@@ -59,7 +59,7 @@ const Item = (props) => {
     <ITEM>
       <HeadWrap>
         <Header>{props.title}</Header>
-        <SubHead>{props.subhead}g</SubHead>
+        <SubHead>{props.subhead} calories</SubHead>
       </HeadWrap>
       <DataWrap>
         <Price>

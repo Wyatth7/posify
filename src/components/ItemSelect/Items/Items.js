@@ -6,6 +6,7 @@ const ITEMS = styled.div`
   display: grid;
   grid-template-columns: 100%;
   padding-top: 8.5rem;
+  overflow: scroll;
 
   @media only screen and (min-width: 715px) {
     grid-template-columns: 45% 45%;
@@ -33,19 +34,91 @@ const items = [
   },
   {
     title: "Ranch Burger",
-    subHead: "150",
+    subHead: "1500",
     price: 8.75,
     img: "ranch-burger.jpeg",
   },
   {
     title: "Fettuccine Pasta",
-    subHead: "150",
+    subHead: "1200",
     price: 10.75,
     img: "fettuccine-alfredo.jpeg",
   },
   {
     title: "Stuffed File Steak",
+    subHead: "1450",
+    price: 15.75,
+    img: "stuffed-filet-steak.jpeg",
+  },
+  {
+    title: "Grilled Corn",
     subHead: "150",
+    price: 1.75,
+    img: "grilled-corn.png",
+  },
+  {
+    title: "Ranch Burger",
+    subHead: "1500",
+    price: 8.75,
+    img: "ranch-burger.jpeg",
+  },
+  {
+    title: "Fettuccine Pasta",
+    subHead: "1200",
+    price: 10.75,
+    img: "fettuccine-alfredo.jpeg",
+  },
+  {
+    title: "Stuffed File Steak",
+    subHead: "1450",
+    price: 15.75,
+    img: "stuffed-filet-steak.jpeg",
+  },
+  {
+    title: "Grilled Corn",
+    subHead: "150",
+    price: 1.75,
+    img: "grilled-corn.png",
+  },
+  {
+    title: "Ranch Burger",
+    subHead: "1500",
+    price: 8.75,
+    img: "ranch-burger.jpeg",
+  },
+  {
+    title: "Fettuccine Pasta",
+    subHead: "1200",
+    price: 10.75,
+    img: "fettuccine-alfredo.jpeg",
+  },
+  {
+    title: "Stuffed File Steak",
+    subHead: "1450",
+    price: 15.75,
+    img: "stuffed-filet-steak.jpeg",
+  },
+  {
+    title: "Grilled Corn",
+    subHead: "150",
+    price: 1.75,
+    img: "grilled-corn.png",
+  },
+  {
+    title: "Ranch Burger",
+    subHead: "1500",
+    price: 8.75,
+    img: "ranch-burger.jpeg",
+  },
+  {
+    title: "Fettuccine Pasta",
+    subHead: "1200",
+    price: 10.75,
+    img: "fettuccine-alfredo.jpeg",
+  },
+  {
+    title: "Stuffed File Steak",
+    subHead: "1450",
     price: 15.75,
     img: "stuffed-filet-steak.jpeg",
   },
