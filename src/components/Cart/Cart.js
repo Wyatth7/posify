@@ -1,7 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import SolidButton from "../reusable/SolidButton/SolidButton";
 import CartHeader from "./CartHeader/CartHeader";
 import CartItems from "./CartItems/CartItems";
+import CartTotal from "./CartTotal/CartTotal";
 
 const CART = styled.div`
   display: flex;
@@ -26,7 +28,15 @@ const Body = styled.div`
   align-items: flex-start;
 `;
 
-const Footer = styled.div``;
+const Footer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+
+const ElementPadding = styled.div`
+  padding: 1rem 0;
+`;
 
 const Cart = (props) => {
   return (
@@ -37,7 +47,13 @@ const Cart = (props) => {
       <Body>
         <CartItems />
       </Body>
-      <Footer></Footer>
+      <Footer>
+        <CartTotal />
+        <ElementPadding />
+        <SolidButton path="" color="#ef7614">
+          Pay $33.76
+        </SolidButton>
+      </Footer>
     </CART>
   );
 };
