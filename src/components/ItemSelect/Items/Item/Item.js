@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useStore } from "../../../../store/store";
 
 const ITEM = styled.div`
   margin: 0.5rem 0;
@@ -55,8 +56,21 @@ const PriceText = styled.p`
 `;
 
 const Item = (props) => {
+  const [state, dispatch] = useStore(false);
+
+  const addToCartHandler = () => {
+    const product = {
+      id: props.id,
+      title: props.title,
+      price: props.price,
+      img: props.img,
+    };
+    dispatch("ADD_CART_ITEM", product);
+    console.log(state);
+  };
+
   return (
-    <ITEM>
+    <ITEM onClick={addToCartHandler}>
       <HeadWrap>
         <Header>{props.title}</Header>
         <SubHead>{props.subhead} calories</SubHead>

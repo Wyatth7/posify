@@ -1,9 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useStore } from "../../store/store";
 import SolidButton from "../reusable/SolidButton/SolidButton";
 import CartHeader from "./CartHeader/CartHeader";
 import CartItems from "./CartItems/CartItems";
 import CartTotal from "./CartTotal/CartTotal";
+
+const ajaxCartItems = [
+  {
+    img: "grilled-corn.png",
+    title: "Grilled Corn",
+    price: 1.97,
+  },
+  {
+    img: "stuffed-filet-steak.jpeg",
+    title: "Stuffed Filet Steak",
+    price: 15.75,
+  },
+  {
+    img: "fettuccine-alfredo.jpeg",
+    title: "Fettuccine Pasta",
+    price: 10.75,
+  },
+  {
+    img: "ranch-burger.jpeg",
+    title: "Ranch Burger",
+    price: 8.75,
+  },
+];
 
 const CART = styled.div`
   display: flex;
@@ -38,22 +62,40 @@ const ElementPadding = styled.div`
   padding: 1rem 0;
 `;
 
+const IsEmptyCart = styled.p`
+  padding-top: 0.5rem;
+  user-select: none;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: #ef7614;
+`;
+
 const Cart = (props) => {
+  // const cartItems = useState(ajaxCartItems)[0];
+  const cartItems = useStore()[0];
+
   return (
     <CART>
       <Header>
         <CartHeader />
       </Header>
-      <Body>
-        <CartItems />
-      </Body>
-      <Footer>
-        <CartTotal />
-        <ElementPadding />
-        <SolidButton path="" color="#ef7614">
-          Pay $33.76
-        </SolidButton>
-      </Footer>
+      {cartItems.cartProducts.length > 0 ? (
+        <React.Fragment>
+          <Body>
+            <CartItems cartItems={cartItems.cartProducts} />
+          </Body>
+          <Footer>
+            <CartTotal />
+            <ElementPadding />
+            <SolidButton path="" color="#ef7614">
+              Pay $33.76
+            </SolidButton>
+          </Footer>
+        </React.Fragment>
+      ) : (
+        <IsEmptyCart>Items added to your cart will show up here.</IsEmptyCart>
+      )}
     </CART>
   );
 };

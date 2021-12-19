@@ -34,6 +34,7 @@ const ControlButton = styled.button`
 `;
 
 const ControlText = styled.p`
+  user-select: none;
   margin: 0 1rem;
   font-size: ${(props) => (props.mobile ? "2rem" : "1rem")};
 `;

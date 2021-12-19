@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { useEffect } from "react/cjs/react.production.min";
 import styled from "styled-components";
 import CartItem from "./CartItem/CartItem";
 
@@ -11,20 +12,14 @@ const CARTITEMS = styled.div`
 `;
 
 const CartItems = (props) => {
+  console.log(props.cartItems);
   return (
     <CARTITEMS>
-      <CartItem img="grilled-corn.png" title="Grilled Corn" price={1.97} />
-      <CartItem
-        img="fettuccine-alfredo.jpeg"
-        title="Fettuccine Pasta"
-        price={10.75}
-      />
-      <CartItem img="ranch-burger.jpeg" title="Ranch Burger" price={8.75} />
-      <CartItem
-        img="stuffed-filet-steak.jpeg"
-        title="Stuffed Filet Steak"
-        price={15.75}
-      />
+      {props.cartItems
+        ? props.cartItems.map((el) => (
+            <CartItem img={el.img} title={el.title} price={el.price} />
+          ))
+        : null}
     </CARTITEMS>
   );
 };

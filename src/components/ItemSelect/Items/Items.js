@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
+import { useStore } from "../../../store/store";
 import Item from "./Item/Item";
 
 const ITEMS = styled.div`
@@ -25,113 +26,15 @@ const ITEMS = styled.div`
   }
 `;
 
-const items = [
-  {
-    title: "Grilled Corn",
-    subHead: "150",
-    price: 1.75,
-    img: "grilled-corn.png",
-  },
-  {
-    title: "Ranch Burger",
-    subHead: "1500",
-    price: 8.75,
-    img: "ranch-burger.jpeg",
-  },
-  {
-    title: "Fettuccine Pasta",
-    subHead: "1200",
-    price: 10.75,
-    img: "fettuccine-alfredo.jpeg",
-  },
-  {
-    title: "Stuffed File Steak",
-    subHead: "1450",
-    price: 15.75,
-    img: "stuffed-filet-steak.jpeg",
-  },
-  {
-    title: "Grilled Corn",
-    subHead: "150",
-    price: 1.75,
-    img: "grilled-corn.png",
-  },
-  {
-    title: "Ranch Burger",
-    subHead: "1500",
-    price: 8.75,
-    img: "ranch-burger.jpeg",
-  },
-  {
-    title: "Fettuccine Pasta",
-    subHead: "1200",
-    price: 10.75,
-    img: "fettuccine-alfredo.jpeg",
-  },
-  {
-    title: "Stuffed File Steak",
-    subHead: "1450",
-    price: 15.75,
-    img: "stuffed-filet-steak.jpeg",
-  },
-  {
-    title: "Grilled Corn",
-    subHead: "150",
-    price: 1.75,
-    img: "grilled-corn.png",
-  },
-  {
-    title: "Ranch Burger",
-    subHead: "1500",
-    price: 8.75,
-    img: "ranch-burger.jpeg",
-  },
-  {
-    title: "Fettuccine Pasta",
-    subHead: "1200",
-    price: 10.75,
-    img: "fettuccine-alfredo.jpeg",
-  },
-  {
-    title: "Stuffed File Steak",
-    subHead: "1450",
-    price: 15.75,
-    img: "stuffed-filet-steak.jpeg",
-  },
-  {
-    title: "Grilled Corn",
-    subHead: "150",
-    price: 1.75,
-    img: "grilled-corn.png",
-  },
-  {
-    title: "Ranch Burger",
-    subHead: "1500",
-    price: 8.75,
-    img: "ranch-burger.jpeg",
-  },
-  {
-    title: "Fettuccine Pasta",
-    subHead: "1200",
-    price: 10.75,
-    img: "fettuccine-alfredo.jpeg",
-  },
-  {
-    title: "Stuffed File Steak",
-    subHead: "1450",
-    price: 15.75,
-    img: "stuffed-filet-steak.jpeg",
-  },
-];
-
 const Items = (props) => {
-  useEffect(() => {});
+  const [state, dispatch] = useStore(false);
 
   return (
     <ITEMS>
-      {items.map((el) => (
+      {state.products.map((el) => (
         <Item
-          key={el.title}
+          id={el.id}
+          key={el.id}
           title={el.title}
           subhead={el.subHead}
           price={el.price}

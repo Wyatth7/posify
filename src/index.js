@@ -3,6 +3,11 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
+import configureProductStore from "./store/items-store";
+import configureCartStore from "./store/cart-item-store";
+
+configureProductStore();
+configureCartStore();
 
 ReactDOM.render(
   <BrowserRouter>
