@@ -1,33 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useStore } from "../../store/store";
 import SolidButton from "../reusable/SolidButton/SolidButton";
 import CartHeader from "./CartHeader/CartHeader";
 import CartItems from "./CartItems/CartItems";
 import CartTotal from "./CartTotal/CartTotal";
-
-const ajaxCartItems = [
-  {
-    img: "grilled-corn.png",
-    title: "Grilled Corn",
-    price: 1.97,
-  },
-  {
-    img: "stuffed-filet-steak.jpeg",
-    title: "Stuffed Filet Steak",
-    price: 15.75,
-  },
-  {
-    img: "fettuccine-alfredo.jpeg",
-    title: "Fettuccine Pasta",
-    price: 10.75,
-  },
-  {
-    img: "ranch-burger.jpeg",
-    title: "Ranch Burger",
-    price: 8.75,
-  },
-];
 
 const CART = styled.div`
   display: flex;

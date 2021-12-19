@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useStore } from "../../../store/store";
 import Item from "./Item/Item";
@@ -27,7 +27,7 @@ const ITEMS = styled.div`
 `;
 
 const Items = (props) => {
-  const [state, dispatch] = useStore(false);
+  const state = useStore(false)[0];
 
   return (
     <ITEMS>

@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useEffect } from "react/cjs/react.production.min";
+import React from "react";
 import styled from "styled-components";
 import CartItem from "./CartItem/CartItem";
 
