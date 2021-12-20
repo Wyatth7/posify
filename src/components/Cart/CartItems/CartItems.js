@@ -11,12 +11,23 @@ const CARTITEMS = styled.div`
 `;
 
 const CartItems = (props) => {
-  console.log(props.cartItems);
+  // const setObjElements = (obj) => {
+
+  // }
+
   return (
     <CARTITEMS>
       {props.cartItems
         ? props.cartItems.map((el) => (
-            <CartItem img={el.img} title={el.title} price={el.price} />
+            <CartItem
+              amountFunction={props.amountFunction}
+              amount={el.amount}
+              img={el.img}
+              title={el.title}
+              price={el.price}
+              id={el.id}
+              key={el.id}
+            />
           ))
         : null}
     </CARTITEMS>

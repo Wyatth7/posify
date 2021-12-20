@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { FiTrash, FiPlus, FiMinus } from "react-icons/fi";
+import { useStore } from "../../../store/store";
 
 const QUANTITYCONTROLLER = styled.div``;
 
@@ -40,27 +41,11 @@ const ControlText = styled.p`
 `;
 
 const QuantityController = (props) => {
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(props.amount);
   const [price, setPrice] = useState(props.price);
 
-  const countHandler = (amount) => {
-    setCount(count + amount);
-    setPrice(price + props.price);
-  };
-
-  const increaseHandler = () => {
-    countHandler(1);
-    props.priceFunc(props.price);
-  };
-
-  const decreaseHandler = () => {
-    if (count === 1) {
-      console.log("deleting");
-      return;
-    }
-
-    countHandler(-1);
-    props.priceFunc(-props.price);
+  const countHandler = (isIncrement) => {
+    props.amountFunction(isIncrement);
   };
 
   return (
@@ -68,19 +53,19 @@ const QuantityController = (props) => {
       <AmountControl>
         <ControlButton
           mobile={props.mobile}
-          amount={count}
+          amount={props.amount}
           del
-          onClick={decreaseHandler}
+          onClick={() => countHandler(false)}
         >
-          {count > 1 ? <FiMinus /> : <FiTrash />}
+          {props.amount > 1 ? <FiMinus /> : <FiTrash />}
         </ControlButton>
-        <ControlText mobile={props.mobile}>{count}</ControlText>
+        <ControlText mobile={props.mobile}>{props.amount}</ControlText>
         <ControlButton
           mobile={props.mobile}
-          amount={count}
+          amount={props.amount}
           del
           right
-          onClick={increaseHandler}
+          onClick={() => countHandler(true)}
         >
           <FiPlus />
         </ControlButton>

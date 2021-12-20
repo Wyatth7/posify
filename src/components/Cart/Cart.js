@@ -50,7 +50,11 @@ const IsEmptyCart = styled.p`
 
 const Cart = (props) => {
   // const cartItems = useState(ajaxCartItems)[0];
-  const cartItems = useStore()[0];
+  const [cartItems, dispatch] = useStore();
+
+  const updateCartItemAmount = (obj) => {
+    dispatch("EDIT_ITEM_AMOUNT", obj);
+  };
 
   return (
     <CART>
@@ -60,7 +64,10 @@ const Cart = (props) => {
       {cartItems.cartProducts.length > 0 ? (
         <React.Fragment>
           <Body>
-            <CartItems cartItems={cartItems.cartProducts} />
+            <CartItems
+              amountFunction={updateCartItemAmount}
+              cartItems={cartItems.cartProducts}
+            />
           </Body>
           <Footer>
             <CartTotal />

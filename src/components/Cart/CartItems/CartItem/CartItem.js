@@ -78,9 +78,16 @@ const Price = styled.p`
 
 const CartItem = (props) => {
   const [price, setPrice] = useState(props.price);
+  const obj = useState({
+    id: props.id,
+    img: props.img,
+    title: props.title,
+    price: props.price,
+    amount: props.amount,
+  })[0];
 
-  const priceHandler = (amount) => {
-    setPrice(price + amount);
+  const setObjItem = (isIncriment) => {
+    props.amountFunction({ ...obj, isIncriment });
   };
 
   return (
@@ -92,7 +99,11 @@ const CartItem = (props) => {
         <Title>{props.title}</Title>
       </DescriptionContainer>
       <QuantityContainer>
-        <QuantityController priceFunc={priceHandler} price={props.price} />
+        <QuantityController
+          amountFunction={setObjItem}
+          price={props.price}
+          amount={props.amount}
+        />
       </QuantityContainer>
       <PriceContainer>
         <Price>${price}</Price>
