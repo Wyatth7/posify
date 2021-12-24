@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route, Routes } from "react-router";
 import { createGlobalStyle } from "styled-components";
 import MobileCart from "./components/Cart/MobileCart";
 import Content from "./components/ContentHead/Content";
+import CustomizeItemModal from "./components/ItemSelect/CustomizeItemModal.js/CustomizeItemModal";
 
 const GlobalStyle = createGlobalStyle`
   *,
@@ -13,6 +14,10 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  html {
+    background-color: #ffffff;
+  }
+
   body {
     font-size: 62.5%;
     font-family: 'Heebo', sans-serif;
@@ -20,8 +25,17 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
+  const [customizeModal, setCustomizeModal] = useState(false);
+
+  const toggleCustomizeModal = () => {
+    setCustomizeModal(!customizeModal);
+  };
+
   return (
     <React.Fragment>
+      {customizeModal ? (
+        <CustomizeItemModal close={toggleCustomizeModal} />
+      ) : null}
       <GlobalStyle />
       <div>
         <Routes>
