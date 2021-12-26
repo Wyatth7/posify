@@ -24,7 +24,6 @@ const Image = styled.img`
 
 const ItemWrapper = styled.div`
   overflow: scroll;
-  padding: 1rem;
 `;
 
 const CustomizeReview = (props) => {

@@ -7,7 +7,8 @@ const editIngredients = (obj, add, ingredientId) => {
   if (add) {
     ingredientArray.push(ingredientId);
   } else {
-    ingredientArray.filter((e) => e === ingredientId);
+    const index = ingredientArray.findIndex((el) => el === ingredientId);
+    ingredientArray.splice(index, 1);
   }
 
   ingredientObject.ingredients = [...ingredientArray];
@@ -25,7 +26,13 @@ const customizeItemStore = () => {
         },
       };
     },
-    REMOVE_ITEM_INGREDIENTS: (curState, ingredientId) => {},
+    REMOVE_ITEM_INGREDIENTS: (curState, ingredientId) => {
+      return {
+        curCustomizeObj: {
+          ...editIngredients(curState.curCustomizeObj, false, ingredientId),
+        },
+      };
+    },
   };
   initStore(actions, { curCustomizeObj: {} });
 };

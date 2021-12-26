@@ -12,7 +12,7 @@ const ReviewItems = (props) => {
     <REVIEW_ITEMS>
       {props.ingredients
         ? props.ingredients.map((el) => (
-            <ReviewItem title={el.title} price={el.price} />
+            <ReviewItem id={el.id} title={el.title} price={el.price} />
           ))
         : null}
     </REVIEW_ITEMS>
