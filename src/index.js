@@ -5,9 +5,11 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import configureProductStore from "./store/items-store";
 import configureCartStore from "./store/cart-item-store";
+import customizeItemStore from "./store/customize-item";
 
 configureProductStore();
 configureCartStore();
+customizeItemStore();
 
 ReactDOM.render(
   <BrowserRouter>

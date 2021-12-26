@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import sortArrayByCategory from "../../../../../scripts/sortArrayByCategory";
 import CustomizableItems from "./CustomizableItems/CustomizableItems";
 import SelectHeader from "./SelectHeader/SelectHeader";
 

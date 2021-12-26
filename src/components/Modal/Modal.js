@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
+import { useStore } from "../../store/store";
 
 const MODAL = styled.div`
   position: fixed;
@@ -31,11 +32,25 @@ const Background = styled.div`
 `;
 
 const Modal = (props) => {
+  const [state, dispatch] = useStore();
+
+  const closeModal = () => {
+    dispatch("CLOSE_CUSTOMIZE_MODAL", false);
+  };
+
+  useEffect(() => {
+    console.log(state);
+  });
+
   return (
-    <MODAL>
-      <Background onClick={props.close} />
-      <Content>{props.children}</Content>
-    </MODAL>
+    <React.Fragment>
+      {state.customizeModal ? (
+        <MODAL>
+          <Background onClick={closeModal} />
+          <Content>{props.children}</Content>
+        </MODAL>
+      ) : null}
+    </React.Fragment>
   );
 };
 

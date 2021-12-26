@@ -1,28 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useStore } from "../../../../store/store";
 import CustomizeItemHeader from "../CustomizeItemHeader/CustomizeItemHeader";
 import ReviewItems from "./ReviewItems/ReviewItems";
-
-const ingredients = [
-  {
-    id: 0,
-    title: "Pickles",
-    price: 0.45,
-    category: "vegetable",
-  },
-  {
-    id: 1,
-    title: "Tomatoes",
-    price: 0.35,
-    category: "vegetable",
-  },
-  {
-    id: 3,
-    title: "Steak",
-    price: 2,
-    category: "meat",
-  },
-];
 
 const CUSTOMIZE_REVIEW = styled.div`
   display: flex;
@@ -48,6 +28,22 @@ const ItemWrapper = styled.div`
 `;
 
 const CustomizeReview = (props) => {
+  const [ingredients, setIngredients] = useState([]);
+  const state = useStore()[0];
+
+  // finds ingredients based on id, then adds then displays them to review item.
+  useEffect(() => {
+    let newIngredientArray = state.curCustomizeObj.ingredients.map((el) => {
+      if (state.ingredients.some((e) => e.id === el)) {
+        return state.ingredients.find((e) => e.id === el);
+      }
+
+      return null;
+    });
+
+    setIngredients(newIngredientArray);
+  }, [setIngredients, state]);
+
   return (
     <CUSTOMIZE_REVIEW>
       <ImageWrapper>

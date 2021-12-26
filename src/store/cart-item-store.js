@@ -73,6 +73,22 @@ const configureCartStore = () => {
 
       return { cartProducts: curState.cartProducts };
     },
+    OPEN_CUSTOMIZE_MODAL: (curState, productObj) => {
+      let newObj = { ...productObj };
+
+      newObj.id = Math.random();
+      console.log(productObj);
+
+      return {
+        customizeModal: true,
+        curCustomizeObj: {
+          ...newObj,
+        },
+      };
+    },
+    CLOSE_CUSTOMIZE_MODAL: () => {
+      return { customizeModal: false, curCustomizeObj: {} };
+    },
   };
   initStore(actions, { cartProducts: [] });
 };

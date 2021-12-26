@@ -62,10 +62,11 @@ const Item = (props) => {
     const product = {
       id: props.id,
       title: props.title,
-      price: props.price,
+      basePrice: props.price,
       img: props.img,
+      ingredients: [],
     };
-    dispatch("ADD_CART_ITEM", product);
+    dispatch("OPEN_CUSTOMIZE_MODAL", product);
     console.log(state);
   };
 

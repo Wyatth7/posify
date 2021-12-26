@@ -42,6 +42,26 @@ const configureProductStore = () => {
         id: 3,
       },
     ],
+    ingredients: [
+      {
+        id: 0,
+        title: "Pickles",
+        price: 0.45,
+        category: "vegetable",
+      },
+      {
+        id: 1,
+        title: "Tomatoes",
+        price: 0.35,
+        category: "vegetable",
+      },
+      {
+        id: 3,
+        title: "Steak",
+        price: 2,
+        category: "meat",
+      },
+    ],
   });
 };
 

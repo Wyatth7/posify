@@ -77,7 +77,7 @@ const Price = styled.p`
 `;
 
 const CartItem = (props) => {
-  const [price, setPrice] = useState(props.price);
+  const price = useState(props.price)[0];
   const obj = useState({
     id: props.id,
     img: props.img,

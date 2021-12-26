@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Route, Routes } from "react-router";
 import { createGlobalStyle } from "styled-components";
 import MobileCart from "./components/Cart/MobileCart";
@@ -25,17 +25,11 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
-  const [customizeModal, setCustomizeModal] = useState(false);
-
-  const toggleCustomizeModal = () => {
-    setCustomizeModal(!customizeModal);
-  };
+  // const [customizeModal, setCustomizeModal] = useState(true);
 
   return (
     <React.Fragment>
-      {customizeModal ? (
-        <CustomizeItemModal close={toggleCustomizeModal} />
-      ) : null}
+      <CustomizeItemModal />
       <GlobalStyle />
       <div>
         <Routes>

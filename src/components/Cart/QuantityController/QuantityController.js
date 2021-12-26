@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { FiTrash, FiPlus, FiMinus } from "react-icons/fi";
-import { useStore } from "../../../store/store";
 
 const QUANTITYCONTROLLER = styled.div``;
 
@@ -41,8 +40,8 @@ const ControlText = styled.p`
 `;
 
 const QuantityController = (props) => {
-  const [count, setCount] = useState(props.amount);
-  const [price, setPrice] = useState(props.price);
+  // const [count, setCount] = useState(props.amount);
+  // const [price, setPrice] = useState(props.price);
 
   const countHandler = (isIncrement) => {
     props.amountFunction(isIncrement);

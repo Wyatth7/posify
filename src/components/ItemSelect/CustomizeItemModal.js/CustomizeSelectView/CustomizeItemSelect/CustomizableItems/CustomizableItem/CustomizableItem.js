@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useStore } from "../../../../../../../store/store";
 
 const CUSTOMIZABLE_ITEM = styled.div`
   cursor: pointer;
@@ -32,8 +33,14 @@ const Price = styled.p`
 `;
 
 const CustomizableItem = (props) => {
+  const dispatch = useStore(false)[1];
+
+  const addIngredientHandler = () => {
+    dispatch("ADD_ITEM_INGREDIENTS", props.id);
+  };
+
   return (
-    <CUSTOMIZABLE_ITEM index={props.index}>
+    <CUSTOMIZABLE_ITEM onClick={addIngredientHandler} index={props.index}>
       <Title>{props.title}</Title>
       <Price>+ ${props.price}</Price>
     </CUSTOMIZABLE_ITEM>

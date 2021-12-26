@@ -1,7 +1,5 @@
 // Will move to server later in development life cycle
 
-import { findAllByRole } from "@testing-library/react";
-
 // take in array then return an array of objects with
 // category title, and array of ingredients in said category.
 const sortArrayByCategory = (array) => {

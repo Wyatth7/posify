@@ -1,29 +1,30 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import sortArrayByCategory from "../../../../scripts/sortArrayByCategory";
+import { useStore } from "../../../../store/store";
 import CustomizeItemHeader from "../CustomizeItemHeader/CustomizeItemHeader";
 import CustomizeItemSelect from "./CustomizeItemSelect/CustomizeItemSelect";
 
-const items = [
-  {
-    id: 0,
-    title: "Pickles",
-    price: 0.45,
-    category: "vegetable",
-  },
-  {
-    id: 1,
-    title: "Tomatoes",
-    price: 0.35,
-    category: "vegetable",
-  },
-  {
-    id: 3,
-    title: "Steak",
-    price: 2,
-    category: "meat",
-  },
-];
+// const items = [
+//   {
+//     id: 0,
+//     title: "Pickles",
+//     price: 0.45,
+//     category: "vegetable",
+//   },
+//   {
+//     id: 1,
+//     title: "Tomatoes",
+//     price: 0.35,
+//     category: "vegetable",
+//   },
+//   {
+//     id: 3,
+//     title: "Steak",
+//     price: 2,
+//     category: "meat",
+//   },
+// ];
 
 const CUSTOMIZE_SELECT_VIEW = styled.div`
   display: flex;
@@ -38,10 +39,11 @@ const ContentContainer = styled.div`
 
 const CustomizeSelectView = (props) => {
   const [sortedItems, setSortedItems] = useState([]);
+  const state = useStore(false)[0];
 
   useEffect(() => {
-    setSortedItems(sortArrayByCategory(items));
-  }, [setSortedItems]);
+    setSortedItems(sortArrayByCategory(state.ingredients));
+  }, [setSortedItems, state]);
 
   return (
     <CUSTOMIZE_SELECT_VIEW>
