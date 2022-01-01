@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import sortArrayByCategory from "../../../../scripts/sortArrayByCategory";
+import ArraySorter from "../../../../scripts/array-sorters";
 import { useStore } from "../../../../store/store";
 import CustomizeItemHeader from "../CustomizeItemHeader/CustomizeItemHeader";
 import CustomizeItemSelect from "./CustomizeItemSelect/CustomizeItemSelect";
@@ -39,15 +39,18 @@ const ContentContainer = styled.div`
 
 const CustomizeSelectView = (props) => {
   const [sortedItems, setSortedItems] = useState([]);
-  const state = useStore(false)[0];
+  const state = useStore()[0];
 
   useEffect(() => {
-    setSortedItems(sortArrayByCategory(state.ingredients));
+    setSortedItems(ArraySorter.sortArrayByCategory(state.ingredients));
   }, [setSortedItems, state]);
 
   return (
     <CUSTOMIZE_SELECT_VIEW>
-      <CustomizeItemHeader>Ranch Burger</CustomizeItemHeader>
+      <CustomizeItemHeader
+        title={"Ranch Burger"}
+        price={state.curCustomizeObj.price}
+      />
       <ContentContainer>
         {sortedItems.map((el) => (
           <CustomizeItemSelect items={el} />

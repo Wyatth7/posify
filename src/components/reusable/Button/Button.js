@@ -9,6 +9,8 @@ const BUTTON = styled.button`
   border-radius: 8px;
   padding: 0.5rem 1rem;
   height: fit-content;
+  width: inherit;
+  justify-content: center;
 `;
 
 const Icon = styled.div`
@@ -26,7 +28,7 @@ const Paragraph = styled.p`
 
 const Button = (props) => {
   return (
-    <BUTTON>
+    <BUTTON onClick={props.clicked}>
       <Icon isChildren={props.children}>{props.icon}</Icon>
       <Paragraph>{props.children}</Paragraph>
     </BUTTON>

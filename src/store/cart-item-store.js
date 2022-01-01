@@ -1,3 +1,4 @@
+import ArraySorter from "../scripts/array-sorters";
 import { initStore } from "./store";
 
 const findObjAndIndex = (arr, obj) => {
@@ -77,6 +78,11 @@ const configureCartStore = () => {
       let newObj = { ...productObj };
 
       newObj.id = Math.random();
+      newObj.price = priceFormatter.format(
+        ArraySorter.getTotalIngredientPrice(newObj.ingredients) +
+          newObj.basePrice
+      );
+
       console.log(productObj);
 
       return {

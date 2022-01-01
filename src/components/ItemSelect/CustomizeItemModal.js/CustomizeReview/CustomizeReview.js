@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useStore } from "../../../../store/store";
+import Button from "../../../reusable/Button/Button";
 import CustomizeItemHeader from "../CustomizeItemHeader/CustomizeItemHeader";
 import ReviewItems from "./ReviewItems/ReviewItems";
 
@@ -26,9 +27,14 @@ const ItemWrapper = styled.div`
   overflow: scroll;
 `;
 
+const ButtonWrapper = styled.div`
+  padding: 1rem;
+  width: 100%;
+`;
+
 const CustomizeReview = (props) => {
   const [ingredients, setIngredients] = useState([]);
-  const state = useStore()[0];
+  const [state, dispatch] = useStore();
 
   // finds ingredients based on id, then adds then displays them to review item.
   useEffect(() => {
@@ -43,6 +49,11 @@ const CustomizeReview = (props) => {
     setIngredients(newIngredientArray);
   }, [setIngredients, state]);
 
+  const onAddToCartHandler = () => {
+    dispatch("ADD_CART_ITEM", state.curCustomizeObj);
+    dispatch("CLOSE_CUSTOMIZE_MODAL", false);
+  };
+
   return (
     <CUSTOMIZE_REVIEW>
       <ImageWrapper>
@@ -52,6 +63,10 @@ const CustomizeReview = (props) => {
       <ItemWrapper>
         <ReviewItems ingredients={ingredients} />
       </ItemWrapper>
+
+      <ButtonWrapper>
+        <Button clicked={onAddToCartHandler}>Add To Cart</Button>
+      </ButtonWrapper>
     </CUSTOMIZE_REVIEW>
   );
 };

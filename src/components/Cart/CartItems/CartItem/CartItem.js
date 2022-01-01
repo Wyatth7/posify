@@ -106,7 +106,7 @@ const CartItem = (props) => {
         />
       </QuantityContainer>
       <PriceContainer>
-        <Price>${price}</Price>
+        <Price>{price}</Price>
       </PriceContainer>
     </CARTITEM>
   );
