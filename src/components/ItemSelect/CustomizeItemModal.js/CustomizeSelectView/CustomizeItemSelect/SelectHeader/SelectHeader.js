@@ -13,7 +13,9 @@ const SELECT_HEADER = styled.div`
   /* color: #ffffff; */
 `;
 
-const Title = styled.p``;
+const Title = styled.p`
+  text-transform: capitalize;
+`;
 
 const SelectHeader = (props) => {
   const [selected, setSelected] = useState(false);

@@ -43,6 +43,9 @@ const configureCartStore = () => {
         cartProducts: newArray,
       };
     },
+    CLEAR_CART: (curState) => {
+      return { cartProducts: [] };
+    },
     EDIT_ITEM_AMOUNT: (curState, productObj) => {
       let incriment = 1;
       if (!productObj.isIncriment) {

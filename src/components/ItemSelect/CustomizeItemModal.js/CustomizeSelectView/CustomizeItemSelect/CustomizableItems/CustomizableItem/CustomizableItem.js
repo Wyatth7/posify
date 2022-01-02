@@ -25,10 +25,12 @@ const CUSTOMIZABLE_ITEM = styled.div`
 
 const Title = styled.p`
   font-size: 1rem;
+  text-transform: capitalize;
 `;
 
 const Price = styled.p`
   font-size: 0.8rem;
+  text-transform: capitalize;
   color: #c1aeae;
 `;
 

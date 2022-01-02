@@ -3,6 +3,7 @@ import { FiSettings } from "react-icons/fi";
 import styled from "styled-components";
 import Button from "../../reusable/Button/Button";
 import MediaQuery from "react-responsive";
+import { useStore } from "./../../../store/store";
 
 const CARTHEADER = styled.div`
   display: flex;
@@ -58,12 +59,18 @@ const MidPad = styled.div`
 `;
 
 const CartHeader = (props) => {
+  const dispatch = useStore(false)[1];
+
+  const clearCartHandler = () => {
+    dispatch("CLEAR_CART");
+  };
+
   return (
     <CARTHEADER>
       <Header>Current Order</Header>
       <MediaQuery minWidth={950}>
         <ButtonContainer>
-          <Button>Clear All</Button>
+          <Button clicked={clearCartHandler}>Clear All</Button>
           <MidPad />
           <Button icon={<FiSettings />}></Button>
         </ButtonContainer>

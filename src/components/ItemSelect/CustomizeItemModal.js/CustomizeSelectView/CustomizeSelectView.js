@@ -48,7 +48,7 @@ const CustomizeSelectView = (props) => {
   return (
     <CUSTOMIZE_SELECT_VIEW>
       <CustomizeItemHeader
-        title={"Ranch Burger"}
+        title={state.curCustomizeObj.title}
         price={state.curCustomizeObj.price}
       />
       <ContentContainer>

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { IoMdClose } from "react-icons/io";
+
 import { useStore } from "../../../../store/store";
 import Button from "../../../reusable/Button/Button";
 import CustomizeItemHeader from "../CustomizeItemHeader/CustomizeItemHeader";
@@ -18,7 +20,7 @@ const ImageWrapper = styled.div`
 
 const Image = styled.img`
   width: 100%;
-  height: 200px;
+  height: 150px;
   object-fit: cover;
   border-radius: 12px;
 `;
@@ -30,6 +32,23 @@ const ItemWrapper = styled.div`
 const ButtonWrapper = styled.div`
   padding: 1rem;
   width: 100%;
+`;
+
+const CloseWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem 1rem 0 0;
+  padding-bottom: 0;
+`;
+
+const Icon = styled.div`
+  cursor: pointer;
+  width: fit-content;
+  height: fit-content;
+  padding: 0;
+  font-size: 1.2rem;
+  color: #ef7614;
 `;
 
 const CustomizeReview = (props) => {
@@ -54,12 +73,21 @@ const CustomizeReview = (props) => {
     dispatch("CLOSE_CUSTOMIZE_MODAL", false);
   };
 
+  const closeModal = () => {
+    dispatch("CLOSE_CUSTOMIZE_MODAL", false);
+  };
+
   return (
     <CUSTOMIZE_REVIEW>
+      <CloseWrapper>
+        <Icon onClick={closeModal}>
+          <IoMdClose />
+        </Icon>
+      </CloseWrapper>
       <ImageWrapper>
         <Image src="/images/ranch-burger.jpeg" alt="testimg" />
       </ImageWrapper>
-      <CustomizeItemHeader>Ingredients</CustomizeItemHeader>
+      <CustomizeItemHeader title="Ingredients" />
       <ItemWrapper>
         <ReviewItems ingredients={ingredients} />
       </ItemWrapper>

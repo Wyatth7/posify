@@ -28,7 +28,9 @@ const REVIEW_ITEM = styled.div`
   }
 `;
 
-const Title = styled.p``;
+const Title = styled.p`
+  text-transform: capitalize;
+`;
 
 const Price = styled.p``;
 

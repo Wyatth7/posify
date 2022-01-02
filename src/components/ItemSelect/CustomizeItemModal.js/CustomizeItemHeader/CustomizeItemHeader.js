@@ -16,6 +16,7 @@ const Header = styled.h1`
 `;
 
 const Price = styled(Header)`
+  margin-left: 1rem;
   font-weight: 300;
 `;
 
@@ -23,7 +24,7 @@ const CustomizeItemHeader = (props) => {
   return (
     <CUSTOMIZE_ITEM_HEADER>
       <Header>{props.title}</Header>
-      <Price>{props.price}</Price>
+      {props.price ? <Price>{props.price}</Price> : null}
     </CUSTOMIZE_ITEM_HEADER>
   );
 };
