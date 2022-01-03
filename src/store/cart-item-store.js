@@ -1,6 +1,13 @@
 import ArraySorter from "../scripts/array-sorters";
 import { initStore } from "./store";
 
+const clearedFinancials = {
+  subTotal: 0,
+  discount: 0,
+  salesTax: 0,
+  totalPrice: 0,
+};
+
 const findObjAndIndex = (arr, obj) => {
   const object = arr.find((el) => el.id === obj.id);
   console.log(object);
@@ -66,7 +73,7 @@ const configureCartStore = () => {
     CLEAR_CART: (curState) => {
       return {
         cartProducts: [],
-        financials: { totalPrice: 0, subTotal: 0, discount: 0, salesTax: 0 },
+        financials: clearedFinancials,
       };
     },
     EDIT_ITEM_AMOUNT: (curState, productObj) => {
@@ -100,7 +107,7 @@ const configureCartStore = () => {
         // Removes item from cart if amount is less than 1.
         if (product.amount < 1) {
           newArray.splice(productIndex, 1);
-          return { cartProducts: newArray };
+          return { cartProducts: newArray, financials: financial };
         }
 
         product.price = product.amount * product.baseEditPrice;
