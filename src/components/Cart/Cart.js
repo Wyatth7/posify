@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import priceFormatter from "../../scripts/price-formatter";
 import { useStore } from "../../store/store";
 import SolidButton from "../reusable/SolidButton/SolidButton";
 import CartHeader from "./CartHeader/CartHeader";
@@ -27,12 +28,14 @@ const Body = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  overflow-y: auto;
 `;
 
 const Footer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  margin-bottom: 1rem;
 `;
 
 const ElementPadding = styled.div`
@@ -49,7 +52,6 @@ const IsEmptyCart = styled.p`
 `;
 
 const Cart = (props) => {
-  // const cartItems = useState(ajaxCartItems)[0];
   const [cartItems, dispatch] = useStore();
 
   const updateCartItemAmount = (obj) => {
@@ -67,13 +69,14 @@ const Cart = (props) => {
             <CartItems
               amountFunction={updateCartItemAmount}
               cartItems={cartItems.cartProducts}
+              itemCount={cartItems.cartProducts.length}
             />
           </Body>
           <Footer>
             <CartTotal />
             <ElementPadding />
             <SolidButton path="" color="#ef7614">
-              Pay $33.76
+              Pay {priceFormatter.format(cartItems.financials.totalPrice)}!
             </SolidButton>
           </Footer>
         </React.Fragment>

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { useStore } from "./../../../store/store";
 import NamePrice from "./NamePrice/NamePrice";
 
 const CARTTOTAL = styled.div`
@@ -24,15 +25,34 @@ const Total = styled.div`
 `;
 
 const CartTotal = (props) => {
+  const state = useStore()[0];
+
   return (
     <CARTTOTAL>
       <Prices>
-        <NamePrice fontSize="1rem" text="Subtotal" price="35.99" />
-        <NamePrice fontSize="1rem" discount text="Discount" price="5.00" />
-        <NamePrice fontSize="1rem" text="Sales Tax" price="2.25" />
+        <NamePrice
+          fontSize="1rem"
+          text="Subtotal"
+          price={state.financials.subTotal}
+        />
+        <NamePrice
+          fontSize="1rem"
+          discount
+          text="Discount"
+          price={state.financials.discount}
+        />
+        <NamePrice
+          fontSize="1rem"
+          text="Sales Tax"
+          price={state.financials.salesTax}
+        />
       </Prices>
       <Total>
-        <NamePrice fontSize="1.5rem" text="Total" price="33.76" />
+        <NamePrice
+          fontSize="1.5rem"
+          text="Total"
+          price={state.financials.totalPrice}
+        />
       </Total>
     </CARTTOTAL>
   );

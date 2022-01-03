@@ -6,10 +6,12 @@ import { BrowserRouter } from "react-router-dom";
 import configureProductStore from "./store/items-store";
 import configureCartStore from "./store/cart-item-store";
 import customizeItemStore from "./store/customize-item";
+import configurePriceStore from "./store/price-store";
 
 configureProductStore();
 configureCartStore();
 customizeItemStore();
+configurePriceStore();
 
 ReactDOM.render(
   <BrowserRouter>

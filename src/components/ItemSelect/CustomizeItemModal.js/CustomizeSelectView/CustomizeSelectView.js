@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import ArraySorter from "../../../../scripts/array-sorters";
+import priceFormatter from "../../../../scripts/price-formatter";
 import { useStore } from "../../../../store/store";
 import CustomizeItemHeader from "../CustomizeItemHeader/CustomizeItemHeader";
 import CustomizeItemSelect from "./CustomizeItemSelect/CustomizeItemSelect";
@@ -49,7 +50,7 @@ const CustomizeSelectView = (props) => {
     <CUSTOMIZE_SELECT_VIEW>
       <CustomizeItemHeader
         title={state.curCustomizeObj.title}
-        price={state.curCustomizeObj.price}
+        price={priceFormatter.format(state.curCustomizeObj.price)}
       />
       <ContentContainer>
         {sortedItems.map((el) => (

@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { FiDelete } from "react-icons/fi";
 import { useStore } from "../../../../../../store/store";
+import priceFormatter from "../../../../../../scripts/price-formatter";
 
 const Icon = styled.div`
   margin: auto 0 auto 0.2rem;
@@ -51,7 +52,7 @@ const ReviewItem = (props) => {
     <REVIEW_ITEM onClick={removeIngredientHandler}>
       <Title>{props.title}</Title>
       <PriceContainer>
-        <Price>+ ${props.price}</Price>
+        <Price>+ {priceFormatter.format(props.price)}</Price>
       </PriceContainer>
       <Icon>
         <FiDelete />

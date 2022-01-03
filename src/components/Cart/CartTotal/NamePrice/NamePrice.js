@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import priceFormatter from "../../../../scripts/price-formatter";
 
 const NAMEPRICE = styled.div`
   display: flex;
@@ -18,7 +19,8 @@ const NamePrice = (props) => {
     <NAMEPRICE>
       <Paragraph fontSize={props.fontSize}>{props.text}</Paragraph>
       <Paragraph price fontSize={props.fontSize}>
-        {props.discount ? "- " : ""}${props.price}
+        {props.discount ? "- " : ""}
+        {priceFormatter.format(props.price)}
       </Paragraph>
     </NAMEPRICE>
   );

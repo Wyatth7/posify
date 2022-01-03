@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import priceFormatter from "../../../../scripts/price-formatter";
+import { useStore } from "../../../../store/store";
 import QuantityController from "../../QuantityController/QuantityController";
 
 const CARTITEM = styled.div`
@@ -35,8 +37,8 @@ const ImageWrapper = styled.div``;
 
 const Image = styled.img`
   object-fit: cover;
-  width: 25px;
-  height: 25px;
+  width: 40px;
+  height: 40px;
   border-radius: 5px;
   margin: auto 0;
 
@@ -77,7 +79,8 @@ const Price = styled.p`
 `;
 
 const CartItem = (props) => {
-  const price = useState(props.price)[0];
+  const [price, setPrice] = useState(props.price);
+  const id = props.id;
   const obj = useState({
     id: props.id,
     img: props.img,
@@ -86,9 +89,17 @@ const CartItem = (props) => {
     amount: props.amount,
   })[0];
 
+  const state = useStore()[0];
+
   const setObjItem = (isIncriment) => {
     props.amountFunction({ ...obj, isIncriment });
   };
+
+  useEffect(() => {
+    const obj = state.cartProducts.find((el) => el.id === id);
+
+    setPrice(obj.price);
+  }, [state, setPrice, id]);
 
   return (
     <CARTITEM>
@@ -106,7 +117,7 @@ const CartItem = (props) => {
         />
       </QuantityContainer>
       <PriceContainer>
-        <Price>{price}</Price>
+        <Price>{priceFormatter.format(price)}</Price>
       </PriceContainer>
     </CARTITEM>
   );

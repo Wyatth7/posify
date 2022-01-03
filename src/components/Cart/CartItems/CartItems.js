@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import CartItem from "./CartItem/CartItem";
 
 const CARTITEMS = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -10,13 +11,31 @@ const CARTITEMS = styled.div`
   width: 100%;
 `;
 
-const CartItems = (props) => {
-  // const setObjElements = (obj) => {
+const Blur = styled.div`
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1.5rem;
+  background-color: #ffffff;
+  filter: blur(1rem);
+`;
 
-  // }
+const CartItems = (props) => {
+  const [overFlowing, setOverFlowing] = useState(false);
+  const itemCount = props.itemCount;
+
+  useEffect(() => {
+    console.log(itemCount);
+    if (itemCount >= 7) {
+      setOverFlowing(true);
+    } else {
+      setOverFlowing(false);
+    }
+  }, [itemCount, setOverFlowing]);
 
   return (
-    <CARTITEMS>
+    <CARTITEMS overFlowing={overFlowing}>
       {props.cartItems
         ? props.cartItems.map((el) => (
             <CartItem
@@ -30,6 +49,7 @@ const CartItems = (props) => {
             />
           ))
         : null}
+      {overFlowing ? <Blur /> : null}
     </CARTITEMS>
   );
 };

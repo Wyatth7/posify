@@ -20,7 +20,7 @@ const ImageWrapper = styled.div`
 
 const Image = styled.img`
   width: 100%;
-  height: 150px;
+  height: 175px;
   object-fit: cover;
   border-radius: 12px;
 `;
@@ -85,7 +85,7 @@ const CustomizeReview = (props) => {
         </Icon>
       </CloseWrapper>
       <ImageWrapper>
-        <Image src="/images/ranch-burger.jpeg" alt="testimg" />
+        <Image src={`/images/${state.curCustomizeObj.img}`} alt="testimg" />
       </ImageWrapper>
       <CustomizeItemHeader title="Ingredients" />
       <ItemWrapper>

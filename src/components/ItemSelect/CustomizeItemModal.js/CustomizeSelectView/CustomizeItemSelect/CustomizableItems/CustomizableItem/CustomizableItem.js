@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import priceFormatter from "../../../../../../../scripts/price-formatter";
 import { useStore } from "../../../../../../../store/store";
 
 const CUSTOMIZABLE_ITEM = styled.div`
@@ -44,7 +45,7 @@ const CustomizableItem = (props) => {
   return (
     <CUSTOMIZABLE_ITEM onClick={addIngredientHandler} index={props.index}>
       <Title>{props.title}</Title>
-      <Price>+ ${props.price}</Price>
+      <Price>+ {priceFormatter.format(props.price)}</Price>
     </CUSTOMIZABLE_ITEM>
   );
 };

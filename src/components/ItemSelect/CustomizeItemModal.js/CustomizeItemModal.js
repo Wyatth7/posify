@@ -26,22 +26,6 @@ const CUSTOMIZE_ITEM_MODAL = styled.div`
 // }
 
 const CustomizeItemModal = (props) => {
-  // const [ItemObject, setItemObject] = useState({});
-  // const baseObj = useState({
-  //   basePrice: props.price,
-  //   title: props.title,
-  //   ingredients: props.ingredients,
-  // })[0];
-
-  // useEffect(() => {
-  //   setItemObject({
-  //     ...baseObj,
-  //     id: Math.random(),
-  //   });
-  // }, [setItemObject, baseObj]);
-
-  // const [state, dispatch] = useStore();
-
   return (
     <Modal close={props.close}>
       <CUSTOMIZE_ITEM_MODAL>

@@ -1,5 +1,4 @@
 import { initStore } from "./store";
-import priceFormatter from "./../scripts/price-formatter";
 import ArraySorter from "../scripts/array-sorters";
 
 const editIngredients = (obj, add, ingredientId) => {
@@ -19,7 +18,7 @@ const editIngredients = (obj, add, ingredientId) => {
 };
 
 const updateItemPrice = (ingredients, price, globalIngredients) => {
-  return priceFormatter.format(
+  return (
     ArraySorter.getTotalIngredientPrice(ingredients, globalIngredients) + price
   );
 };
@@ -32,11 +31,14 @@ const customizeItemStore = () => {
         ...editIngredients(curState.curCustomizeObj, true, ingredientId),
       };
 
-      newObject.price = updateItemPrice(
+      const customizedPrice = updateItemPrice(
         newObject.ingredients,
         newObject.basePrice,
         curState.ingredients
       );
+
+      newObject.price = customizedPrice;
+      newObject.baseEditPrice = customizedPrice;
 
       return {
         curCustomizeObj: {
