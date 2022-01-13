@@ -14,7 +14,15 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  html {
+
+::-webkit-scrollbar {
+  width: 0;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
+html {
+    overflow: scroll;
+    overflow-x: hidden;
     background-color: #ffffff;
   }
 
@@ -22,6 +30,8 @@ const GlobalStyle = createGlobalStyle`
     font-size: 62.5%;
     font-family: 'Heebo', sans-serif;
   }
+
+
 `;
 
 function App() {
