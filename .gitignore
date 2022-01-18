@@ -12,7 +12,7 @@
 /build
 /server/config.env
 /server/dist
-/firebase-auth-sdk.json
+/posify-337200-firebase-adminsdk-8lcdr-7bd4934c4a.json
 
 # misc
 .DS_Store
