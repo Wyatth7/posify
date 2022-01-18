@@ -12,6 +12,7 @@
 /build
 /server/config.env
 /server/dist
+/firebase-auth-sdk.json
 
 # misc
 .DS_Store

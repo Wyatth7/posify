@@ -8,8 +8,11 @@
     "@testing-library/user-event": "^12.8.3",
     "@types/gapi": "^0.0.41",
     "axios": "^0.24.0",
+    "cross-env": "^7.0.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.2",
+    "firebase": "^9.6.3",
+    "firebase-admin": "^10.0.1",
     "googleapis": "^92.0.0",
     "mongoose": "^6.1.4",
     "react": "^17.0.2",
@@ -26,7 +29,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start:server": "nodemon server.js"
+    "start:server": "cross-env  GOOGLE_APPLICATION_CREDENTIALS=posify-337200-firebase-adminsdk-8lcdr-7bd4934c4a.json nodemon server.js"
   },
   "eslintConfig": {
     "extends": [

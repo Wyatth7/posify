@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Routes } from "react-router";
 import { createGlobalStyle } from "styled-components";
 import MobileCart from "./components/Cart/MobileCart";
 import Content from "./components/ContentHead/Content";
 import CustomizeItemModal from "./components/ItemSelect/CustomizeItemModal.js/CustomizeItemModal";
+import SignUp from "./pages/auth/SignUp";
 
 const GlobalStyle = createGlobalStyle`
   *,
@@ -40,6 +41,7 @@ function App() {
           <Route path="/alcohol" element={<Content />} />
           <Route path="/cold-drinks" element={<Content />} />
           <Route path="/hot-drinks" element={<Content />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="/" element={<Content />} />
         </Routes>
       </div>
