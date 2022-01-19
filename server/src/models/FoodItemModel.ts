@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { ingredientModel } from "./IngredientModel";
 
 interface IFoodItem extends mongoose.Document {
   title: string;
@@ -13,6 +14,7 @@ const foodItemModel = new mongoose.Schema({
     type: String,
     required: true,
   },
+  // price = initPrice plus sum of ingredient prices
   price: {
     type: Number,
     required: true,
@@ -29,12 +31,7 @@ const foodItemModel = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  ingredients: {
-    type: Array,
-    required: true,
-  },
+  ingredients: [ingredientModel],
 });
 
-const FootItemModel = mongoose.model<IFoodItem>("FootItemModel", foodItemModel);
-
-export default FootItemModel;
+export { IFoodItem, foodItemModel };

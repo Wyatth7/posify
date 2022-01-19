@@ -4,4 +4,44 @@
 // specific resturant is created, and users are added.
 import mongoose from "mongoose";
 
-const userModel = new mongoose.Schema({});
+interface IUser extends mongoose.Document {
+  firstName: string;
+  lastName: string;
+  email: string;
+  role: string;
+}
+
+const userModel = new mongoose.Schema({
+  _id: {
+    type: String,
+    required: true,
+  },
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  role: {
+    type: String,
+    default: "employee",
+  },
+  hireDate: {
+    type: Date,
+    default: Date.now(),
+  },
+  terminationDate: {
+    type: Date,
+    default: null,
+  },
+});
+
+const UserModel = mongoose.model<IUser>("UserModel", userModel);
+export default UserModel;
+export { IUser };

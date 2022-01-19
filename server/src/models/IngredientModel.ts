@@ -21,9 +21,4 @@ const ingredientModel = new mongoose.Schema({
   },
 });
 
-const IngredientModel = mongoose.model<IIngredientModel>(
-  "IngredientModel",
-  ingredientModel
-);
-
-export default IngredientModel;
+export { IIngredientModel, ingredientModel };
