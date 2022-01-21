@@ -5,6 +5,7 @@ import {
   IUser,
 } from "../auth/controllers/user-auth-controller";
 import BusinessModel from "../models/BusinessModel";
+import UserModel from "../models/UserModel";
 
 export const createBusiness: RequestHandler = async (req, res, next) => {
   try {
@@ -25,15 +26,19 @@ export const createBusiness: RequestHandler = async (req, res, next) => {
       users: [
         {
           _id: user.uid,
-          email: user.email,
-          firstName: reqData.firstName,
-          lastName: reqData.lastName,
-          role: reqData.role,
-          hireDate: Date.now(),
-          terminationDate: null,
         },
       ],
       title: req.body.title,
+    });
+
+    await UserModel.create({
+      _id: user.uid,
+      firstName: reqData.firstName,
+      lastName: reqData.lastName,
+      email: user.email,
+      role: reqData.role,
+      hireDate: Date.now(),
+      businessId: business._id,
     });
 
     res.status(200).json({
@@ -50,6 +55,16 @@ export const createBusiness: RequestHandler = async (req, res, next) => {
     res.status(400).json({
       status: "fail",
       message: "Could not create business system.",
+    });
+  }
+};
+
+export const addUserToBusiness: RequestHandler = async (req, res, next) => {
+  try {
+  } catch (err) {
+    res.status(200).json({
+      status: "fail",
+      message: "Could not add user to business.",
     });
   }
 };

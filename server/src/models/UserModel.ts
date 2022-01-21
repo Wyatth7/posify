@@ -9,6 +9,9 @@ interface IUser extends mongoose.Document {
   lastName: string;
   email: string;
   role: string;
+  businessId: string;
+  hireDate: string;
+  terminationDate: string;
 }
 
 const userModel = new mongoose.Schema({
@@ -38,6 +41,10 @@ const userModel = new mongoose.Schema({
   },
   terminationDate: {
     type: Date,
+    default: null,
+  },
+  businessId: {
+    type: String,
     default: null,
   },
 });

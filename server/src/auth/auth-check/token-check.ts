@@ -6,6 +6,7 @@ const getAuthToken: RequestHandler = (req, res, next) => {
     req.headers.authorization &&
     req.headers.authorization.split(" ")[0] === "Bearer"
   ) {
+    console.log(req.headers.authorization.split(" ")[1]);
     req.authToken = req.headers.authorization.split(" ")[1];
   } else {
     req.authToken = null;
@@ -13,15 +14,16 @@ const getAuthToken: RequestHandler = (req, res, next) => {
   next();
 };
 
-export const checkIfAuthenticated: RequestHandler = (req, res, next) => {
-  getAuthToken(req, res, async () => {
+export const checkIfAuthenticated: RequestHandler = async (req, res, next) => {
+  await getAuthToken(req, res, async () => {
     try {
       const { authToken } = req;
 
       const userInfo = await admin.auth().verifyIdToken(authToken);
 
       req.authId = userInfo.uid;
-
+      console.log(userInfo);
+      res.locals.user = userInfo;
       return next();
     } catch (e) {
       return res

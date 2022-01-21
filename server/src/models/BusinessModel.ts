@@ -24,6 +24,10 @@ const businessModel = new mongoose.Schema({
   ingredients: [ingredientModel],
   unfulfilledOrder: [orderModel],
   fulfilledOrder: [orderModel],
+  dailyTotal: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const BusinessModel = mongoose.model<IBusinessModel>(

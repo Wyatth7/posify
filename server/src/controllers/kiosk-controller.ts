@@ -1,26 +1,47 @@
-// import { RequestHandler } from "express";
-// import FoodItemModel from "./../models/FoodItemModel";
-// import IngredientModel from "./../models/IngredientModel";
-// import IIngredient from "./../interfaces/IIngredients";
-// import IFoodItem from "../interfaces/IFoodItem";
+import { RequestHandler } from "express";
+import IIngredient from "./../interfaces/IIngredients";
+import IFoodItem from "../interfaces/IFoodItem";
+import admin from "../auth/firebase/init-app";
+import UserModel from "../models/UserModel";
+import BusinessModel from "../models/BusinessModel";
 
-// export const getInitData: RequestHandler = async (req, res, next) => {
-//   try {
-//     const foodItems = await FoodItemModel.find();
-//     const ingredients = await IngredientModel.find();
+export const getInitData: RequestHandler = async (req, res, next) => {
+  try {
+    // const foodItems = await FoodItemModel.find();
+    // const ingredients = await IngredientModel.find();
 
-//     res.status(200).json({
-//       status: "success",
-//       payload: { foodItems: [...foodItems], ingredients: [...ingredients] },
-//     });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(400).json({
-//       status: "fail",
-//       message: "Could not get initial data from server.",
-//     });
-//   }
-// };
+    // res.status(200).json({
+    //   status: "success",
+    //   payload: { foodItems: [...foodItems], ingredients: [...ingredients] },
+    // });
+
+    const userBusinessId = await UserModel.findById(res.locals.user.user_id);
+
+    if (!userBusinessId) {
+      return res.status(400).json({ message: "test" });
+    }
+
+    const business = await BusinessModel.findById(userBusinessId.businessId);
+
+    if (!business) {
+      return res.status(400).json({ message: "test" });
+    }
+
+    res.status(200).json({
+      status: "success",
+      payload: {
+        foodItems: [...business.foodItems],
+        ingredients: [...business.ingredients],
+      },
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({
+      status: "fail",
+      message: "Could not get initial data from server.",
+    });
+  }
+};
 
 // export const addIngredient: RequestHandler = async (req, res, next) => {
 //   try {
