@@ -11,18 +11,18 @@ router.get(
   checkUserRole(["kiosk", "employee", "manager", "admin"]),
   kiosk.getInitData
 );
-// router
-//   .post(
-//     "/addFoodItem",
-//     checkIfAuthenticated,
-//     checkUserRole(["admin"]),
-//     kiosk.addFoodItem
-//   )
-//   .post(
-//     "/addIngredient",
-//     checkIfAuthenticated,
-//     checkUserRole(["admin"]),
-//     kiosk.addIngredient
-//   );
+router
+  .patch(
+    "/addFoodItem",
+    checkIfAuthenticated,
+    checkUserRole(["admin"]),
+    kiosk.addFoodItem
+  )
+  .patch(
+    "/addIngredient",
+    checkIfAuthenticated,
+    checkUserRole(["admin"]),
+    kiosk.addIngredient
+  );
 
 export default router;

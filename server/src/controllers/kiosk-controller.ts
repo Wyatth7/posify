@@ -5,6 +5,22 @@ import admin from "../auth/firebase/init-app";
 import UserModel from "../models/UserModel";
 import BusinessModel from "../models/BusinessModel";
 
+// Gets user and business starting from user id.
+const getUserAndBusiness = async (userId: string) => {
+  try {
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return [null, null];
+    }
+
+    const business = await BusinessModel.findById(user.businessId);
+
+    return [user, business];
+  } catch (err) {
+    return [null, null];
+  }
+};
+
 export const getInitData: RequestHandler = async (req, res, next) => {
   try {
     // const foodItems = await FoodItemModel.find();
@@ -15,13 +31,14 @@ export const getInitData: RequestHandler = async (req, res, next) => {
     //   payload: { foodItems: [...foodItems], ingredients: [...ingredients] },
     // });
 
-    const userBusinessId = await UserModel.findById(res.locals.user.user_id);
+    console.log("here");
+    const user = await UserModel.findById(req.authId);
 
-    if (!userBusinessId) {
+    if (!user) {
       return res.status(400).json({ message: "test" });
     }
 
-    const business = await BusinessModel.findById(userBusinessId.businessId);
+    const business = await BusinessModel.findById(user.businessId);
 
     if (!business) {
       return res.status(400).json({ message: "test" });
@@ -43,51 +60,64 @@ export const getInitData: RequestHandler = async (req, res, next) => {
   }
 };
 
-// export const addIngredient: RequestHandler = async (req, res, next) => {
-//   try {
-//     const reqObj: IIngredient = {
-//       title: req.body.title,
-//       price: req.body.price,
-//       category: req.body.category,
-//     };
+export const addIngredient: RequestHandler = async (req, res, next) => {
+  try {
+    const reqObj: IIngredient = {
+      title: req.body.title,
+      price: req.body.price,
+      category: req.body.category,
+    };
 
-//     await IngredientModel.create(reqObj);
+    // const [user, business] = await getUserAndBusiness(req.authId);
+    const user = await UserModel.findById(req.authId);
+    if (!user) {
+      throw new Error();
+    }
+    await BusinessModel.findByIdAndUpdate(user.businessId, {
+      $push: { ingredients: reqObj },
+    });
 
-//     res.status(200).json({
-//       status: "success",
-//       dataCreated: reqObj,
-//     });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(400).json({
-//       status: "fail",
-//       message: "Could not add ingredient.",
-//     });
-//   }
-// };
+    res.status(200).json({
+      status: "success",
+      dataCreated: reqObj,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({
+      status: "fail",
+      message: "Could not add ingredient.",
+    });
+  }
+};
 
-// export const addFoodItem: RequestHandler = async (req, res, next) => {
-//   try {
-//     const reqObj: IFoodItem = {
-//       title: req.body.title,
-//       price: req.body.price,
-//       initPrice: req.body.initPrice,
-//       img: req.body.img,
-//       calories: req.body.calories,
-//       ingredients: req.body.ingredients,
-//     };
+export const addFoodItem: RequestHandler = async (req, res, next) => {
+  try {
+    const reqObj: IFoodItem = {
+      title: req.body.title,
+      price: req.body.price,
+      initPrice: req.body.initPrice,
+      img: req.body.img,
+      calories: req.body.calories,
+      ingredients: req.body.ingredients,
+    };
 
-//     await FoodItemModel.create(reqObj);
+    const user = await UserModel.findById(req.authId);
+    if (!user) {
+      throw new Error();
+    }
+    await BusinessModel.findByIdAndUpdate(user.businessId, {
+      $push: { foodItems: reqObj },
+    });
 
-//     res.status(200).json({
-//       status: "success",
-//       foodItem: reqObj,
-//     });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(400).json({
-//       status: "fail",
-//       message: "Could not add food item.",
-//     });
-//   }
-// };
+    res.status(200).json({
+      status: "success",
+      foodItem: reqObj,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({
+      status: "fail",
+      message: "Could not add food item.",
+    });
+  }
+};
