@@ -4,5 +4,5 @@ export default interface IFoodItem {
   initPrice: number;
   img: string;
   calories: number;
-  ingredients: [string];
+  ingredients: string[];
 }

@@ -105,13 +105,45 @@ export const addFoodItem: RequestHandler = async (req, res, next) => {
     if (!user) {
       throw new Error();
     }
+
+    // authenticate ingredients from req
+
+    const business = await BusinessModel.findById(user.businessId);
+    if (!business) {
+      throw new Error();
+    }
+    const ingredients = business.ingredients;
+    let newIngredients: string[] = [];
+    let ingredientSum = 1 * reqObj.initPrice;
+
+    // Checks to see if ingredient sent with req is in the business ingredients array.
+    // Gets final foodItem price.
+    for (let offeredIngredient of reqObj.ingredients) {
+      for (let allowedIngredient of ingredients) {
+        if (allowedIngredient._id.toString() === offeredIngredient) {
+          newIngredients.push(allowedIngredient._id.toString());
+          ingredientSum += allowedIngredient.price;
+        }
+      }
+    }
+
+    const finalObj: IFoodItem = {
+      title: reqObj.title,
+      price: ingredientSum,
+      initPrice: 1 * reqObj.price,
+      ingredients: newIngredients,
+      // change to path
+      img: reqObj.img,
+      calories: 1 * reqObj.calories,
+    };
+
     await BusinessModel.findByIdAndUpdate(user.businessId, {
-      $push: { foodItems: reqObj },
+      $push: { foodItems: finalObj },
     });
 
     res.status(200).json({
       status: "success",
-      foodItem: reqObj,
+      foodItem: finalObj,
     });
   } catch (err) {
     console.log(err);

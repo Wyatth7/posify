@@ -7,6 +7,7 @@ interface IFoodItem extends mongoose.Document {
   initPrice: number;
   img: string;
   calories: number;
+  ingredients: string[];
 }
 
 const foodItemModel = new mongoose.Schema({
@@ -31,7 +32,7 @@ const foodItemModel = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  ingredients: [ingredientModel],
+  ingredients: [String],
 });
 
 export { IFoodItem, foodItemModel };

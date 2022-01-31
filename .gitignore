@@ -13,6 +13,8 @@
 /server/config.env
 /server/dist
 /posify-337200-firebase-adminsdk-8lcdr-7bd4934c4a.json
+# Holds stripe API key
+/server/src/payments/init-stripe.ts
 
 # misc
 .DS_Store
