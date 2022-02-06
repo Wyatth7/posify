@@ -1,10 +1,13 @@
 import axios from "axios";
 import React, { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const SIGN_UP = styled.div``;
 
 const SignUp = (props) => {
+  const history = useNavigate();
+
   const firstName = useRef();
   const lastName = useRef();
   const email = useRef();
@@ -20,8 +23,24 @@ const SignUp = (props) => {
     };
 
     try {
-      const res = await axios.post("/api/v1/auth/signup", data);
-      console.log(res);
+      const res = await axios.post(
+        "http://localhost:8080/api/v1/auth/signUp ",
+        data
+      );
+      // const user = await fetch(
+      //   "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAWNHDYgrfNpHZnwOLh4ejKOoI7hBhHTI0",
+      //   {
+      //     method: "POST",
+      //     body: JSON.stringify({
+      //       email: email.current.value,
+      //       password: password.current.value,
+      //       returnSecureToken: true,
+      //     }),
+      //   }
+      // );
+      // const userObj = await user.json();
+      localStorage.setItem("authToken", res.data.authToken);
+      history("/kiosk");
     } catch (e) {
       console.log(e);
     }
@@ -30,8 +49,10 @@ const SignUp = (props) => {
   return (
     <SIGN_UP>
       <form onSubmit={formSubmitHandler}>
-        <input type="email" required />
-        <input type="password" required />
+        <input ref={firstName} type="text" required />
+        <input ref={lastName} type="text" required />
+        <input ref={email} type="email" required />
+        <input ref={password} type="password" required />
         <button>submit</button>
       </form>
     </SIGN_UP>

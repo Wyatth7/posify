@@ -27,20 +27,23 @@ const ITEMS = styled.div`
 `;
 
 const Items = (props) => {
-  const state = useStore(false)[0];
+  const state = useStore(true)[0];
 
   return (
     <ITEMS>
-      {state.products.map((el) => (
-        <Item
-          id={el.id}
-          key={el.id}
-          title={el.title}
-          subhead={el.subHead}
-          price={el.price}
-          img={el.img}
-        />
-      ))}
+      {state.products
+        ? state.products.map((el) => (
+            <Item
+              id={el.id}
+              key={el.id}
+              calories={el.calories}
+              title={el.title}
+              subhead={el.subHead}
+              price={el.price}
+              img={el.img}
+            />
+          ))
+        : null}
     </ITEMS>
   );
 };

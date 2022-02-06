@@ -1,12 +1,19 @@
 import mongoose from "mongoose";
-import { foodItemModel } from "./FoodItemModel";
+import { foodItemModel, IFoodItem } from "./FoodItemModel";
+
+interface IOrderModel extends mongoose.Document {
+  orderNumber: number;
+  foodItem: [IFoodItem];
+  startTime: Date;
+  endTime: Date;
+}
 
 const orderModel = new mongoose.Schema({
   orderNumber: {
     type: Number,
     required: true,
   },
-  foodItem: foodItemModel,
+  foodItem: [foodItemModel],
   startTime: {
     type: Date,
     required: true,
@@ -18,4 +25,4 @@ const orderModel = new mongoose.Schema({
   },
 });
 
-export { orderModel };
+export { orderModel, IOrderModel };

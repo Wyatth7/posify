@@ -1,9 +1,9 @@
 import { RequestHandler } from "express";
-import IIngredient from "./../interfaces/IIngredients";
-import IFoodItem from "../interfaces/IFoodItem";
-import admin from "../auth/firebase/init-app";
-import UserModel from "../models/UserModel";
-import BusinessModel from "../models/BusinessModel";
+import IIngredient from "../../interfaces/IIngredients";
+import IFoodItem from "../../interfaces/IFoodItem";
+import admin from "../../auth/firebase/init-app";
+import UserModel from "../../models/UserModel";
+import BusinessModel from "../../models/BusinessModel";
 
 // Gets user and business starting from user id.
 const getUserAndBusiness = async (userId: string) => {
@@ -31,7 +31,6 @@ export const getInitData: RequestHandler = async (req, res, next) => {
     //   payload: { foodItems: [...foodItems], ingredients: [...ingredients] },
     // });
 
-    console.log("here");
     const user = await UserModel.findById(req.authId);
 
     if (!user) {
@@ -41,7 +40,7 @@ export const getInitData: RequestHandler = async (req, res, next) => {
     const business = await BusinessModel.findById(user.businessId);
 
     if (!business) {
-      return res.status(400).json({ message: "test" });
+      return res.status(400).json({ message: "Could not find business." });
     }
 
     res.status(200).json({

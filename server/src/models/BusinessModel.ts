@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { IFoodItem, foodItemModel } from "./FoodItemModel";
 import { IIngredientModel, ingredientModel } from "./IngredientModel";
-import { orderModel } from "./OrderModel";
+import { orderModel, IOrderModel } from "./OrderModel";
 import { IUser } from "./UserModel";
 
 interface IBusinessModel extends mongoose.Document {
@@ -9,6 +9,8 @@ interface IBusinessModel extends mongoose.Document {
   users: [IUser];
   foodItems: [IFoodItem];
   ingredients: [IIngredientModel];
+  unfulfilledOrder: [IOrderModel];
+  fulfilledOrder: [IOrderModel];
 }
 
 const businessModel = new mongoose.Schema({

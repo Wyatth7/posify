@@ -1,11 +1,13 @@
 import MediaQuery from "react-responsive";
 
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import MobileCartButton from "../Cart/MobileCartContent/MobileCart/MobileCartButton";
 import ItemSelect from "../ItemSelect/ItemSelect";
 // import MobileCart from "../Cart/MobileCart";
 import Cart from "../Cart/Cart";
+import axios from "axios";
+import { useStore } from "../../store/store";
 
 const CONTENT = styled.div`
   position: relative;
@@ -34,6 +36,29 @@ const Wrapper = styled.div`
 // `;
 
 const Content = (props) => {
+  const dispatch = useStore(false)[1];
+
+  useEffect(() => {
+    console.log(localStorage.getItem("authToken"));
+    const func = async () => {
+      try {
+        const initData = await axios.get(
+          "http://localhost:8080/api/v1/kiosk/getInitData",
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("authToken"),
+            },
+          }
+        );
+        console.log(initData.data);
+        dispatch("INIT_USER_KIOSK", initData.data.payload);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    func();
+  }, [dispatch]);
+
   return (
     <CONTENT>
       <ItemSelect />

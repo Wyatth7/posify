@@ -74,7 +74,7 @@ const Item = (props) => {
     <ITEM onClick={addToCartHandler}>
       <HeadWrap>
         <Header>{props.title}</Header>
-        <SubHead>{props.subhead} calories</SubHead>
+        <SubHead>{props.calories} calories</SubHead>
       </HeadWrap>
       <DataWrap>
         <Price>

@@ -2,6 +2,7 @@ import { RequestHandler } from "express";
 import {
   deleteUser,
   generateUser,
+  getUserAuthToken,
   IUser,
 } from "../auth/controllers/user-auth-controller";
 import BusinessModel from "../models/BusinessModel";
@@ -21,6 +22,7 @@ export const createBusiness: RequestHandler = async (req, res, next) => {
 
     // Use createUser function to generate a new user.
     const user = await generateUser(reqData);
+    const token = await getUserAuthToken(user.uid);
 
     const business = await BusinessModel.create({
       users: [
@@ -44,6 +46,7 @@ export const createBusiness: RequestHandler = async (req, res, next) => {
     res.status(200).json({
       status: "success",
       businessData: business,
+      authToken: token,
     });
   } catch (err) {
     try {

@@ -1,7 +1,7 @@
 import express from "express";
 import checkUserRole from "../auth/auth-check/role-check";
 import checkIfAuthenticated from "../auth/auth-check/token-check";
-import * as kiosk from "../controllers/kiosk-controller";
+import * as kiosk from "../controllers/kisok-controllers/kiosk-controller";
 import * as order from "../controllers/kisok-controllers/kisok-orders";
 
 const router = express.Router();

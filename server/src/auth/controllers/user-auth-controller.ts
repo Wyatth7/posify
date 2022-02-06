@@ -52,7 +52,7 @@ export const createUser: RequestHandler = async (req, res, next) => {
 
     const userId = await (await admin.auth().getUserByEmail(email)).uid;
 
-    await UserModel.create({
+    const user = await UserModel.create({
       email,
       firstName,
       lastName,
@@ -60,8 +60,11 @@ export const createUser: RequestHandler = async (req, res, next) => {
       _id: userId,
     });
 
+    const token = await getUserAuthToken(user._id);
+
     return res.status(200).json({
       status: "Success",
+      authToken: token,
       message: `User ${firstName} ${lastName} has been created.`,
     });
   } catch (err) {
@@ -77,5 +80,14 @@ export const createUser: RequestHandler = async (req, res, next) => {
       status: "Fail",
       message: "Could not create user.",
     });
+  }
+};
+
+export const getUserAuthToken = async (uid: string) => {
+  try {
+    return await admin.auth().createCustomToken(uid);
+  } catch (err) {
+    console.log(err);
+    return "";
   }
 };

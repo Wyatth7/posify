@@ -7,11 +7,13 @@ import configureProductStore from "./store/items-store";
 import configureCartStore from "./store/cart-item-store";
 import customizeItemStore from "./store/customize-item";
 import configurePriceStore from "./store/price-store";
+import configureUserKioskStore from "./store/init-user-data";
 
 configureProductStore();
 configureCartStore();
-customizeItemStore();
+// customizeItemStore();
 configurePriceStore();
+configureUserKioskStore();
 
 ReactDOM.render(
   <BrowserRouter>

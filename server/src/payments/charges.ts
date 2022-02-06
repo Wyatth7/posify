@@ -1,11 +1,13 @@
 import stripe from "./init-stripe";
 
-export const createCharge = async (amount: number, customerId: string) => {
+export const createCharge = async (amount: number, id: string) => {
   try {
-    return await stripe.charges.create({
-      amount,
-      currency: "usd",
-      customer: customerId,
+    return await stripe.paymentIntents.create({
+      amount: amount,
+      currency: "USD",
+      description: "Your Company Description",
+      payment_method: id,
+      confirm: true,
     });
   } catch (err) {
     console.log(err);

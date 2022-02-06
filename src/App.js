@@ -5,7 +5,7 @@ import MobileCart from "./components/Cart/MobileCart";
 import Content from "./components/ContentHead/Content";
 import CustomizeItemModal from "./components/ItemSelect/CustomizeItemModal.js/CustomizeItemModal";
 import SignUp from "./pages/auth/SignUp";
-import Login from "./pages/login/login";
+import Login from "./pages/auth/login";
 
 const GlobalStyle = createGlobalStyle`
   *,
@@ -42,6 +42,7 @@ function App() {
           <Route path="/alcohol" element={<Content />} />
           <Route path="/cold-drinks" element={<Content />} />
           <Route path="/hot-drinks" element={<Content />} />
+          <Route path="/kiosk" element={<Content />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Content />} />
