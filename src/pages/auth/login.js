@@ -1,7 +1,9 @@
 import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import { useStore } from "./../../store/store";
 import styled from "styled-components";
 import Auth from "./Auth";
+import Input from "./../../components/reusable/Input/Input";
 // import { loadStripe } from "@stripe/stripe-js";
 // import {
 //   CardElement,
@@ -13,6 +15,10 @@ import Auth from "./Auth";
 
 const LOGIN = styled.div``;
 
+const InputWrapper = styled.div`
+  padding-bottom: 1rem;
+`;
+
 // const stripeInit = loadStripe(
 //   "pk_test_51IGC2MKm15LThELZ2zWy8o019nMhps90zaUuzZZqJqTZWfDWIJ0ljocCyyn3b5n3V2hohsSd5eohWddAIseyRriD00uA3PTzqJ"
 // );
@@ -21,17 +27,18 @@ const Login = (props) => {
   const email = useRef();
   const password = useRef();
   const history = useNavigate();
+  const dispatch = useStore(false)[1];
 
-  const inputs = [
-    {
-      type: 'email',
-      text: 'Email'
-    },
-    {
-      type: 'password',
-      text: 'Password'
-    }
-  ]
+  // const inputs = [
+  //   {
+  //     type: "email",
+  //     text: "Email",
+  //   },
+  //   {
+  //     type: "password",
+  //     text: "Password",
+  //   },
+  // ];
 
   const onSubmitHandler = async () => {
     try {
@@ -46,7 +53,7 @@ const Login = (props) => {
           }),
         }
       );
-
+      dispatch("UPDATE_AUTH_STATUS", true);
       const userObj = await user.json();
       localStorage.setItem("authToken", userObj.idToken);
       history("/kiosk");
@@ -64,8 +71,14 @@ const Login = (props) => {
         linkText="Don't have an account?"
         linkTitle="Sign up"
         link="/signup"
-        input={}
-      />
+      >
+        <InputWrapper>
+          <Input ref={email} type="email" text="Email" />
+        </InputWrapper>
+        <InputWrapper>
+          <Input ref={password} type="password" text="Password" />
+        </InputWrapper>
+      </Auth>
 
       {/* <Elements stripe={stripeInit}>
         <Payment />

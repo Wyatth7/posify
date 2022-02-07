@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, forwardRef } from "react";
 import styled from "styled-components";
 
 const INPUT_CONTAINER = styled.div`
@@ -36,7 +36,7 @@ const InputField = styled.input`
   }
 `;
 
-const Input = (props) => {
+const Input = forwardRef((props, ref) => {
   const [focused, setFocused] = useState(false);
   const inputRef = useRef("");
 
@@ -53,13 +53,13 @@ const Input = (props) => {
   return (
     <INPUT_CONTAINER focus={focused} onClick={focusHandler}>
       <InputField
-        ref={inputRef}
+        ref={ref}
         placeholder={props.text}
         type={props.type}
         required
       />
     </INPUT_CONTAINER>
   );
-};
+});
 
 export default Input;

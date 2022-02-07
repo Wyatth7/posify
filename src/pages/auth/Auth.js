@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import Input from "./../../components/reusable/Input/Input";
+// import Input from "./../../components/reusable/Input/Input";
 import OrangeButton from "./../../components/reusable/OrangeButton/OrangeButton";
 
 const AUTH = styled.div`
@@ -30,9 +30,7 @@ const InputContainer = styled.div`
   width: 25%;
 `;
 
-const InputWrapper = styled.div`
-  padding-bottom: 1rem;
-`;
+const Inputs = styled.div``;
 
 const Reroute = styled.div`
   display: flex;
@@ -58,12 +56,13 @@ const Auth = (props) => {
         <HeaderText>{props.headerText}</HeaderText>
       </Header>
       <InputContainer>
-        <InputWrapper>
+        <Inputs>{props.children}</Inputs>
+        {/* <InputWrapper>
           <Input text="Email" type="email" />
         </InputWrapper>
         <InputWrapper>
           <Input text="Password" type="password" />
-        </InputWrapper>
+        </InputWrapper> */}
         <OrangeButton clicked={props.submit}>Login</OrangeButton>
         <Reroute>
           <RerouteParagraph>{props.linkText}</RerouteParagraph>

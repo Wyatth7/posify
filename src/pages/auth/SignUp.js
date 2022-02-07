@@ -1,8 +1,10 @@
 import axios from "axios";
 import React, { useRef } from "react";
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import OrangeButton from "../../components/reusable/OrangeButton/OrangeButton";
+import Input from "../../components/reusable/Input/Input";
+import { useStore } from "../../store/store";
+import Auth from "./Auth";
 
 const SIGN_UP = styled.div`
   padding: 1rem;
@@ -13,34 +15,19 @@ const SIGN_UP = styled.div`
   align-items: center;
 `;
 
-const InputContainer = styled.div`
-  width: 25%;
-`;
-
 const InputWrapper = styled.div`
   padding-bottom: 1rem;
 `;
 
-const Reroute = styled.div`
+const NameContainer = styled.div`
   display: flex;
-  justify-content: center;
-  margin-top: 0.5rem;
-`;
-
-const RerouteParagraph = styled.p`
-  font-size: 0.8rem;
-`;
-
-const RerouteButton = styled(NavLink)`
-  font-size: 0.8rem;
-  color: #ef7614;
-  margin-left: 0.2rem;
-  /* border-bottom: 1px solid #ef7614; */
+  gap: 1rem;
+  padding-bottom: 1rem;
 `;
 
 const SignUp = (props) => {
+  const dispatch = useStore()[1];
   const history = useNavigate();
-
   const firstName = useRef();
   const lastName = useRef();
   const email = useRef();
@@ -72,6 +59,7 @@ const SignUp = (props) => {
       //   }
       // );
       // const userObj = await user.json();
+      dispatch("UPDATE_AUTH_STATUS", true);
       localStorage.setItem("authToken", res.data.authToken);
       history("/kiosk");
     } catch (e) {
@@ -81,13 +69,24 @@ const SignUp = (props) => {
 
   return (
     <SIGN_UP>
-      <InputContainer>
-        <OrangeButton>Sign up</OrangeButton>
-        <Reroute>
-          <RerouteParagraph>Already have an account?</RerouteParagraph>
-          <RerouteButton to="/signup">Login</RerouteButton>
-        </Reroute>
-      </InputContainer>
+      <Auth
+        headerText="Sign up to order from Mom and Pop's Pizza"
+        submit={onSubmitHandler}
+        linkText="Already have an account?"
+        linkTitle="Login"
+        link="/login"
+      >
+        <NameContainer>
+          <Input ref={firstName} type="text" text="First Name" />
+          <Input ref={lastName} type="text" text="Last Name" />
+        </NameContainer>
+        <InputWrapper>
+          <Input type="email" text="Email" />
+        </InputWrapper>
+        <InputWrapper>
+          <Input type="password" text="Password" />
+        </InputWrapper>
+      </Auth>
     </SIGN_UP>
   );
 };
