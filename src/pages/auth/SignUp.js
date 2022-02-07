@@ -1,9 +1,42 @@
 import axios from "axios";
 import React, { useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import styled from "styled-components";
+import OrangeButton from "../../components/reusable/OrangeButton/OrangeButton";
 
-const SIGN_UP = styled.div``;
+const SIGN_UP = styled.div`
+  padding: 1rem;
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+`;
+
+const InputContainer = styled.div`
+  width: 25%;
+`;
+
+const InputWrapper = styled.div`
+  padding-bottom: 1rem;
+`;
+
+const Reroute = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+`;
+
+const RerouteParagraph = styled.p`
+  font-size: 0.8rem;
+`;
+
+const RerouteButton = styled(NavLink)`
+  font-size: 0.8rem;
+  color: #ef7614;
+  margin-left: 0.2rem;
+  /* border-bottom: 1px solid #ef7614; */
+`;
 
 const SignUp = (props) => {
   const history = useNavigate();
@@ -13,7 +46,7 @@ const SignUp = (props) => {
   const email = useRef();
   const password = useRef();
 
-  const formSubmitHandler = async (e) => {
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
     const data = {
       firstName: firstName.current.value,
@@ -48,13 +81,13 @@ const SignUp = (props) => {
 
   return (
     <SIGN_UP>
-      <form onSubmit={formSubmitHandler}>
-        <input ref={firstName} type="text" required />
-        <input ref={lastName} type="text" required />
-        <input ref={email} type="email" required />
-        <input ref={password} type="password" required />
-        <button>submit</button>
-      </form>
+      <InputContainer>
+        <OrangeButton>Sign up</OrangeButton>
+        <Reroute>
+          <RerouteParagraph>Already have an account?</RerouteParagraph>
+          <RerouteButton to="/signup">Login</RerouteButton>
+        </Reroute>
+      </InputContainer>
     </SIGN_UP>
   );
 };

@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
 import { Route, Routes } from "react-router";
+import { Navigate } from "react-router-dom";
+import { useStore } from "./store/store";
 import { createGlobalStyle } from "styled-components";
 import MobileCart from "./components/Cart/MobileCart";
 import Content from "./components/ContentHead/Content";
@@ -24,9 +26,16 @@ const GlobalStyle = createGlobalStyle`
     font-size: 62.5%;
     font-family: 'Heebo', sans-serif;
   }
+
+  ::placeholder {
+    font-size: 1rem;
+    color: #000000;
+    font-family: 'Heebo', sans-serif;
+  }
 `;
 
 function App() {
+  const store = useStore(false)[0];
   // const [customizeModal, setCustomizeModal] = useState(true);
 
   return (
@@ -35,17 +44,25 @@ function App() {
       <GlobalStyle />
       <div>
         <Routes>
-          <Route path="/cart" element={<MobileCart />} />
-          <Route path="/checkout" element={<Content />} />
-          <Route path="/all" element={<Content />} />
-          <Route path="/food" element={<Content />} />
-          <Route path="/alcohol" element={<Content />} />
-          <Route path="/cold-drinks" element={<Content />} />
-          <Route path="/hot-drinks" element={<Content />} />
-          <Route path="/kiosk" element={<Content />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Content />} />
+          {store.isLoggedIn ? (
+            <React.Fragment>
+              <Route path="/cart" element={<MobileCart />} />
+              <Route path="/checkout" element={<Content />} />
+              <Route path="/all" element={<Content />} />
+              <Route path="/food" element={<Content />} />
+              <Route path="/alcohol" element={<Content />} />
+              <Route path="/cold-drinks" element={<Content />} />
+              <Route path="/hot-drinks" element={<Content />} />
+              <Route path="/kiosk" element={<Content />} />
+              <Route path="/" element={<Content />} />
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/login" element={<Login />} />
+              <Route exact path="/" element={<Navigate to="/login" />} />
+            </React.Fragment>
+          )}
         </Routes>
       </div>
     </React.Fragment>
