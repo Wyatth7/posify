@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 
-let globalState = {
-  isLoggedIn: false,
-};
+let globalState = {};
 let listeners = [];
 let actions = {};
 

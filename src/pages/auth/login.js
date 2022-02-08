@@ -1,9 +1,10 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useStore } from "./../../store/store";
 import styled from "styled-components";
 import Auth from "./Auth";
 import Input from "./../../components/reusable/Input/Input";
+import { checkUserAuth } from "../../scripts/check-user-authentication";
 // import { loadStripe } from "@stripe/stripe-js";
 // import {
 //   CardElement,
@@ -40,6 +41,20 @@ const Login = (props) => {
   //   },
   // ];
 
+  useEffect(() => {
+    const func = async () => {
+      const auth = await checkUserAuth();
+
+      if (!auth) {
+        return;
+      }
+
+      history("/kiosk");
+    };
+
+    func();
+  }, [history]);
+
   const onSubmitHandler = async () => {
     try {
       const user = await fetch(
@@ -56,6 +71,7 @@ const Login = (props) => {
       dispatch("UPDATE_AUTH_STATUS", true);
       const userObj = await user.json();
       localStorage.setItem("authToken", userObj.idToken);
+      console.log(userObj.idToken);
       history("/kiosk");
     } catch (err) {
       console.log(err);

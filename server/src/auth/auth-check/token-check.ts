@@ -1,5 +1,19 @@
-import { RequestHandler } from "express";
+import { RequestHandler, Request } from "express";
 import admin from "./../firebase/init-app";
+
+export const checkAuth = async (authToken: string) => {
+  try {
+    const authenticated = await admin.auth().verifyIdToken(authToken);
+
+    if (authenticated) {
+      return true;
+    }
+
+    return false;
+  } catch (err) {
+    return false;
+  }
+};
 
 const getAuthToken: RequestHandler = (req, res, next) => {
   if (

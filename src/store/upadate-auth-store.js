@@ -8,7 +8,7 @@ const configureAuthStore = () => {
   };
 
   initStore(actions, {
-    financials: { subTotal: 0, discount: 0, salesTax: 0, totalPrice: 0 },
+    isLoggedIn: false,
   });
 };
 

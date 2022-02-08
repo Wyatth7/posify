@@ -1,6 +1,7 @@
 import admin from "../firebase/init-app";
 import { RequestHandler } from "express";
 import UserModel from "../../models/UserModel";
+import { checkAuth } from "./../auth-check/token-check";
 
 export interface IUser {
   firstName: string;
@@ -79,6 +80,33 @@ export const createUser: RequestHandler = async (req, res, next) => {
     return res.status(400).json({
       status: "Fail",
       message: "Could not create user.",
+    });
+  }
+};
+
+export const checkUserToken: RequestHandler = async (req, res, next) => {
+  try {
+    const token: any = req.headers.authorization?.split(" ")[1];
+    const isAuthenticated = await checkAuth(token);
+
+    if (!isAuthenticated) {
+      res.status(400).json({
+        status: "fail",
+        message: "Invalid authorization token.",
+      });
+    }
+
+    res.status(200).json({
+      status: "success",
+      payload: {
+        isAuthenticated: true,
+      },
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({
+      status: "fail",
+      message: "Invalid authorization token.",
     });
   }
 };

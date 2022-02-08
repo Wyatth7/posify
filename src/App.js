@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router";
 import { Navigate } from "react-router-dom";
 import { useStore } from "./store/store";
@@ -8,6 +8,9 @@ import Content from "./components/ContentHead/Content";
 import CustomizeItemModal from "./components/ItemSelect/CustomizeItemModal.js/CustomizeItemModal";
 import SignUp from "./pages/auth/SignUp";
 import Login from "./pages/auth/login";
+import AppRoutes from "./AppRoutes";
+import axios from "axios";
+import { checkUserAuth } from "./scripts/check-user-authentication";
 
 const GlobalStyle = createGlobalStyle`
   *,
@@ -35,8 +38,32 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 function App() {
-  const store = useStore(false)[0];
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   // const [customizeModal, setCustomizeModal] = useState(true);
+
+  useEffect(() => {
+    const func = async () => {
+      if (!localStorage.getItem("authToken")) {
+        setIsLoggedIn(false);
+        return;
+      }
+
+      try {
+        const auth = await checkUserAuth();
+
+        if (!auth) {
+          setIsLoggedIn(false);
+          return;
+        }
+
+        setIsLoggedIn(true);
+      } catch (err) {
+        setIsLoggedIn(false);
+      }
+    };
+
+    func();
+  }, [setIsLoggedIn]);
 
   return (
     <React.Fragment>
@@ -44,7 +71,7 @@ function App() {
       <GlobalStyle />
       <div>
         <Routes>
-          {store.isLoggedIn ? (
+          {isLoggedIn ? (
             <React.Fragment>
               <Route path="/cart" element={<MobileCart />} />
               <Route path="/checkout" element={<Content />} />
