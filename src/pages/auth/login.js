@@ -71,6 +71,7 @@ const Login = (props) => {
       dispatch("UPDATE_AUTH_STATUS", true);
       const userObj = await user.json();
       localStorage.setItem("authToken", userObj.idToken);
+      props.setLogin();
       console.log(userObj.idToken);
       history("/kiosk");
     } catch (err) {

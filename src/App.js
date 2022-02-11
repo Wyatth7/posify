@@ -65,6 +65,10 @@ function App() {
     func();
   }, [setIsLoggedIn]);
 
+  const setLoginHandler = () => {
+    setIsLoggedIn(true);
+  };
+
   return (
     <React.Fragment>
       <CustomizeItemModal />
@@ -85,8 +89,14 @@ function App() {
             </React.Fragment>
           ) : (
             <React.Fragment>
-              <Route path="/signup" element={<SignUp />} />
-              <Route path="/login" element={<Login />} />
+              <Route
+                path="/signup"
+                element={<SignUp setLogin={setLoginHandler} />}
+              />
+              <Route
+                path="/login"
+                element={<Login setLogin={setLoginHandler} />}
+              />
               <Route exact path="/" element={<Navigate to="/login" />} />
             </React.Fragment>
           )}
