@@ -1,10 +1,11 @@
 import axios from "axios";
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Input from "../../components/reusable/Input/Input";
 import { useStore } from "../../store/store";
 import Auth from "./Auth";
+import { checkUserAuth } from "../../scripts/check-user-authentication";
 
 const SIGN_UP = styled.div`
   padding: 1rem;
@@ -32,6 +33,20 @@ const SignUp = (props) => {
   const lastName = useRef();
   const email = useRef();
   const password = useRef();
+
+  useEffect(() => {
+    const func = async () => {
+      const auth = await checkUserAuth();
+
+      if (!auth) {
+        return;
+      }
+
+      history("/kiosk");
+    };
+
+    func();
+  }, [history]);
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -61,9 +76,12 @@ const SignUp = (props) => {
       // const userObj = await user.json();
       dispatch("UPDATE_AUTH_STATUS", true);
       localStorage.setItem("authToken", res.data.authToken);
+
+      props.setLogin();
       history("/kiosk");
     } catch (e) {
       console.log(e);
+      history("/signup");
     }
   };
 

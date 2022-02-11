@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router";
 import { Navigate } from "react-router-dom";
-import { useStore } from "./store/store";
 import { createGlobalStyle } from "styled-components";
 import MobileCart from "./components/Cart/MobileCart";
 import Content from "./components/ContentHead/Content";
 import CustomizeItemModal from "./components/ItemSelect/CustomizeItemModal.js/CustomizeItemModal";
 import SignUp from "./pages/auth/SignUp";
 import Login from "./pages/auth/login";
-import AppRoutes from "./AppRoutes";
-import axios from "axios";
 import { checkUserAuth } from "./scripts/check-user-authentication";
 
 const GlobalStyle = createGlobalStyle`
@@ -90,12 +87,13 @@ function App() {
           ) : (
             <React.Fragment>
               <Route
-                path="/signup"
-                element={<SignUp setLogin={setLoginHandler} />}
-              />
-              <Route
                 path="/login"
                 element={<Login setLogin={setLoginHandler} />}
+              />
+              <Route
+                exact
+                path="/signup"
+                element={<SignUp setLogin={setLoginHandler} />}
               />
               <Route exact path="/" element={<Navigate to="/login" />} />
             </React.Fragment>
