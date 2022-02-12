@@ -1,4 +1,5 @@
-import React from "react";
+import { Elements } from "@stripe/react-stripe-js";
+import React, { useState } from "react";
 import styled from "styled-components";
 import priceFormatter from "../../scripts/price-formatter";
 import { useStore } from "../../store/store";
@@ -6,6 +7,9 @@ import SolidButton from "../reusable/SolidButton/SolidButton";
 import CartHeader from "./CartHeader/CartHeader";
 import CartItems from "./CartItems/CartItems";
 import CartTotal from "./CartTotal/CartTotal";
+import Payment from "./CreateOrder/Payments/Payments";
+import { loadStripe } from "@stripe/stripe-js";
+import CreateOrder from "./CreateOrder/CreateOrder";
 
 const CART = styled.div`
   display: flex;
@@ -53,6 +57,11 @@ const IsEmptyCart = styled.p`
 
 const Cart = (props) => {
   const [cartItems, dispatch] = useStore();
+  const [showPayment, setShowPayment] = useState(false);
+
+  const togglePaymentHandler = () => {
+    setShowPayment(!showPayment);
+  };
 
   const updateCartItemAmount = (obj) => {
     dispatch("EDIT_ITEM_AMOUNT", obj);
@@ -65,20 +74,30 @@ const Cart = (props) => {
       </Header>
       {cartItems.cartProducts.length > 0 ? (
         <React.Fragment>
-          <Body>
-            <CartItems
-              amountFunction={updateCartItemAmount}
-              cartItems={cartItems.cartProducts}
-              itemCount={cartItems.cartProducts.length}
-            />
-          </Body>
-          <Footer>
-            <CartTotal />
-            <ElementPadding />
-            <SolidButton path="" color="#ef7614">
-              Pay {priceFormatter.format(cartItems.financials.totalPrice)}!
-            </SolidButton>
-          </Footer>
+          {!showPayment ? (
+            <React.Fragment>
+              <Body>
+                <CartItems
+                  amountFunction={updateCartItemAmount}
+                  cartItems={cartItems.cartProducts}
+                  itemCount={cartItems.cartProducts.length}
+                />
+              </Body>
+              <Footer>
+                <CartTotal />
+                <ElementPadding />
+                <SolidButton
+                  clicked={togglePaymentHandler}
+                  path=""
+                  color="#ef7614"
+                >
+                  Pay {priceFormatter.format(cartItems.financials.totalPrice)}!
+                </SolidButton>
+              </Footer>
+            </React.Fragment>
+          ) : (
+            <CreateOrder />
+          )}
         </React.Fragment>
       ) : (
         <IsEmptyCart>Items added to your cart will show up here.</IsEmptyCart>

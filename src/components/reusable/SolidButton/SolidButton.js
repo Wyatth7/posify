@@ -19,7 +19,11 @@ const Text = styled.p`
 
 const SolidButton = (props) => {
   return (
-    <SOLID_BUTTON to={`/${props.path}`} color={props.color}>
+    <SOLID_BUTTON
+      onClick={props.clicked}
+      to={`/${props.path}`}
+      color={props.color}
+    >
       <Text>{props.children}</Text>
     </SOLID_BUTTON>
   );

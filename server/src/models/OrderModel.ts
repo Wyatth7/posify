@@ -4,6 +4,7 @@ import { foodItemModel, IFoodItem } from "./FoodItemModel";
 interface IOrderModel extends mongoose.Document {
   orderNumber: number;
   foodItem: [IFoodItem];
+  paymentType: string;
   startTime: Date;
   endTime: Date;
 }
@@ -14,6 +15,10 @@ const orderModel = new mongoose.Schema({
     required: true,
   },
   foodItem: [foodItemModel],
+  paymentType: {
+    type: String,
+    required: true,
+  },
   startTime: {
     type: Date,
     required: true,

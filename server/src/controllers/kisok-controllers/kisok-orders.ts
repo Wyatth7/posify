@@ -1,29 +1,34 @@
 import { RequestHandler } from "express";
 import { createCharge, createCustomer } from "../../payments/charges";
-// handle card payments, and upon completion of payment,
-// add orders to unfulfilled orders section.
-// use stripe to handle payments.
+
+// Create order and process payment.
+
+let orderNumber = 0;
+
+interface ICreateOrderData {
+  // Check, cash, card
+  paymentType: string;
+  foodItemArray: object[];
+  id: string;
+}
 
 export const createOrder: RequestHandler = async (req, res, next) => {
   try {
-    // const reqData = {
-    //   name: req.body.name,
-    //   email: req.body.email,
-    //   source: req.body.stripeToken,
-    // };
-    // const createUser = await createCustomer(
-    //   reqData.name,
-    //   reqData.email,
-    //   reqData.source
-    // // );
-    // const chargeUser = await createCharge(1, createUser.id);
-    // console.log(chargeUser);
+    const reqData: ICreateOrderData = {
+      paymentType: req.body.paymentType,
+      foodItemArray: req.body.foodItems,
+      id: req.body.id,
+    };
 
-    const id = req.body.id;
+    //
 
     // stripe does not take decimal numbers.
-    const payment = await createCharge(15600, id);
-    console.log(payment);
+    if (reqData.paymentType === "card") {
+      // Get price by finding the sum of all foodItems in the
+      // foodItemArray.
+      const payment = await createCharge(15600, reqData.id);
+      console.log(payment);
+    }
 
     res.status(200).json({
       status: "success",
