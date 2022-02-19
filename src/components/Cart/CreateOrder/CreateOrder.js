@@ -1,6 +1,8 @@
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import React, { useState } from "react";
+import { useStripe } from "@stripe/react-stripe-js";
+import React, { useRef, useState } from "react";
+import axios from "axios";
 import styled from "styled-components";
 import CheckBox from "../../reusable/CheckBox/CheckBox";
 import OrangeButton from "../../reusable/OrangeButton/OrangeButton";
@@ -22,6 +24,11 @@ const stripeInit = loadStripe(
 const CreateOrder = (props) => {
   const [paymentType, setPaymentType] = useState("card");
   const [receiveType, setReceiveType] = useState("pickup");
+  const [paymentElement, setPaymentElement] = useState();
+
+  const setPaymentElementHandler = (e) => {
+    setPaymentElement(e);
+  };
 
   const togglePaymentHandler = (name) => {
     setPaymentType(name);
@@ -29,6 +36,30 @@ const CreateOrder = (props) => {
 
   const toggleReceiveHandler = (name) => {
     setReceiveType(name);
+  };
+
+  const onSubmitHandler = async () => {
+    let paymentId = "";
+    try {
+      if (paymentType === "card") {
+        // const { error, paymentMethod } = await stripe.createPaymentMethod({
+        //   type: "card",
+        //   card: paymentElement,
+        // });
+        // paymentId = paymentMethod.id;
+      }
+
+      const paymentData = {
+        paymentType,
+        paymentId: paymentId,
+      };
+
+      await axios.patch("http://localhost:8080/api/v1/kiosk/createOrder", {
+        paymentData,
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -77,13 +108,14 @@ const CreateOrder = (props) => {
       </OrderQuestions>
       {paymentType === "card" ? (
         <Elements stripe={stripeInit}>
-          <Payment completeCheckoutHandler="" />
+          <Payment
+            setPaymentElementHandler={setPaymentElementHandler}
+            completeCheckoutHandler=""
+          />
         </Elements>
       ) : null}
       <Buffer />
-      <OrangeButton onClick={props.completeCheckoutHandler}>
-        Complete Order!
-      </OrangeButton>
+      <OrangeButton onClick={onSubmitHandler}>Complete Order!</OrangeButton>
     </CREATE_ORDER>
   );
 };

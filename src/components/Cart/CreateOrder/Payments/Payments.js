@@ -10,6 +10,12 @@ const Payment = (props) => {
   const stripe = useStripe();
   const elements = useElements();
 
+  const cardFill = () => {
+    setTimeout(() => {
+      props.setPaymentElementHandler(elements.getElement(CardElement));
+    }, 500);
+  };
+
   const checkoutHandler = async () => {
     try {
       const { error, paymentMethod } = await stripe.createPaymentMethod({
@@ -30,7 +36,7 @@ const Payment = (props) => {
 
   return (
     <React.Fragment>
-      <CardElement />
+      <CardElement onChange={cardFill} />
     </React.Fragment>
   );
 };

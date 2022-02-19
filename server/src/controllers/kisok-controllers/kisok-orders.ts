@@ -5,28 +5,31 @@ import { createCharge, createCustomer } from "../../payments/charges";
 
 let orderNumber = 0;
 
+interface IPaymentData {
+  paymentType: string;
+  paymentId: string;
+}
+
 interface ICreateOrderData {
   // Check, cash, card
-  paymentType: string;
   foodItemArray: object[];
-  id: string;
+  paymentData: IPaymentData;
 }
 
 export const createOrder: RequestHandler = async (req, res, next) => {
   try {
     const reqData: ICreateOrderData = {
-      paymentType: req.body.paymentType,
       foodItemArray: req.body.foodItems,
-      id: req.body.id,
+      paymentData: req.body.paymentData,
     };
 
     //
 
     // stripe does not take decimal numbers.
-    if (reqData.paymentType === "card") {
+    if (reqData.paymentData.paymentType === "card") {
       // Get price by finding the sum of all foodItems in the
       // foodItemArray.
-      const payment = await createCharge(15600, reqData.id);
+      const payment = await createCharge(15600, reqData.paymentData.paymentId);
       console.log(payment);
     }
 
