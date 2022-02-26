@@ -14,7 +14,7 @@ const orderModel = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  foodItem: [foodItemModel],
+  foodItem: [Object],
   paymentType: {
     type: String,
     required: true,

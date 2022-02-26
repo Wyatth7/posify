@@ -10,17 +10,11 @@ const checkUserRole = (roles: string[]) => {
         throw new Error();
       }
       if (!roles.includes(user.role)) {
-        return res.status(403).json({
-          status: "fail",
-          message: "Your are not authorized to access this route.",
-        });
+        next("You are not authorized to make this request.");
       }
       return next();
     } catch (err) {
-      res.status(400).json({
-        status: "fail",
-        message: "Could not get data from server.",
-      });
+      next("You are not authorized to make this request.");
     }
   };
 };

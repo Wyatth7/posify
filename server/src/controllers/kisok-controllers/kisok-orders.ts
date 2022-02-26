@@ -25,6 +25,7 @@ interface ICreateOrderData {
   foodItemArray: string[];
   ingredientArray: string[];
   paymentData: IPaymentData;
+  addressData: { address: string; state: string; zipCode: string };
 }
 
 export const createOrder: RequestHandler = async (req, res, next) => {
@@ -33,6 +34,7 @@ export const createOrder: RequestHandler = async (req, res, next) => {
       foodItemArray: req.body.foodItems,
       ingredientArray: req.body.ingredientItems,
       paymentData: req.body.paymentData,
+      addressData: req.body.addressData,
     };
 
     const user = await UserModel.findById(req.authId);
@@ -72,6 +74,20 @@ export const createOrder: RequestHandler = async (req, res, next) => {
       );
       console.log(payment);
     }
+
+    let orderNumber = 0;
+
+    if (business.unfulfilledOrder.length > 0) {
+      orderNumber -
+        business.unfulfilledOrder[business.unfulfilledOrder.length - 1];
+    }
+
+    // const order: IOrderModel = {
+    //   orderNumber: orderNumber++,
+    //   foodItem: businessFoodItems;
+    // }
+
+    // const orderAdded = await UserModel.findByIdAndUpdate(business._id, {$push: })
 
     res.status(200).json({
       status: "success",
