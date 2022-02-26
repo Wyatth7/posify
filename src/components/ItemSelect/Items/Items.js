@@ -34,7 +34,7 @@ const Items = (props) => {
       {state.products
         ? state.products.map((el) => (
             <Item
-              id={el.id}
+              id={el._id}
               key={el.id}
               calories={el.calories}
               title={el.title}

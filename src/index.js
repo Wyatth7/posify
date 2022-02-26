@@ -6,14 +6,14 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import configureProductStore from "./store/items-store";
 import configureCartStore from "./store/cart-item-store";
-// import customizeItemStore from "./store/customize-item";
+import customizeItemStore from "./store/customize-item";
 import configurePriceStore from "./store/price-store";
 import configureUserKioskStore from "./store/init-user-data";
 import configureAuthStore from "./store/upadate-auth-store";
 
 configureProductStore();
 configureCartStore();
-// customizeItemStore();
+customizeItemStore();
 configurePriceStore();
 configureUserKioskStore();
 configureAuthStore();

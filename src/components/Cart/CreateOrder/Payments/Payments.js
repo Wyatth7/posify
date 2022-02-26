@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import axios from "axios";
@@ -7,14 +7,36 @@ import OrangeButton from "../../../reusable/OrangeButton/OrangeButton";
 const PAYMENT = styled.div``;
 
 const Payment = (props) => {
+  const { formSubmitted, setPaymentId } = props;
+  const [paymentElement, setpaymentElement] = useState();
   const stripe = useStripe();
   const elements = useElements();
 
-  const cardFill = () => {
-    setTimeout(() => {
-      props.setPaymentElementHandler(elements.getElement(CardElement));
-    }, 500);
-  };
+  useEffect(() => {
+    if (formSubmitted) {
+      const func = async () => {
+        try {
+          const { error, paymentMethod } = await stripe.createPaymentMethod({
+            type: "card",
+            card: elements.getElement(CardElement),
+          });
+
+          // const { id } = paymentMethod;
+          setPaymentId(paymentMethod.id);
+        } catch (err) {
+          console.log(err);
+          console.log("error in paymentjs");
+        }
+      };
+      func();
+    }
+  }, [formSubmitted, setPaymentId, stripe, elements, paymentElement]);
+
+  // const cardFill = () => {
+  //   setTimeout(() => {
+  //     setpaymentElement(elements.getElement(CardElement));
+  //   }, 500);
+  // };
 
   const checkoutHandler = async () => {
     try {
@@ -36,7 +58,7 @@ const Payment = (props) => {
 
   return (
     <React.Fragment>
-      <CardElement onChange={cardFill} />
+      <CardElement />
     </React.Fragment>
   );
 };

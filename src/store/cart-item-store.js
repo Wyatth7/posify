@@ -123,7 +123,7 @@ const configureCartStore = () => {
     OPEN_CUSTOMIZE_MODAL: (curState, productObj) => {
       let newObj = { ...productObj };
 
-      newObj.id = Math.random();
+      // newObj.id = Math.random();
       newObj.price =
         ArraySorter.getTotalIngredientPrice(newObj.ingredients) +
         newObj.basePrice;

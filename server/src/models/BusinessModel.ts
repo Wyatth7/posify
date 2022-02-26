@@ -4,7 +4,7 @@ import { IIngredientModel, ingredientModel } from "./IngredientModel";
 import { orderModel, IOrderModel } from "./OrderModel";
 import { IUser } from "./UserModel";
 
-interface IBusinessModel extends mongoose.Document {
+export interface IBusinessModel extends mongoose.Document {
   title: string;
   users: [IUser];
   foodItems: [IFoodItem];
