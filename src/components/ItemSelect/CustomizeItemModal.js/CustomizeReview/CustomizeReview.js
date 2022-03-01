@@ -58,13 +58,15 @@ const CustomizeReview = (props) => {
   // finds ingredients based on id, then adds then displays them to review item.
   useEffect(() => {
     let newIngredientArray = state.curCustomizeObj.ingredients.map((el) => {
-      if (state.ingredients.some((e) => e.id === el)) {
-        return state.ingredients.find((e) => e.id === el);
+      if (state.ingredients.some((e) => e._id === el)) {
+        // console.log(el);
+        return state.ingredients.find((e) => e._id === el);
       }
 
       return null;
     });
 
+    // console.log(newIngredientArray);
     setIngredients(newIngredientArray);
   }, [setIngredients, state]);
 

@@ -4,7 +4,7 @@ const createObj = (obj) => {
     category: obj.category,
     items: [
       {
-        id: obj.id,
+        id: obj._id,
         title: obj.title,
         price: obj.price,
       },
@@ -17,7 +17,7 @@ const updateObject = (arr, obj) => {
   returnArr.forEach((el) => {
     if (el.category === obj.category) {
       el.items.push({
-        id: obj.id,
+        id: obj._id,
         title: obj.title,
         price: obj.price,
       });
@@ -59,7 +59,7 @@ class ArraySorter {
 
     for (let i = 0; i < idArray.length; i++) {
       for (let j = 0; j < ingredientArray.length; j++) {
-        if (idArray[i] === ingredientArray[j].id) {
+        if (idArray[i] === ingredientArray[j]._id) {
           totalPrice += ingredientArray[j].price;
         }
       }
