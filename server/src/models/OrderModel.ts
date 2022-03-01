@@ -19,6 +19,10 @@ const orderModel = new mongoose.Schema({
     type: String,
     required: true,
   },
+  addressData: Object,
+  deliveryMethod: Object,
+  customerInfo: Object,
+  totalPrice: Number,
   startTime: {
     type: Date,
     required: true,

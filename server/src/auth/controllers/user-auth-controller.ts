@@ -90,9 +90,11 @@ export const checkUserToken: RequestHandler = async (req, res, next) => {
     const isAuthenticated = await checkAuth(token);
 
     if (!isAuthenticated) {
-      res.status(400).json({
+      return res.status(401).json({
         status: "fail",
-        message: "Invalid authorization token.",
+        payload: {
+          isAuthenticated: false,
+        },
       });
     }
 
@@ -106,7 +108,9 @@ export const checkUserToken: RequestHandler = async (req, res, next) => {
     console.log(err);
     res.status(400).json({
       status: "fail",
-      message: "Invalid authorization token.",
+      payload: {
+        isAuthenticated: false,
+      },
     });
   }
 };

@@ -11,7 +11,7 @@ export const checkUserAuth = async () => {
       }
     );
 
-    return auth.data.payload.isAuthenticated;
+    return auth.data.payload.isAuthenticated === true;
   } catch (err) {
     return false;
   }
