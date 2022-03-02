@@ -12,6 +12,19 @@ const AUTH = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: relative;
+`;
+
+const BackgroundImage = styled.div`
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("/images/auth/app-preview.png");
+  filter: blur(2.5px);
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
 `;
 
 const Header = styled.div`
@@ -26,11 +39,25 @@ const HeaderText = styled.h1`
   text-align: center;
 `;
 
-const InputContainer = styled.div`
-  width: 25%;
+const AuthWrapper = styled.div`
+  background-color: #ffff;
+  border: 1px solid #ef7614;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  z-index: 1000;
 `;
 
-const Inputs = styled.div``;
+const InputContainer = styled.div`
+  width: 90%;
+`;
+
+const Inputs = styled.div`
+  width: 100%;
+`;
 
 const Reroute = styled.div`
   display: flex;
@@ -52,23 +79,26 @@ const RerouteButton = styled(NavLink)`
 const Auth = (props) => {
   return (
     <AUTH>
-      <Header>
-        <HeaderText>{props.headerText}</HeaderText>
-      </Header>
-      <InputContainer>
-        <Inputs>{props.children}</Inputs>
-        {/* <InputWrapper>
+      <BackgroundImage></BackgroundImage>
+      <AuthWrapper>
+        <Header>
+          <HeaderText>{props.headerText}</HeaderText>
+        </Header>
+        <InputContainer>
+          <Inputs>{props.children}</Inputs>
+          {/* <InputWrapper>
           <Input text="Email" type="email" />
-        </InputWrapper>
-        <InputWrapper>
+          </InputWrapper>
+          <InputWrapper>
           <Input text="Password" type="password" />
         </InputWrapper> */}
-        <OrangeButton clicked={props.submit}>Login</OrangeButton>
-        <Reroute>
-          <RerouteParagraph>{props.linkText}</RerouteParagraph>
-          <RerouteButton to={props.link}>{props.linkTitle}</RerouteButton>
-        </Reroute>
-      </InputContainer>
+          <OrangeButton clicked={props.submit}>Login</OrangeButton>
+          <Reroute>
+            <RerouteParagraph>{props.linkText}</RerouteParagraph>
+            <RerouteButton to={props.link}>{props.linkTitle}</RerouteButton>
+          </Reroute>
+        </InputContainer>
+      </AuthWrapper>
 
       {/* <Elements stripe={stripeInit}>
         <Payment />

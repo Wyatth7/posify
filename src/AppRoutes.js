@@ -1,7 +1,7 @@
 import React from "react";
 import { useStore } from "./store/store";
 import { Navigate, Route } from "react-router-dom";
-import Content from "./components/ContentHead/Content";
+import Content from "./pages/kiosk/ContentHead/Content";
 import SignUp from "./pages/auth/SignUp";
 import Login from "./pages/auth/login";
 

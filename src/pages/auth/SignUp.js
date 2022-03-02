@@ -24,6 +24,7 @@ const NameContainer = styled.div`
   display: flex;
   gap: 1rem;
   padding-bottom: 1rem;
+  width: 100%;
 `;
 
 const SignUp = (props) => {
