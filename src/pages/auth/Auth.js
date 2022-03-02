@@ -16,7 +16,7 @@ const AUTH = styled.div`
 `;
 
 const BackgroundImage = styled.div`
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
     url("/images/auth/app-preview.png");
   filter: blur(2.5px);
   background-size: cover;

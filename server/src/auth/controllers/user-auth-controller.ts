@@ -2,6 +2,7 @@ import admin from "../firebase/init-app";
 import { RequestHandler } from "express";
 import UserModel from "../../models/UserModel";
 import { checkAuth } from "./../auth-check/token-check";
+import BusinessModel from "../../models/BusinessModel";
 
 export interface IUser {
   firstName: string;
@@ -41,7 +42,9 @@ const checkIfUserCreated = async (email: string) => {
 
 export const createUser: RequestHandler = async (req, res, next) => {
   try {
-    const { email, password, firstName, lastName, role } = req.body;
+    const { email, password, firstName, lastName } = req.body;
+
+    const role = "manager";
 
     // const user = await admin.auth().createUser({
     //   email,
@@ -59,6 +62,11 @@ export const createUser: RequestHandler = async (req, res, next) => {
       lastName,
       role,
       _id: userId,
+      businessId: "61ff4b44dd90ca13083bfe75",
+    });
+
+    await BusinessModel.findByIdAndUpdate("61ff4b44dd90ca13083bfe75", {
+      $push: { users: { _id: user._id } },
     });
 
     const token = await getUserAuthToken(user._id);
@@ -114,6 +122,24 @@ export const checkUserToken: RequestHandler = async (req, res, next) => {
     });
   }
 };
+
+// export const signout: RequestHandler = async (req, res, next) => {
+//   try {
+//     // const user = await admin.auth().getUser(req.authId);
+
+//     await admin.auth().revokeRefreshTokens(req.authId);
+
+//     res.status(200).json({
+//       status: "success",
+//       message: "User signed out successfully",
+//     });
+//   } catch (err) {
+//     res.status(400).json({
+//       status: "failed",
+//       message: "Could not sign user out",
+//     });
+//   }
+// };
 
 export const getUserAuthToken = async (uid: string) => {
   try {

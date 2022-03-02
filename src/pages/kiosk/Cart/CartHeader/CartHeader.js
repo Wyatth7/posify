@@ -4,6 +4,9 @@ import styled from "styled-components";
 import Button from "../../../../components/reusable/Button/Button";
 import MediaQuery from "react-responsive";
 import { useStore } from "../../../../store/store";
+import signUserOut from "../../../../firebase/sign-user-out.js/sign-user-out";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const CARTHEADER = styled.div`
   display: flex;
@@ -83,10 +86,21 @@ const BackButtonIcon = styled.span`
 const BackButtonText = styled.p``;
 
 const CartHeader = (props) => {
+  const history = useNavigate();
   const dispatch = useStore(false)[1];
 
   const clearCartHandler = () => {
     dispatch("CLEAR_CART");
+  };
+
+  const signOut = async () => {
+    try {
+      localStorage.setItem("authToken", "");
+      dispatch("UPDATE_AUTH_STATUS", false);
+      history("/login");
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -105,7 +119,7 @@ const CartHeader = (props) => {
             <Button clicked={clearCartHandler}>Clear All</Button>
           )}
           <MidPad />
-          <Button icon={<FiSettings />}></Button>
+          <Button clicked={signOut} icon={<FiSettings />}></Button>
         </ButtonContainer>
       </MediaQuery>
     </CARTHEADER>

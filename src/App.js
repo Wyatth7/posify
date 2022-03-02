@@ -72,6 +72,12 @@ function App() {
       <GlobalStyle />
       <div>
         <Routes>
+          <Route path="/login" element={<Login setLogin={setLoginHandler} />} />
+          <Route
+            exact
+            path="/signup"
+            element={<SignUp setLogin={setLoginHandler} />}
+          />
           {isLoggedIn ? (
             <React.Fragment>
               <Route path="/cart" element={<MobileCart />} />
@@ -86,15 +92,6 @@ function App() {
             </React.Fragment>
           ) : (
             <React.Fragment>
-              <Route
-                path="/login"
-                element={<Login setLogin={setLoginHandler} />}
-              />
-              <Route
-                exact
-                path="/signup"
-                element={<SignUp setLogin={setLoginHandler} />}
-              />
               <Route exact path="/" element={<Navigate to="/login" />} />
             </React.Fragment>
           )}

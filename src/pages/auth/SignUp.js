@@ -63,21 +63,16 @@ const SignUp = (props) => {
         "http://localhost:8080/api/v1/auth/signUp ",
         data
       );
-      // const user = await fetch(
-      //   "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAWNHDYgrfNpHZnwOLh4ejKOoI7hBhHTI0",
-      //   {
-      //     method: "POST",
-      //     body: JSON.stringify({
-      //       email: email.current.value,
-      //       password: password.current.value,
-      //       returnSecureToken: true,
-      //     }),
-      //   }
-      // );
-      // const userObj = await user.json();
+      const user = await axios.post(
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=AIzaSyAWNHDYgrfNpHZnwOLh4ejKOoI7hBhHTI0",
+        {
+          token: res.data.authToken,
+          returnSecureToken: true,
+        }
+      );
+      const userObj = await user.json();
       dispatch("UPDATE_AUTH_STATUS", true);
-      localStorage.setItem("authToken", res.data.authToken);
-
+      localStorage.setItem("authToken", userObj.idToken);
       props.setLogin();
       history("/kiosk");
     } catch (e) {
@@ -100,10 +95,10 @@ const SignUp = (props) => {
           <Input ref={lastName} type="text" text="Last Name" />
         </NameContainer>
         <InputWrapper>
-          <Input type="email" text="Email" />
+          <Input ref={email} type="email" text="Email" />
         </InputWrapper>
         <InputWrapper>
-          <Input type="password" text="Password" />
+          <Input ref={password} type="password" text="Password" />
         </InputWrapper>
       </Auth>
     </SIGN_UP>
