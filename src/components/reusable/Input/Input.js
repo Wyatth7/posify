@@ -12,13 +12,13 @@ const INPUT_CONTAINER = styled.div`
   }
 `;
 
-const Paragraph = styled.p`
-  /* ${(props) =>
-    props.focus ? "font-size: .5rem; margin-top: -.5rem" : null} */
-  font-size: ${(props) => (props.focus ? ".7rem" : "1rem")};
-  margin-top: ${(props) => (props.focus ? "-.5rem" : "0")}
-  color: #4d4d4d;
-`;
+// const Paragraph = styled.p`
+//   /* ${(props) =>
+//     props.focus ? "font-size: .5rem; margin-top: -.5rem" : null} */
+//   font-size: ${(props) => (props.focus ? ".7rem" : "1rem")};
+//   margin-top: ${(props) => (props.focus ? "-.5rem" : "0")}
+//   color: #4d4d4d;
+// `;
 
 const InputField = styled.input`
   width: 100%;

@@ -1,6 +1,5 @@
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { useStripe } from "@stripe/react-stripe-js";
 import React, { useRef, useState } from "react";
 import axios from "axios";
 import styled from "styled-components";

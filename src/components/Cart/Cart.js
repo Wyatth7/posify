@@ -1,4 +1,3 @@
-import { Elements } from "@stripe/react-stripe-js";
 import React, { useState } from "react";
 import styled from "styled-components";
 import priceFormatter from "../../scripts/price-formatter";
@@ -7,8 +6,6 @@ import SolidButton from "../reusable/SolidButton/SolidButton";
 import CartHeader from "./CartHeader/CartHeader";
 import CartItems from "./CartItems/CartItems";
 import CartTotal from "./CartTotal/CartTotal";
-import Payment from "./CreateOrder/Payments/Payments";
-import { loadStripe } from "@stripe/stripe-js";
 import CreateOrder from "./CreateOrder/CreateOrder";
 
 const CART = styled.div`

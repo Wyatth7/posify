@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { foodItemModel, IFoodItem } from "./FoodItemModel";
+import { IFoodItem } from "./FoodItemModel";
 
 interface IOrderModel extends mongoose.Document {
   orderNumber: number;
