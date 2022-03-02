@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import priceFormatter from "../../scripts/price-formatter";
 import { useStore } from "../../store/store";
-import SolidButton from "../reusable/SolidButton/SolidButton";
+import OrangeButton from "../reusable/OrangeButton/OrangeButton";
 import CartHeader from "./CartHeader/CartHeader";
 import CartItems from "./CartItems/CartItems";
 import CartTotal from "./CartTotal/CartTotal";
@@ -83,13 +83,9 @@ const Cart = (props) => {
               <Footer>
                 <CartTotal />
                 <ElementPadding />
-                <SolidButton
-                  clicked={togglePaymentHandler}
-                  path=""
-                  color="#ef7614"
-                >
+                <OrangeButton clicked={togglePaymentHandler}>
                   Pay {priceFormatter.format(cartItems.financials.totalPrice)}!
-                </SolidButton>
+                </OrangeButton>
               </Footer>
             </React.Fragment>
           ) : (

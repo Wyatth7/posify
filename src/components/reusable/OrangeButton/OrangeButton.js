@@ -6,7 +6,7 @@ const ORANGE_BUTTON = styled.button`
   border: 1px solid #ef7614;
   border-radius: 10px;
   width: 100%;
-  padding: 0.5rem 0;
+  padding: 1rem 0.5rem;
   cursor: pointer;
 `;
 
