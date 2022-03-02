@@ -20,7 +20,7 @@ const orderModel = new mongoose.Schema({
     required: true,
   },
   addressData: Object,
-  deliveryMethod: Object,
+  deliveryMethod: String,
   customerInfo: Object,
   totalPrice: Number,
   startTime: {

@@ -4,7 +4,15 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import axios from "axios";
 import OrangeButton from "../../../reusable/OrangeButton/OrangeButton";
 
-const PAYMENT = styled.div``;
+// const PAYMENT = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   margin-top: -1rem;
+// `;
+
+const Card = styled(CardElement)`
+  padding: 1rem 0;
+`;
 
 const Payment = (props) => {
   const { formSubmitted, setPaymentId } = props;
@@ -58,7 +66,8 @@ const Payment = (props) => {
 
   return (
     <React.Fragment>
-      <CardElement />
+      <Card />
+      {/* <OrangeButton onClick={onSubmitHandler}>Complete Order!</OrangeButton> */}
     </React.Fragment>
   );
 };

@@ -23,11 +23,17 @@ const stripeInit = loadStripe(
 );
 
 const CreateOrder = (props) => {
+  const nameRef = useRef("");
+  const phoneNumberRef = useRef("");
+  const address = useRef("");
+  const city = useRef("");
+  const state = useRef("");
+  const zipCode = useRef("");
   const [paymentType, setPaymentType] = useState("card");
   const [receiveType, setReceiveType] = useState("pickup");
   const [paymentElement, setPaymentElement] = useState();
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const store = useStore()[1];
+  const store = useStore()[0];
 
   const togglePaymentHandler = (name) => {
     setPaymentType(name);
@@ -57,13 +63,36 @@ const CreateOrder = (props) => {
         paymentId: paymentElement,
       };
 
-      const foodItemIds = store.cartProducts.map((el) => el.id);
-
-      await axios.patch("http://localhost:8080/api/v1/kiosk/createOrder", {
-        paymentData,
-        foodItems: foodItemIds,
-        ingredientItems: [],
+      const foodItems = store.cartProducts.map((el) => {
+        return { id: el.id, ingredients: el.ingredients, quantity: el.amount };
       });
+
+      console.log(address);
+
+      await axios.patch(
+        "http://localhost:8080/api/v1/kiosk/createOrder",
+        {
+          paymentData,
+          foodItems,
+          paymentType,
+          deliveryMethod: receiveType,
+          addressData: {
+            address: address.current.value,
+            state: state.current.value,
+            city: city.current.value,
+            zipCode: zipCode.current.value,
+          },
+          customerInfo: {
+            name: nameRef.current.value,
+            phoneNumber: phoneNumberRef.current.value,
+          },
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("authToken"),
+          },
+        }
+      );
     } catch (err) {
       setFormSubmitted(false);
       console.log(err);
@@ -77,6 +106,12 @@ const CreateOrder = (props) => {
         toShowComponent="delivery"
         component={<UserAddress />}
         text="Will your order be for pickup or delivery?"
+        nameRef={nameRef}
+        phoneNumberRef={phoneNumberRef}
+        address={address}
+        city={city}
+        state={state}
+        zipCode={zipCode}
       >
         <CheckBox
           change={toggleReceiveHandler}
@@ -124,7 +159,7 @@ const CreateOrder = (props) => {
         </Elements>
       ) : null}
       <Buffer />
-      <OrangeButton onClick={onSubmitHandler}>Complete Order!</OrangeButton>
+      <OrangeButton clicked={onSubmitHandler}>Complete Order!</OrangeButton>
     </CREATE_ORDER>
   );
 };

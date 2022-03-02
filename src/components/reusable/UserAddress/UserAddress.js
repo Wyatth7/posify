@@ -22,18 +22,15 @@ const StateAndZip = styled(MasterDiv)`
 `;
 
 const UserAddress = (props) => {
-  const address = useRef();
-  const state = useRef();
-  const zipCode = useRef();
-
   return (
     <USER_ADDRESS>
-      <MasterDiv>
-        <Input ref={address} text="Address" type="text" />
-      </MasterDiv>
       <StateAndZip>
-        <Input ref={state} text="State" type="text" />
-        <Input ref={zipCode} text="Zip code" type="text" />
+        <Input ref={props.address} text="Address" type="text" />
+        <Input ref={props.city} text="City" type="text" />
+      </StateAndZip>
+      <StateAndZip>
+        <Input ref={props.state} text="State" type="text" />
+        <Input ref={props.zipCode} text="Zip code" type="text" />
       </StateAndZip>
     </USER_ADDRESS>
   );

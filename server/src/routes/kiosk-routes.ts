@@ -9,7 +9,7 @@ const router = express.Router();
 router.get(
   "/getInitData",
   checkIfAuthenticated,
-  checkUserRole(["kiosk", "employee", "manager", "admin"]),
+  checkUserRole(["kiosk", "employee", "manager", "admin", "owner"]),
   kiosk.getInitData
 );
 router
