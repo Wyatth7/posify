@@ -80,7 +80,7 @@ const Item = (props) => {
         <Price>
           <PriceText>${props.price}</PriceText>
         </Price>
-        <Image src={`http://localhost:8080${props.img}`} alt={props.title} />
+        <Image src={`${props.img}`} alt={props.title} />
       </DataWrap>
     </ITEM>
   );

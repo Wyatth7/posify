@@ -59,10 +59,7 @@ const SignUp = (props) => {
     };
 
     try {
-      const res = await axios.post(
-        "http://localhost:8080/api/v1/auth/signUp ",
-        data
-      );
+      const res = await axios.post("/api/v1/auth/signUp ", data);
       const user = await axios.post(
         "https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=AIzaSyAWNHDYgrfNpHZnwOLh4ejKOoI7hBhHTI0",
         {
@@ -84,7 +81,7 @@ const SignUp = (props) => {
   return (
     <SIGN_UP>
       <Auth
-        headerText="Sign up to order from Mom and Pop's Pizza"
+        headerText="Sign up to order from Simon's BBQ"
         submit={onSubmitHandler}
         linkText="Already have an account?"
         linkTitle="Login"

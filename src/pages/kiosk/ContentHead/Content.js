@@ -41,14 +41,11 @@ const Content = (props) => {
     console.log(localStorage.getItem("authToken"));
     const func = async () => {
       try {
-        const initData = await axios.get(
-          "http://localhost:8080/api/v1/kiosk/getInitData",
-          {
-            headers: {
-              Authorization: "Bearer " + localStorage.getItem("authToken"),
-            },
-          }
-        );
+        const initData = await axios.get("/api/v1/kiosk/getInitData", {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("authToken"),
+          },
+        });
         console.log(initData.data);
         dispatch("INIT_USER_KIOSK", initData.data.payload);
       } catch (err) {

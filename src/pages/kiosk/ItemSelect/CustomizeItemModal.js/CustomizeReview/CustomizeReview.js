@@ -88,10 +88,7 @@ const CustomizeReview = (props) => {
         </Icon>
       </CloseWrapper>
       <ImageWrapper>
-        <Image
-          src={`http://localhost:8080${state.curCustomizeObj.img}`}
-          alt={props.img}
-        />
+        <Image src={`${state.curCustomizeObj.img}`} alt={props.img} />
       </ImageWrapper>
       <CustomizeItemHeader title="Ingredients" />
       <ItemWrapper>

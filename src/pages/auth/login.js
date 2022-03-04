@@ -70,7 +70,7 @@ const Login = (props) => {
   return (
     <LOGIN>
       <Auth
-        headerText="Login to order from Mom and Pop's Pizza"
+        headerText="Login to order from Simon's BBQ"
         submit={onSubmitHandler}
         linkText="Don't have an account?"
         linkTitle="Sign up"

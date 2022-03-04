@@ -9,8 +9,12 @@ import UserAddress from "../../../../components/reusable/UserAddress/UserAddress
 import OrderQuestions from "./OrderQuestions/OrderQuestions";
 import Payment from "./Payments/Payments";
 import { useStore } from "../../../../store/store";
+import Loader from "../../../../components/reusable/loader/loader";
 
-const CREATE_ORDER = styled.div``;
+const CREATE_ORDER = styled.div`
+  position: relative;
+  width: 100%;
+`;
 
 const Buffer = styled.div`
   padding: 0.5rem 0;
@@ -69,7 +73,7 @@ const CreateOrder = (props) => {
       console.log(address);
 
       await axios.patch(
-        "http://localhost:8080/api/v1/kiosk/createOrder",
+        "/api/v1/kiosk/createOrder",
         {
           paymentData,
           foodItems,
@@ -99,67 +103,71 @@ const CreateOrder = (props) => {
   };
 
   return (
-    <CREATE_ORDER>
-      <OrderQuestions
-        currentlySelected={receiveType}
-        toShowComponent="delivery"
-        component={<UserAddress />}
-        text="Will your order be for pickup or delivery?"
-        nameRef={nameRef}
-        phoneNumberRef={phoneNumberRef}
-        address={address}
-        city={city}
-        state={state}
-        zipCode={zipCode}
-      >
-        <CheckBox
-          change={toggleReceiveHandler}
-          current={receiveType}
-          itemName="pickup"
-          text="Pickup"
-        />
-        <CheckBox
-          change={toggleReceiveHandler}
-          current={receiveType}
-          itemName="delivery"
-          text="Delivery"
-        />
-      </OrderQuestions>
-      <OrderQuestions text="Select a payment type.">
-        <CheckBox
-          change={togglePaymentHandler}
-          itemName="card"
-          current={paymentType}
-          checked={true}
-          text="Card"
-        />
-        <CheckBox
-          change={togglePaymentHandler}
-          current={paymentType}
-          itemName="cash"
-          checked={false}
-          text="Cash"
-        />
-        <CheckBox
-          change={togglePaymentHandler}
-          current={paymentType}
-          itemName="check"
-          checked={false}
-          text="Check"
-        />
-      </OrderQuestions>
-      {paymentType === "card" ? (
-        <Elements stripe={stripeInit}>
-          <Payment
-            formSubmitted={formSubmitted}
-            setPaymentId={setPaymentId}
-            completeCheckoutHandler=""
+    <React.Fragment>
+      <CREATE_ORDER>
+        {formSubmitted ? <Loader></Loader> : null}
+
+        <OrderQuestions
+          currentlySelected={receiveType}
+          toShowComponent="delivery"
+          component={<UserAddress />}
+          text="Will your order be for pickup or delivery?"
+          nameRef={nameRef}
+          phoneNumberRef={phoneNumberRef}
+          address={address}
+          city={city}
+          state={state}
+          zipCode={zipCode}
+        >
+          <CheckBox
+            change={toggleReceiveHandler}
+            current={receiveType}
+            itemName="pickup"
+            text="Pickup"
           />
-        </Elements>
-      ) : null}
-      <Buffer />
-      <OrangeButton clicked={onSubmitHandler}>Complete Order!</OrangeButton>
-    </CREATE_ORDER>
+          <CheckBox
+            change={toggleReceiveHandler}
+            current={receiveType}
+            itemName="delivery"
+            text="Delivery"
+          />
+        </OrderQuestions>
+        <OrderQuestions text="Select a payment type.">
+          <CheckBox
+            change={togglePaymentHandler}
+            itemName="card"
+            current={paymentType}
+            checked={true}
+            text="Card"
+          />
+          <CheckBox
+            change={togglePaymentHandler}
+            current={paymentType}
+            itemName="cash"
+            checked={false}
+            text="Cash"
+          />
+          <CheckBox
+            change={togglePaymentHandler}
+            current={paymentType}
+            itemName="check"
+            checked={false}
+            text="Check"
+          />
+        </OrderQuestions>
+        {paymentType === "card" ? (
+          <Elements stripe={stripeInit}>
+            <Payment
+              formSubmitted={formSubmitted}
+              setPaymentId={setPaymentId}
+              completeCheckoutHandler=""
+            />
+          </Elements>
+        ) : null}
+        <Buffer />
+        <OrangeButton clicked={onSubmitHandler}>Complete Order!</OrangeButton>
+      </CREATE_ORDER>
+    </React.Fragment>
   );
 };
 

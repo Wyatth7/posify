@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Loader from "../../../../components/reusable/loader/loader";
 import { useStore } from "../../../../store/store";
 import Item from "./Item/Item";
 
@@ -30,9 +31,10 @@ const Items = (props) => {
   const state = useStore(true)[0];
 
   return (
-    <ITEMS>
-      {state.products
-        ? state.products.map((el) => (
+    <React.Fragment>
+      {state.products ? (
+        <ITEMS>
+          {state.products.map((el) => (
             <Item
               id={el._id}
               key={el.id}
@@ -42,9 +44,12 @@ const Items = (props) => {
               price={el.price}
               img={el.img}
             />
-          ))
-        : null}
-    </ITEMS>
+          ))}
+        </ITEMS>
+      ) : (
+        <Loader></Loader>
+      )}
+    </React.Fragment>
   );
 };
 

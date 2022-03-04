@@ -101,7 +101,7 @@ const CartItem = (props) => {
   return (
     <CARTITEM>
       <CartHeader>
-        <Image src={`/images/${props.img}`} alt={props.title} />
+        <Image src={`${props.img}`} alt={props.title} />
         <DescriptionWrapper>
           <Title>{props.title}</Title>
           <Price>${price}</Price>

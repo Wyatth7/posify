@@ -105,7 +105,7 @@ const CartItem = (props) => {
     <CARTITEM>
       <DescriptionContainer>
         <ImageWrapper>
-          <Image src={`http://localhost:8080${props.img}`} alt={props.title} />
+          <Image src={`${props.img}`} alt={props.title} />
         </ImageWrapper>
         <Title>{props.title}</Title>
       </DescriptionContainer>
