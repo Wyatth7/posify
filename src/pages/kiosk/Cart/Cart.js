@@ -89,7 +89,7 @@ const Cart = (props) => {
               </Footer>
             </React.Fragment>
           ) : (
-            <CreateOrder />
+            <CreateOrder removeBackButton={togglePaymentHandler} />
           )}
         </React.Fragment>
       ) : (

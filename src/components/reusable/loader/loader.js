@@ -38,11 +38,11 @@ const LOADER = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  backdrop-filter: blur(1.5px);
+  backdrop-filter: ${(props) => (props.blur ? "blur(1.5px)" : "none")};
 `;
 
 const BackGround = styled.div`
-  filter: blur(2.5px);
+  filter: ${(props) => (props.blur ? "blur(2.5px)" : "none")};
 `;
 
 const Spinner = styled.div`
@@ -83,8 +83,8 @@ const EmptyDiv = styled.div``;
 
 const Loader = (props) => {
   return (
-    <LOADER>
-      <BackGround></BackGround>
+    <LOADER blur={props.blur}>
+      <BackGround blur={props.blur}></BackGround>
       <Spinner>
         <EmptyDiv></EmptyDiv>
         <EmptyDiv></EmptyDiv>

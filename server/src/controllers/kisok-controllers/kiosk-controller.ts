@@ -2,18 +2,18 @@ import { RequestHandler } from "express";
 import IIngredient from "../../interfaces/IIngredients";
 import IFoodItem from "../../interfaces/IFoodItem";
 import admin from "../../auth/firebase/init-app";
-import UserModel from "../../models/UserModel";
-import BusinessModel from "../../models/BusinessModel";
+import UserModel, { IUser } from "../../models/UserModel";
+import BusinessModel, { IBusinessModel } from "../../models/BusinessModel";
 
 // Gets user and business starting from user id.
 const getUserAndBusiness = async (userId: string) => {
   try {
-    const user = await UserModel.findById(userId);
+    const user: any = await UserModel.findById(userId);
     if (!user) {
       return [null, null];
     }
 
-    const business = await BusinessModel.findById(user.businessId);
+    const business: any = await BusinessModel.findById(user.businessId);
 
     return [user, business];
   } catch (err) {
@@ -23,18 +23,10 @@ const getUserAndBusiness = async (userId: string) => {
 
 export const getInitData: RequestHandler = async (req, res, next) => {
   try {
-    // const foodItems = await FoodItemModel.find();
-    // const ingredients = await IngredientModel.find();
-
-    // res.status(200).json({
-    //   status: "success",
-    //   payload: { foodItems: [...foodItems], ingredients: [...ingredients] },
-    // });
-
     const user = await UserModel.findById(req.authId);
 
     if (!user) {
-      return res.status(400).json({ message: "test" });
+      return res.status(400).json({ message: "Could not get initial data." });
     }
 
     const business = await BusinessModel.findById(user.businessId);
@@ -43,11 +35,26 @@ export const getInitData: RequestHandler = async (req, res, next) => {
       return res.status(400).json({ message: "Could not find business." });
     }
 
+    let categoryArray: string[] = [];
+
+    business.foodItems.forEach((el: any) => categoryArray.push(el.category));
+
+    let filteredCategoryArray = [...new Set(categoryArray)];
+
+    let finalCategoryArray = [];
+
+    finalCategoryArray.push({ title: "All Items" });
+
+    filteredCategoryArray.forEach((el) => {
+      finalCategoryArray.push({ title: el });
+    });
+
     res.status(200).json({
       status: "success",
       payload: {
         foodItems: [...business.foodItems],
         ingredients: [...business.ingredients],
+        categories: finalCategoryArray,
       },
     });
   } catch (err) {
@@ -55,6 +62,40 @@ export const getInitData: RequestHandler = async (req, res, next) => {
     res.status(400).json({
       status: "fail",
       message: "Could not get initial data from server.",
+    });
+  }
+};
+
+export const getCategoryData: RequestHandler = async (req, res, next) => {
+  try {
+    const [user, business] = await getUserAndBusiness(req.authId);
+
+    if (!user && !business) {
+      return res
+        .status(400)
+        .json({ message: "Could not get category data from server." });
+    }
+
+    let foodItems: IFoodItem[] = [];
+
+    if (req.query.category === "All Items") {
+      foodItems = business.foodItems;
+    } else {
+      foodItems = business.foodItems.filter(
+        (el: IFoodItem) => el.category === req.query.category
+      );
+    }
+
+    res.status(200).json({
+      status: "success",
+      data: {
+        foodItems,
+      },
+    });
+  } catch (err) {
+    res.status(400).json({
+      status: "fail",
+      message: "Could not get category data from the server.",
     });
   }
 };
@@ -98,6 +139,7 @@ export const addFoodItem: RequestHandler = async (req, res, next) => {
       img: req.body.img,
       calories: req.body.calories,
       ingredients: req.body.ingredients,
+      category: req.body.category,
     };
 
     const user = await UserModel.findById(req.authId);
@@ -134,6 +176,7 @@ export const addFoodItem: RequestHandler = async (req, res, next) => {
       // change to path
       img: reqObj.img,
       calories: 1 * reqObj.calories,
+      category: reqObj.category,
     };
 
     await BusinessModel.findByIdAndUpdate(user.businessId, {

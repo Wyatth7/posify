@@ -6,12 +6,19 @@ import * as order from "../controllers/kisok-controllers/kisok-orders";
 
 const router = express.Router();
 
-router.get(
-  "/getInitData",
-  checkIfAuthenticated,
-  checkUserRole(["kiosk", "employee", "manager", "admin", "owner"]),
-  kiosk.getInitData
-);
+router
+  .get(
+    "/getInitData",
+    checkIfAuthenticated,
+    checkUserRole(["kiosk", "employee", "manager", "admin", "owner"]),
+    kiosk.getInitData
+  )
+  .get(
+    "/getCategorizedData",
+    checkIfAuthenticated,
+    checkUserRole(["kiosk", "employee", "manager", "admin", "owner"]),
+    kiosk.getCategoryData
+  );
 router
   .patch(
     "/addFoodItem",

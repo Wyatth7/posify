@@ -119,7 +119,7 @@ const CartHeader = (props) => {
             <Button clicked={clearCartHandler}>Clear All</Button>
           )}
           <MidPad />
-          <Button clicked={signOut} icon={<FiSettings />}></Button>
+          <Button clicked={signOut}>Sign Out</Button>
         </ButtonContainer>
       </MediaQuery>
     </CARTHEADER>

@@ -5,4 +5,5 @@ export default interface IFoodItem {
   img: string;
   calories: number;
   ingredients: string[];
+  category: string;
 }

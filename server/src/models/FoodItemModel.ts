@@ -33,6 +33,10 @@ const foodItemModel = new mongoose.Schema({
     required: true,
   },
   ingredients: [String],
+  category: {
+    type: String,
+    required: true,
+  },
 });
 
 export { IFoodItem, foodItemModel };

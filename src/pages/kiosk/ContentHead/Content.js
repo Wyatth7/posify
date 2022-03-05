@@ -7,6 +7,8 @@ import ItemSelect from "../ItemSelect/ItemSelect";
 // import MobileCart from "../Cart/MobileCart";
 import Cart from "../Cart/Cart";
 import { useStore } from "../../../store/store";
+import { useNavigate } from "react-router-dom";
+import { redirectOnAuthFail } from "../../../scripts/redirect-on-fail";
 
 const CONTENT = styled.div`
   position: relative;
@@ -36,6 +38,7 @@ const Wrapper = styled.div`
 
 const Content = (props) => {
   const dispatch = useStore(false)[1];
+  const history = useNavigate();
 
   useEffect(() => {
     console.log(localStorage.getItem("authToken"));
@@ -46,14 +49,16 @@ const Content = (props) => {
             Authorization: "Bearer " + localStorage.getItem("authToken"),
           },
         });
-        console.log(initData.data);
+        console.log(initData.data.payload.categories);
         dispatch("INIT_USER_KIOSK", initData.data.payload);
+        dispatch("ADD_KIOSK_CATEGORIES", initData.data.payload.categories);
       } catch (err) {
         console.log(err);
+        redirectOnAuthFail(history, dispatch);
       }
     };
     func();
-  }, [dispatch]);
+  }, [dispatch, history]);
 
   return (
     <CONTENT>

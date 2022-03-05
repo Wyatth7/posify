@@ -10,6 +10,8 @@ import OrderQuestions from "./OrderQuestions/OrderQuestions";
 import Payment from "./Payments/Payments";
 import { useStore } from "../../../../store/store";
 import Loader from "../../../../components/reusable/loader/loader";
+import { redirectOnAuthFail } from "../../../../scripts/redirect-on-fail";
+import { useNavigate } from "react-router-dom";
 
 const CREATE_ORDER = styled.div`
   position: relative;
@@ -36,7 +38,8 @@ const CreateOrder = (props) => {
   const [receiveType, setReceiveType] = useState("pickup");
   const [paymentElement, setPaymentElement] = useState();
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const store = useStore()[0];
+  const [store, dispatch] = useStore();
+  const history = useNavigate();
 
   const togglePaymentHandler = (name) => {
     setPaymentType(name);
@@ -96,17 +99,19 @@ const CreateOrder = (props) => {
           },
         }
       );
+      props.removeBackButton();
+      dispatch("CLEAR_CART");
     } catch (err) {
       setFormSubmitted(false);
       console.log(err);
+      redirectOnAuthFail(history, dispatch);
     }
   };
 
   return (
     <React.Fragment>
       <CREATE_ORDER>
-        {formSubmitted ? <Loader></Loader> : null}
-
+        {formSubmitted ? <Loader blur></Loader> : null}
         <OrderQuestions
           currentlySelected={receiveType}
           toShowComponent="delivery"

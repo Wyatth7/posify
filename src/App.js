@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, Routes } from "react-router";
+import { Route, Routes, useNavigate } from "react-router";
 import { Navigate } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import MobileCart from "./pages/kiosk/Cart/MobileCart";
@@ -8,6 +8,8 @@ import CustomizeItemModal from "./pages/kiosk/ItemSelect/CustomizeItemModal.js/C
 import SignUp from "./pages/auth/SignUp";
 import Login from "./pages/auth/login";
 import { checkUserAuth } from "./scripts/check-user-authentication";
+import { useStore } from "./store/store";
+import { checkUserTokenStatus } from "./scripts/redirect-on-fail";
 
 const GlobalStyle = createGlobalStyle`
   *,
@@ -36,7 +38,11 @@ const GlobalStyle = createGlobalStyle`
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const history = useNavigate();
+  const dispatch = useStore(false)[1];
   // const [customizeModal, setCustomizeModal] = useState(true);
+
+  checkUserTokenStatus(history, dispatch);
 
   useEffect(() => {
     const func = async () => {

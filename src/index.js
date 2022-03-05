@@ -10,12 +10,14 @@ import customizeItemStore from "./store/customize-item";
 import configurePriceStore from "./store/price-store";
 import configureUserKioskStore from "./store/init-user-data";
 import configureAuthStore from "./store/upadate-auth-store";
+import configureCategoryStore from "./store/category-store";
 
 configureProductStore();
 configureCartStore();
 customizeItemStore();
 configurePriceStore();
 configureUserKioskStore();
+configureCategoryStore();
 configureAuthStore();
 
 ReactDOM.render(

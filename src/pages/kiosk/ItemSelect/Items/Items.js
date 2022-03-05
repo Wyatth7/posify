@@ -34,6 +34,7 @@ const Items = (props) => {
     <React.Fragment>
       {state.products ? (
         <ITEMS>
+          {state.kioskItemLoader ? <Loader></Loader> : null}
           {state.products.map((el) => (
             <Item
               id={el._id}
@@ -46,9 +47,7 @@ const Items = (props) => {
             />
           ))}
         </ITEMS>
-      ) : (
-        <Loader></Loader>
-      )}
+      ) : null}
     </React.Fragment>
   );
 };
