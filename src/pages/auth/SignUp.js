@@ -61,15 +61,16 @@ const SignUp = (props) => {
     try {
       const res = await axios.post("/api/v1/auth/signUp ", data);
       const user = await axios.post(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=AIzaSyAWNHDYgrfNpHZnwOLh4ejKOoI7hBhHTI0",
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAWNHDYgrfNpHZnwOLh4ejKOoI7hBhHTI0",
         {
-          token: res.data.authToken,
+          email: data.email,
+          password: data.password,
           returnSecureToken: true,
         }
       );
-      const userObj = await user.json();
+      // const userObj = await user.json();
       dispatch("UPDATE_AUTH_STATUS", true);
-      localStorage.setItem("authToken", userObj.idToken);
+      localStorage.setItem("authToken", user.data.idToken);
       props.setLogin();
       history("/kiosk");
     } catch (e) {

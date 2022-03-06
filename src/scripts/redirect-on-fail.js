@@ -20,6 +20,10 @@ export const redirectOnAuthFail = (history, dispatch) => {
 export const checkUserTokenStatus = (history, dispatch) => {
   setInterval(async () => {
     try {
+      if (localStorage.getItem("authToken") === "") {
+        return;
+      }
+
       const isAuthenticated = await axios.get(
         "http://localhost:8080/api/v1/auth/checkAuthUser",
         {
