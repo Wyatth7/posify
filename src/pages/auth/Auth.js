@@ -1,6 +1,7 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useStore } from "../../store/store";
 // import Input from "./../../components/reusable/Input/Input";
 import OrangeButton from "./../../components/reusable/OrangeButton/OrangeButton";
 
@@ -76,7 +77,56 @@ const RerouteButton = styled(NavLink)`
   /* border-bottom: 1px solid #ef7614; */
 `;
 
+const Form = styled.form`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+`;
+
+const ErrorParagraph = styled.p`
+  margin-top: 0.2rem;
+  font-size: 0.8rem;
+  color: #ff5959;
+  text-align: center;
+`;
+
 const Auth = (props) => {
+  const dispatch = useStore()[1];
+  const history = useNavigate();
+  const [isErr, setIsErr] = useState();
+
+  const onSubmitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const [email, password] = await props.func();
+      const user = await fetch(
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAWNHDYgrfNpHZnwOLh4ejKOoI7hBhHTI0",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            email,
+            password,
+            returnSecureToken: true,
+          }),
+        }
+      );
+      dispatch("UPDATE_AUTH_STATUS", true);
+      const userObj = await user.json();
+      console.log(userObj.idToken);
+      localStorage.setItem("authToken", userObj.idToken);
+      props.setLogin();
+      // if (!userObj) {
+      //   console.log("here");
+      //   throw new Error();
+      // }
+      history("/kiosk");
+    } catch (err) {
+      setIsErr(true);
+      // history("/login");
+    }
+  };
+
   return (
     <AUTH>
       <BackgroundImage></BackgroundImage>
@@ -84,20 +134,23 @@ const Auth = (props) => {
         <Header>
           <HeaderText>{props.headerText}</HeaderText>
         </Header>
-        <InputContainer>
-          <Inputs>{props.children}</Inputs>
-          {/* <InputWrapper>
+        <Form onSubmit={onSubmitHandler}>
+          <InputContainer>
+            <Inputs>{props.children}</Inputs>
+            {/* <InputWrapper>
           <Input text="Email" type="email" />
           </InputWrapper>
           <InputWrapper>
           <Input text="Password" type="password" />
         </InputWrapper> */}
-          <OrangeButton clicked={props.submit}>Login</OrangeButton>
-          <Reroute>
-            <RerouteParagraph>{props.linkText}</RerouteParagraph>
-            <RerouteButton to={props.link}>{props.linkTitle}</RerouteButton>
-          </Reroute>
-        </InputContainer>
+            <OrangeButton>{props.buttonText}</OrangeButton>
+            {isErr ? <ErrorParagraph>{props.errorText}</ErrorParagraph> : null}
+            <Reroute>
+              <RerouteParagraph>{props.linkText}</RerouteParagraph>
+              <RerouteButton to={props.link}>{props.linkTitle}</RerouteButton>
+            </Reroute>
+          </InputContainer>
+        </Form>
       </AuthWrapper>
 
       {/* <Elements stripe={stripeInit}>

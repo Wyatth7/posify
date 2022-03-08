@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Input from "../../components/reusable/Input/Input";
@@ -22,6 +22,7 @@ const InputWrapper = styled.div`
 
 const NameContainer = styled.div`
   display: flex;
+  justify-content: space-between;
   gap: 1rem;
   padding-bottom: 1rem;
   width: 100%;
@@ -30,10 +31,11 @@ const NameContainer = styled.div`
 const SignUp = (props) => {
   const dispatch = useStore()[1];
   const history = useNavigate();
-  const firstName = useRef();
-  const lastName = useRef();
-  const email = useRef();
-  const password = useRef();
+  const firstName = useRef("");
+  const lastName = useRef("");
+  const email = useRef("");
+  const password = useRef("");
+  const [isErr, setIsErr] = useState(false);
 
   useEffect(() => {
     const func = async () => {
@@ -49,33 +51,18 @@ const SignUp = (props) => {
     func();
   }, [history]);
 
-  const onSubmitHandler = async (e) => {
-    e.preventDefault();
-    const data = {
-      firstName: firstName.current.value,
-      lastName: lastName.current.value,
-      email: email.current.value,
-      password: password.current.value,
-    };
-
+  const signUpUser = async () => {
     try {
-      const res = await axios.post("/api/v1/auth/signUp ", data);
-      const user = await axios.post(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAWNHDYgrfNpHZnwOLh4ejKOoI7hBhHTI0",
-        {
-          email: data.email,
-          password: data.password,
-          returnSecureToken: true,
-        }
-      );
-      // const userObj = await user.json();
-      dispatch("UPDATE_AUTH_STATUS", true);
-      localStorage.setItem("authToken", user.data.idToken);
-      props.setLogin();
-      history("/kiosk");
-    } catch (e) {
-      console.log(e);
-      history("/signup");
+      const data = {
+        firstName: firstName.current.value,
+        lastName: lastName.current.value,
+        email: email.current.value,
+        password: password.current.value,
+      };
+      await axios.post("/api/v1/auth/signUp ", data);
+      return [data.email, data.password];
+    } catch (err) {
+      console.log(err);
     }
   };
 
@@ -83,10 +70,13 @@ const SignUp = (props) => {
     <SIGN_UP>
       <Auth
         headerText="Sign up to order from Simon's BBQ"
-        submit={onSubmitHandler}
         linkText="Already have an account?"
         linkTitle="Login"
         link="/login"
+        buttonText="Sign Up"
+        func={signUpUser}
+        errorText={"Could not create an account."}
+        setLogin={props.setLogin}
       >
         <NameContainer>
           <Input ref={firstName} type="text" text="First Name" />

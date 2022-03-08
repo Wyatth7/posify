@@ -30,6 +30,7 @@ const CategorySelector = (props) => {
   const buttonClickedHandler = async (title) => {
     setActiveString(title);
 
+    dispatch("UPDATE_FOODITEMS_BY_CATEGORY", []);
     dispatch("UPDATE_KIOSK_ITEM_LOADER", true);
     try {
       const categoryData = await axios.get(

@@ -27,12 +27,28 @@ const ITEMS = styled.div`
   }
 `;
 
+const ErrorParagraph = styled.p`
+  color: #ef7614;
+  font-size: 2.3rem;
+  font-weight: 300;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  padding-top: 5rem;
+  width: 100%;
+  height: 100%;
+`;
+
 const Items = (props) => {
   const state = useStore(true)[0];
 
   return (
     <React.Fragment>
-      {state.products ? (
+      {props.isErr ? (
+        <ErrorParagraph>
+          There was a problem getting your store's food items.
+        </ErrorParagraph>
+      ) : state.products ? (
         <ITEMS>
           {state.kioskItemLoader ? <Loader></Loader> : null}
           {state.products.map((el) => (

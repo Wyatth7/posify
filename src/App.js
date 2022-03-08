@@ -99,6 +99,7 @@ function App() {
           ) : (
             <React.Fragment>
               <Route exact path="/" element={<Navigate to="/login" />} />
+              <Route exact path="*" element={<Navigate to="/login" />} />
             </React.Fragment>
           )}
         </Routes>

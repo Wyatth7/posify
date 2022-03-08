@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useStore } from "./../../store/store";
 import styled from "styled-components";
@@ -13,20 +13,9 @@ const InputWrapper = styled.div`
 `;
 
 const Login = (props) => {
-  const email = useRef();
-  const password = useRef();
+  const email = useRef("");
+  const password = useRef("");
   const history = useNavigate();
-  const dispatch = useStore(false)[1];
-  // const inputs = [
-  //   {
-  //     type: "email",
-  //     text: "Email",
-  //   },
-  //   {
-  //     type: "password",
-  //     text: "Password",
-  //   },
-  // ];
 
   useEffect(() => {
     const func = async () => {
@@ -42,39 +31,21 @@ const Login = (props) => {
     func();
   }, [history]);
 
-  const onSubmitHandler = async () => {
-    try {
-      const user = await fetch(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAWNHDYgrfNpHZnwOLh4ejKOoI7hBhHTI0",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            email: email.current.value,
-            password: password.current.value,
-            returnSecureToken: true,
-          }),
-        }
-      );
-      dispatch("UPDATE_AUTH_STATUS", true);
-      const userObj = await user.json();
-      localStorage.setItem("authToken", userObj.idToken);
-      props.setLogin();
-      console.log(userObj.idToken);
-      history("/kiosk");
-    } catch (err) {
-      console.log(err);
-      history("/login");
-    }
+  const emailAndPass = () => {
+    return [email.current.value, password.current.value];
   };
 
   return (
     <LOGIN>
       <Auth
         headerText="Login to order from Simon's BBQ"
-        submit={onSubmitHandler}
         linkText="Don't have an account?"
         linkTitle="Sign up"
         link="/signup"
+        buttonText="Login"
+        errorText={"Invalid email or password."}
+        func={emailAndPass}
+        setLogin={props.setLogin}
       >
         <InputWrapper>
           <Input ref={email} type="email" text="Email" />

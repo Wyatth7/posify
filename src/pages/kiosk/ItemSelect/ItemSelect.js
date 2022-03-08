@@ -32,7 +32,7 @@ const ItemSelect = (props) => {
   return (
     <ITEMSELECT>
       <Header />
-      <Items />
+      <Items isErr={props.isErr} />
     </ITEMSELECT>
   );
 };

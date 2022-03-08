@@ -1,5 +1,5 @@
 import MediaQuery from "react-responsive";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import MobileCartButton from "../Cart/MobileCartContent/MobileCart/MobileCartButton";
@@ -39,6 +39,7 @@ const Wrapper = styled.div`
 const Content = (props) => {
   const dispatch = useStore(false)[1];
   const history = useNavigate();
+  const [isErr, setIsErr] = useState(false);
 
   useEffect(() => {
     console.log(localStorage.getItem("authToken"));
@@ -49,12 +50,15 @@ const Content = (props) => {
             Authorization: "Bearer " + localStorage.getItem("authToken"),
           },
         });
-        console.log(initData.data.payload.categories);
+        if (!initData) {
+          throw new Error();
+        }
         dispatch("INIT_USER_KIOSK", initData.data.payload);
         dispatch("ADD_KIOSK_CATEGORIES", initData.data.payload.categories);
       } catch (err) {
         console.log(err);
-        redirectOnAuthFail(history, dispatch);
+        setIsErr(true);
+        // redirectOnAuthFail(history, dispatch);
       }
     };
     func();
@@ -62,7 +66,7 @@ const Content = (props) => {
 
   return (
     <CONTENT>
-      <ItemSelect />
+      <ItemSelect isErr={isErr} />
       <MediaQuery maxWidth={949}>
         <Wrapper>
           <MobileCartButton />

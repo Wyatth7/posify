@@ -22,6 +22,13 @@ const Buffer = styled.div`
   padding: 0.5rem 0;
 `;
 
+const ErrorParagraph = styled.p`
+  color: #ff5959;
+  text-align: center;
+  font-size: 1rem;
+  padding-top: 0.5rem;
+`;
+
 // const form
 const stripeInit = loadStripe(
   "pk_test_51IGC2MKm15LThELZ2zWy8o019nMhps90zaUuzZZqJqTZWfDWIJ0ljocCyyn3b5n3V2hohsSd5eohWddAIseyRriD00uA3PTzqJ"
@@ -38,6 +45,7 @@ const CreateOrder = (props) => {
   const [receiveType, setReceiveType] = useState("pickup");
   const [paymentElement, setPaymentElement] = useState();
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isErr, setIsErr] = useState(false);
   const [store, dispatch] = useStore();
   const history = useNavigate();
 
@@ -103,8 +111,9 @@ const CreateOrder = (props) => {
       dispatch("CLEAR_CART");
     } catch (err) {
       setFormSubmitted(false);
+      setIsErr(true);
       console.log(err);
-      redirectOnAuthFail(history, dispatch);
+      // redirectOnAuthFail(history, dispatch);
     }
   };
 
@@ -171,6 +180,9 @@ const CreateOrder = (props) => {
         ) : null}
         <Buffer />
         <OrangeButton clicked={onSubmitHandler}>Complete Order!</OrangeButton>
+        {isErr ? (
+          <ErrorParagraph>Could not create order.</ErrorParagraph>
+        ) : null}
       </CREATE_ORDER>
     </React.Fragment>
   );
