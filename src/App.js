@@ -10,6 +10,7 @@ import Login from "./pages/auth/login";
 import { checkUserAuth } from "./scripts/check-user-authentication";
 import { useStore } from "./store/store";
 import { checkUserTokenStatus } from "./scripts/redirect-on-fail";
+import AlertResize from "./components/reusable/AlertResize/AlertResize";
 
 const GlobalStyle = createGlobalStyle`
   *,

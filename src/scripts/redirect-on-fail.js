@@ -24,14 +24,11 @@ export const checkUserTokenStatus = (history, dispatch) => {
         return;
       }
 
-      const isAuthenticated = await axios.get(
-        "http://localhost:8080/api/v1/auth/checkAuthUser",
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("authToken"),
-          },
-        }
-      );
+      const isAuthenticated = await axios.get("/api/v1/auth/checkAuthUser", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("authToken"),
+        },
+      });
 
       if (isAuthenticated.data.payload.isAuthenticated) {
         return;

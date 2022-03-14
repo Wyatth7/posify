@@ -9,6 +9,7 @@ import Cart from "../Cart/Cart";
 import { useStore } from "../../../store/store";
 import { useNavigate } from "react-router-dom";
 import { redirectOnAuthFail } from "../../../scripts/redirect-on-fail";
+import AlertResize from "../../../components/reusable/AlertResize/AlertResize";
 
 const CONTENT = styled.div`
   position: relative;
@@ -66,13 +67,11 @@ const Content = (props) => {
 
   return (
     <CONTENT>
-      <ItemSelect isErr={isErr} />
       <MediaQuery maxWidth={949}>
-        <Wrapper>
-          <MobileCartButton />
-        </Wrapper>
+        <AlertResize />
       </MediaQuery>
       <MediaQuery minWidth={950}>
+        <ItemSelect isErr={isErr} />
         <Cart />
       </MediaQuery>
     </CONTENT>

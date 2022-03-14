@@ -33,17 +33,14 @@ const CategorySelector = (props) => {
     dispatch("UPDATE_FOODITEMS_BY_CATEGORY", []);
     dispatch("UPDATE_KIOSK_ITEM_LOADER", true);
     try {
-      const categoryData = await axios.get(
-        "http://localhost:8080/api/v1/kiosk/getCategorizedData",
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("authToken"),
-          },
-          params: {
-            category: title,
-          },
-        }
-      );
+      const categoryData = await axios.get("/api/v1/kiosk/getCategorizedData", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("authToken"),
+        },
+        params: {
+          category: title,
+        },
+      });
 
       dispatch("UPDATE_KIOSK_ITEM_LOADER", false);
       dispatch(
