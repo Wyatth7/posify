@@ -2,13 +2,11 @@ import MediaQuery from "react-responsive";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import MobileCartButton from "../Cart/MobileCartContent/MobileCart/MobileCartButton";
 import ItemSelect from "../ItemSelect/ItemSelect";
 // import MobileCart from "../Cart/MobileCart";
 import Cart from "../Cart/Cart";
 import { useStore } from "../../../store/store";
 import { useNavigate } from "react-router-dom";
-import { redirectOnAuthFail } from "../../../scripts/redirect-on-fail";
 import AlertResize from "../../../components/reusable/AlertResize/AlertResize";
 
 const CONTENT = styled.div`
