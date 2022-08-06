@@ -3,7 +3,7 @@ import UserModel from "../../models/UserModel";
 
 const checkUserRole = (roles: string[]) => {
   return async (req: Request, res: Response, next: NextFunction) => {
-    // If the user's role is not in role, deny access to controller.
+    // If the user's role is not in the role array, deny access to controller.
     try {
       const user = await UserModel.findById(req.authId);
       if (!user) {

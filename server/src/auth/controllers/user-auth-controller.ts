@@ -3,6 +3,7 @@ import { RequestHandler } from "express";
 import UserModel from "../../models/UserModel";
 import { checkAuth } from "./../auth-check/token-check";
 import BusinessModel from "../../models/BusinessModel";
+import { customResponses } from "../../helpers/customReposes";
 
 export interface IUser {
   firstName: string;
@@ -40,55 +41,96 @@ const checkIfUserCreated = async (email: string) => {
   }
 };
 
-export const createUser: RequestHandler = async (req, res, next) => {
+export const createBusinessUser: RequestHandler = async (req, res, next) => {
+  const user: IUser = {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    password: req.body.password,
+    role: req.body.role,
+  };
+
   try {
-    const { email, password, firstName, lastName } = req.body;
+    const createdUser = await createUser(user, req.body.businessId);
 
-    const role = "manager";
+    if (!createdUser) {
+      return customResponses.badRequestReponse("Could not create user.", res);
+    }
 
-    // const user = await admin.auth().createUser({
-    //   email,
-    //   password,
-    //   displayName: `${firstName} ${lastName}`,
-    // });
+    return customResponses.successResponse(createdUser, res);
+  } catch (err) {
+    console.log(err);
 
+    return customResponses.badRequestReponse("Could not create user.", res);
+  }
+};
+
+export const createGenericUser: RequestHandler = async (req, res, next) => {
+  const user: IUser = {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    password: req.body.password,
+    role: "customer",
+  };
+
+  try {
+    const createdUser = await createUser(user, req.body.businessId);
+
+    return customResponses.successResponse(createdUser, res);
+  } catch (err) {
+    console.log(err);
+
+    return customResponses.badRequestReponse("Could not create user.", res);
+  }
+};
+
+const createUser = async (
+  user: IUser,
+  businessId: string
+): Promise<{
+  email: string;
+  firstName: string;
+  lastName: string;
+} | null> => {
+  const { email, password, firstName, lastName, role } = user;
+
+  try {
     await generateUser({ email, password, firstName, lastName, role });
 
     const userId = await (await admin.auth().getUserByEmail(email)).uid;
 
-    const user = await UserModel.create({
+    const createdUser = await UserModel.create({
       email,
       firstName,
       lastName,
       role,
       _id: userId,
-      businessId: "61ff4b44dd90ca13083bfe75",
+      businessId,
     });
 
-    await BusinessModel.findByIdAndUpdate("61ff4b44dd90ca13083bfe75", {
-      $push: { users: { _id: user._id } },
+    await BusinessModel.findByIdAndUpdate(businessId, {
+      $push: { users: { _id: createdUser._id } },
     });
 
-    const token = await getUserAuthToken(user._id);
+    const token = await getUserAuthToken(createdUser._id);
 
-    return res.status(200).json({
-      status: "Success",
-      authToken: token,
-      message: `User ${firstName} ${lastName} has been created.`,
-    });
+    return {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+    };
   } catch (err) {
     console.log(err);
 
     try {
-      await deleteUser(req.body.email);
+      await deleteUser(user.email);
+      console.log("User deleted...");
     } catch (nestedError) {
       console.log(nestedError);
     }
 
-    return res.status(400).json({
-      status: "Fail",
-      message: "Could not create user.",
-    });
+    return null;
   }
 };
 
@@ -122,24 +164,6 @@ export const checkUserToken: RequestHandler = async (req, res, next) => {
     });
   }
 };
-
-// export const signout: RequestHandler = async (req, res, next) => {
-//   try {
-//     // const user = await admin.auth().getUser(req.authId);
-
-//     await admin.auth().revokeRefreshTokens(req.authId);
-
-//     res.status(200).json({
-//       status: "success",
-//       message: "User signed out successfully",
-//     });
-//   } catch (err) {
-//     res.status(400).json({
-//       status: "failed",
-//       message: "Could not sign user out",
-//     });
-//   }
-// };
 
 export const getUserAuthToken = async (uid: string) => {
   try {

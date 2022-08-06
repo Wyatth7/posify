@@ -4,9 +4,9 @@ import {
   generateUser,
   getUserAuthToken,
   IUser,
-} from "../auth/controllers/user-auth-controller";
-import BusinessModel from "../models/BusinessModel";
-import UserModel from "../models/UserModel";
+} from "../../auth/controllers/user-auth-controller";
+import BusinessModel from "../../models/BusinessModel";
+import UserModel from "../../models/UserModel";
 
 export const createBusiness: RequestHandler = async (req, res, next) => {
   try {
